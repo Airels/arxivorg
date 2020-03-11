@@ -20,6 +20,10 @@ test {
         jvmArgs "-Dprism.order=sw"
         jvmArgs "-Dprism.text=t2k"
     }
+
+    beforeTest {
+        descriptor -> logger.lifecycle("Running test: " + descriptor)
+    }
 }
 
 javafx {
