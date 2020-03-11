@@ -54,6 +54,7 @@ dependencies {
 task(runCLI, dependsOn: 'classes', type: JavaExec) {
     main = 'app.arxivorg.ArxivOrgCLI'
     classpath = sourceSets.main.runtimeClasspath
+    standardInput = System.in
     args "list"
     args "today"
 }
