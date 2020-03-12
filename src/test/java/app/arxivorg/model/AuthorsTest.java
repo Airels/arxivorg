@@ -2,6 +2,7 @@ package app.arxivorg.model;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,6 +28,10 @@ public class AuthorsTest {
     public void TestGet(){
         assert (authors.get().equals(getTest));
         assert (!authors.get().equals(getTest2));
+    }
+    @Test
+    public  void TestConstructor(){
+        assertThrows(IllegalArgumentException.class, ()-> new Authors(new ArrayList<>()));
     }
 
 

@@ -7,6 +7,7 @@ public class Authors {
     private ArrayList<String> data;
 
     public Authors(List<String> input) {
+        if(input.isEmpty()) throw new IllegalArgumentException("there must at least one authors");
         this.data = new ArrayList<>();
         for(String s:input){
             this.add(s);
