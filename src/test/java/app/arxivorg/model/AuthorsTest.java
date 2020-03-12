@@ -15,5 +15,12 @@ public class AuthorsTest {
         String expected = "Martin Dupont, Marie Martin, François Cordonnier";
         assertEquals(expected, authors.toString());
     }
+    @Test
+    public void testAdd(){
+        assert (authors.add("test"));
+        assert (!authors.add("Martin Dupont"));
+    }
+
+
 }
 
