@@ -11,7 +11,7 @@ import java.io.OutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-public class unzip {
+public class Unzip {
 
     /**
      * décompresse le fichier zip dans le répertoire donné
@@ -77,4 +77,8 @@ public class unzip {
         }
     }
 }
+
+    public static void main(String[] args) {
+        unzip();
+    }
 
