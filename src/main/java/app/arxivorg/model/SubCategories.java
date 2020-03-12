@@ -27,5 +27,9 @@ public class SubCategories {
         return false;
     }
 
+    public List<String> get(){
+        return subCategories;
+    }
+
 
 }
