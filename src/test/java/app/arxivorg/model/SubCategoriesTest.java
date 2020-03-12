@@ -10,4 +10,11 @@ public class SubCategoriesTest {
         assert(subCategories.add("test"));
         assert(!subCategories.add("test"));
     }
+
+    @Test
+    public void getTest(){
+        subCategories.add("test");
+        assert (subCategories.get().get(0).equals("test"));
+        assert (!subCategories.get().get(0).equals("testFalse"));
+    }
 }
