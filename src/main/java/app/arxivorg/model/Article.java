@@ -9,11 +9,14 @@ public class Article {
     private Category category;
     private SubCategories subCategories;
 
-    public Article(String title, Authors authors, String content, Category category, SubCategories subCategories) throws Exception {
-        if(title.isEmpty()) throw new IllegalAccessException("title is Empty");
-        if(authors.get().isEmpty()) throw new IllegalAccessException("there must be at least one author");
-        if(content.isEmpty()) throw new IllegalAccessException("content is empty");
-        if(category==null) throw new IllegalAccessException("category must be defined");
+    public Article(String title, Authors authors, String content, Category category, SubCategories subCategories) throws IllegalArgumentException {
+        if(title.isEmpty()) throw new IllegalArgumentException("title is Empty");
+        if(authors.get().isEmpty()) throw new IllegalArgumentException("there must be at least one author");
+        if(content.isEmpty()) throw new IllegalArgumentException("content is empty");
+        if(category==null) throw new IllegalArgumentException("category must be defined");
+        if(subCategories==null){
+            subCategories = new SubCategories();
+        }
         this.title = title;
         this.authors = authors;
         this.content = content;
