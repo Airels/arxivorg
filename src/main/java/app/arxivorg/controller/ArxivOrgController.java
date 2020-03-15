@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
@@ -19,10 +20,19 @@ import java.util.Set;
 public class ArxivOrgController implements Initializable {
 
     @FXML private ListView articlesList;
+    @FXML private ChoiceBox categoryChoiceBox;
 
     //    @Override
     public void initialize(URL location, ResourceBundle resourceBundle) {
+        generateCategoryChoiceBox();
         generateArticlesList();
+    }
+
+    @FXML
+    private void generateCategoryChoiceBox() {
+        String categories[] = {"A", "B", "C"};
+        categoryChoiceBox.setItems(FXCollections.observableArrayList(categories));
+        categoryChoiceBox.setValue("A");
     }
 
     // TODO : Afficher tout les auteurs au survol de la souris
