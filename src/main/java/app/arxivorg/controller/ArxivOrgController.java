@@ -21,10 +21,12 @@ public class ArxivOrgController implements Initializable {
 
     @FXML private ListView articlesList;
     @FXML private ChoiceBox categoryChoiceBox;
+    @FXML private ChoiceBox periodChoiceBox;
 
     //    @Override
     public void initialize(URL location, ResourceBundle resourceBundle) {
         generateCategoryChoiceBox();
+        generatePeriodChoiceBox();
         generateArticlesList();
     }
 
@@ -33,6 +35,13 @@ public class ArxivOrgController implements Initializable {
         String categories[] = {"A", "B", "C"};
         categoryChoiceBox.setItems(FXCollections.observableArrayList(categories));
         categoryChoiceBox.setValue("A");
+    }
+
+    @FXML
+    private void generatePeriodChoiceBox() {
+        String periods[] = {"A", "B", "C"};
+        periodChoiceBox.setItems(FXCollections.observableArrayList(periods));
+        periodChoiceBox.setValue("A");
     }
 
     // TODO : Afficher tout les auteurs au survol de la souris
