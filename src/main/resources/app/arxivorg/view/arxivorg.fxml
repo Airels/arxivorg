@@ -49,10 +49,9 @@
 
     <!-- Panneau liste + vue de l'article -->
     <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="153.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <children>
-            <ListView fx:id="articlesList" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-            <TextFlow prefHeight="298.0" prefWidth="248.0" style="-fx-background-color: white; -fx-border-color: lightgray;" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-        </children>
+        <ListView fx:id="articlesList" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" onMouseClicked="#onMouseClickArticle" />
+        <TextFlow fx:id="articleView" prefHeight="298.0" prefWidth="248.0" style="-fx-background-color: white; -fx-border-color: lightgray;" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+
       <columnConstraints>
          <ColumnConstraints percentWidth="100.0" />
       </columnConstraints>
