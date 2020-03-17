@@ -29,7 +29,6 @@ public class XmlReader
             Document doc = dBuilder.parse(inputFile);
             doc.getDocumentElement().normalize();
             NodeList nList = doc.getElementsByTagName("entry");
-            NodeList primarylist = doc.getElementsByTagName("arxiv:primary_category");
             NodeList secondlist = doc.getElementsByTagName("category");
 
 
