@@ -1,5 +1,6 @@
 package app.arxivorg.controller;
 
+import Utils.XmlReader;
 import app.arxivorg.model.Article;
 import app.arxivorg.model.Authors;
 import app.arxivorg.model.Category;
@@ -19,6 +20,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 import java.awt.*;
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,28 +53,9 @@ public class ArxivOrgController implements Initializable {
         periodChoiceBox.setValue("A");
     }
 
-    // TODO : Afficher tout les auteurs au survol de la souris
-    // TODO : Générer des vrais articles quand le lecteur XML sera prêt
     private void generateArticlesList() {
-        // XmlReader reader = new XmlReader();
-
-        List<String> authors = new ArrayList<>();
-
-        for (int i = 0; i < 20; i++) {
-            authors.add("auteur " + i);
-        }
-
-        for (int i = 0; i < 100; i++) {
-            Article article = new Article(
-                    "Titre " + i,
-                    new Authors(authors),
-                    "Hello world!",
-                    Category.Physics,
-                    new SubCategories()
-            );
-
-            articlesList.getItems().add(article);
-        }
+        List<Article> articles = XmlReader.Reader(new File("1.atom"));
+        articlesList.getItems().addAll(articles);
 
         // Génération affichage éléments
         articlesList.setCellFactory(cell -> new ListCell<Article>() {
@@ -88,8 +71,10 @@ public class ArxivOrgController implements Initializable {
                     lineContent += article.getTitle();
                     lineContent += "\n\t";
 
-                    for (int i = 0; i < 3; i++)
-                        lineContent += article.getAuthors().get(i) + ", ";
+                    List<String> authors = article.getAuthors().getList();
+
+                    for (int i = 0; i < 3 && i < authors.size(); i++)
+                        lineContent += authors.get(i) + ", ";
 
                     if (authors.size() > 3)
                         lineContent += "+" + (authors.size()-3) + " autres";
@@ -104,10 +89,6 @@ public class ArxivOrgController implements Initializable {
                 }
             }
         });
-
-        /* for (Article article : reader.....) {
-            articlesListText.append(article.)
-        } */
     }
 
     @FXML
