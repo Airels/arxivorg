@@ -29,7 +29,7 @@ public class XmlReader
             Document doc = dBuilder.parse(inputFile);
             doc.getDocumentElement().normalize();
             NodeList nList = doc.getElementsByTagName("entry");
-            NodeList secondlist = doc.getElementsByTagName("category");
+            NodeList secondList = doc.getElementsByTagName("category");
 
 
 
@@ -37,41 +37,41 @@ public class XmlReader
 
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);
-                Node secondNode = secondlist.item(temp);
+                Node secondNode = secondList.item(temp);
 
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element entryNode = (Element) nNode;
-                    Element secondcategoryNode = (Element) secondNode;
+                    Element secondCategoryNode = (Element) secondNode;
 
-                    int lenghtauthor = entryNode.getElementsByTagName("author").getLength();
-                    ArrayList<String> templist = new ArrayList<String>();
+                    int lengthAuthor = entryNode.getElementsByTagName("author").getLength();
+                    ArrayList<String> tempList = new ArrayList<String>();
 
-                    for (int index = 0 ; index > lenghtauthor ; index ++ ){
-                        templist.add(entryNode.getElementsByTagName("name").item(index).getTextContent());
+                    for (int index = 0 ; index > lengthAuthor ; index ++ ){
+                        tempList.add(entryNode.getElementsByTagName("name").item(index).getTextContent());
 
                     }
 
 
-                    Authors tempauthors = new Authors(templist);
+                    Authors tempAuthors = new Authors(tempList);
 
-                    String temptitle = entryNode.getElementsByTagName("title").item(0).getTextContent();
+                    String tempTitle = entryNode.getElementsByTagName("title").item(0).getTextContent();
 
-                    String tempcomtent = entryNode.getElementsByTagName("summary").item(0).getTextContent();
+                    String tempContent = entryNode.getElementsByTagName("summary").item(0).getTextContent();
 
                     ArrayList subcategories = new ArrayList<String>();
 
-                    subcategories.add(secondcategoryNode
+                    subcategories.add(secondCategoryNode
                             .getAttribute("term"));
 
-                    SubCategories tempsub = new SubCategories(subcategories);
+                    SubCategories tempSub = new SubCategories(subcategories);
 
 
 
                     Category primalCategory = Category.Computer_Science;
 
 
-                    Article tempArticle = new Article(temptitle, tempauthors, tempcomtent, primalCategory, tempsub );
+                    Article tempArticle = new Article(tempTitle, tempAuthors, tempContent, primalCategory, tempSub );
                     articles.add(tempArticle);
 
                 }
