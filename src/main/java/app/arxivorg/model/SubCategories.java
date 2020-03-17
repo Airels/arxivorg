@@ -27,7 +27,12 @@ public class SubCategories {
         return false;
     }
 
-    public List<String> get(){
+    public String get(int i){
+        if(i>subCategories.size()-1 || i<0) throw new IllegalArgumentException(("index out bound [ 0 : "+ (subCategories.size()-1) +"] for authors : index ="+ i));
+        return subCategories.get(i);
+    }
+
+    public List<String> getList(){
         return subCategories;
     }
 
