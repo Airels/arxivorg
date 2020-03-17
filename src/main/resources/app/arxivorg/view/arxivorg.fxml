@@ -50,7 +50,11 @@
     <!-- Panneau liste + vue de l'article -->
     <GridPane alignment="TOP_RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="154.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <ListView fx:id="articlesList" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-        <TextFlow fx:id="articleView" style="-fx-background-color: white; -fx-border-color: lightgray;" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <ScrollPane fx:id="scrollPaneArticleView" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <content>
+                <TextFlow fx:id="articleView" style="-fx-background-color: white; -fx-border-color: lightgray;" />
+            </content>
+        </ScrollPane>
 
       <columnConstraints>
          <ColumnConstraints percentWidth="100.0" />

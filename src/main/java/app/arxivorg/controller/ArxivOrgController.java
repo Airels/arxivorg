@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
@@ -33,12 +34,15 @@ public class ArxivOrgController implements Initializable {
     @FXML private ChoiceBox categoryChoiceBox;
     @FXML private ChoiceBox periodChoiceBox;
     @FXML private TextFlow articleView;
+    @FXML private ScrollPane scrollPaneArticleView;
 
     //    @Override
     public void initialize(URL location, ResourceBundle resourceBundle) {
         generateCategoryChoiceBox();
         generatePeriodChoiceBox();
         generateArticlesList();
+        scrollPaneArticleView.setFitToWidth(true);
+        scrollPaneArticleView.setFitToHeight(true);
     }
 
     private void generateCategoryChoiceBox() {
