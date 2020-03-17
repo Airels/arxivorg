@@ -15,11 +15,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
 
-public class XmlReader
-{
+public class XmlReader {
 
-    public static ArrayList<Article> Reader (File file)
-    {
+    public static ArrayList<Article> Reader (File file) {
         ArrayList<Article> articles = new ArrayList<Article>();
 
         try {
@@ -31,10 +29,7 @@ public class XmlReader
             NodeList nList = doc.getElementsByTagName("entry");
             NodeList secondList = doc.getElementsByTagName("category");
 
-
-
-
-
+            
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);
                 Node secondNode = secondList.item(temp);
@@ -62,6 +57,12 @@ public class XmlReader
 
                     ArrayList subcategories = new ArrayList<String>();
 
+
+                    /**
+                     * Only print Primary SubCategory, must be changed
+                     * Tests are done with this predicate.
+                     */
+
                     subcategories.add(secondCategoryNode
                             .getAttribute("term"));
 
@@ -86,7 +87,7 @@ public class XmlReader
     }
 
     public static void main(String[] args) {
-        ArrayList<Article> test = Reader(new File("1.atom"));
+        ArrayList<Article> test = Reader(new File("test.atom"));
 
         for (int i = 0 ; i < test.size(); i++) {
             System.out.println("test");
