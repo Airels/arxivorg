@@ -14,7 +14,12 @@ public class Authors {
         }
     }
 
-    public ArrayList<String> get() {
+    public String get(int i){
+        if(i>data.size()-1 || i<0) throw new IllegalArgumentException(("index out bound [ 0 : "+ (data.size()-1) +"] for authors : index ="+ i));
+        return data.get(i);
+    }
+
+    public ArrayList<String> getList() {
         return data;
     }
 

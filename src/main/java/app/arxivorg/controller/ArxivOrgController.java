@@ -89,7 +89,7 @@ public class ArxivOrgController implements Initializable {
                     lineContent += "\n\t";
 
                     for (int i = 0; i < 3; i++)
-                        lineContent += article.getAuthors().get().get(i) + ", "; // TODO : Attente de modifications de Tom
+                        lineContent += article.getAuthors().get(i) + ", ";
 
                     if (authors.size() > 3)
                         lineContent += "+" + (authors.size()-3) + " autres";
@@ -116,7 +116,7 @@ public class ArxivOrgController implements Initializable {
             String textArticle = "";
 
             textArticle += article.getTitle() + "\n\t";
-            textArticle += article.getAuthors().get() + "\n";
+            textArticle += article.getAuthors() + "\n";
             textArticle += "--------------------\n";
             textArticle += "Résumé: ";
             textArticle += article.getContent();
