@@ -60,8 +60,8 @@
          <ColumnConstraints percentWidth="100.0" />
       </columnConstraints>
       <rowConstraints>
-         <RowConstraints percentHeight="60.0" />
-         <RowConstraints percentHeight="40.0" />
+         <RowConstraints percentHeight="50.0" />
+         <RowConstraints percentHeight="50.0" />
          <RowConstraints maxHeight="322.0" minHeight="0.0" prefHeight="0.0" />
       </rowConstraints>
     </GridPane>
