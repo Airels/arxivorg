@@ -2,20 +2,22 @@ package app.arxivorg.controller;
 
 import app.arxivorg.model.Article;
 import app.arxivorg.model.Authors;
+import app.arxivorg.model.Category;
+import app.arxivorg.model.SubCategories;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
+import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +55,6 @@ public class ArxivOrgController implements Initializable {
     private void generateArticlesList() {
         // XmlReader reader = new XmlReader();
 
-        ObservableList articles = FXCollections.observableArrayList();
         List<String> authors = new ArrayList<>();
 
         for (int i = 0; i < 20; i++) {
@@ -61,18 +62,44 @@ public class ArxivOrgController implements Initializable {
         }
 
         for (int i = 0; i < 100; i++) {
-            String string = "Titre " + i + "\n\t";
+            Article article = new Article(
+                    "Titre " + i,
+                    new Authors(authors),
+                    "Hello world!",
+                    Category.Physics,
+                    new SubCategories()
+            );
 
-            for (int authorID = 0; authorID < 3; authorID++)
-                string += authors.get(authorID) + ", ";
-
-            if (authors.size() > 3)
-                string += "+" + (authors.size()-3) + " autres";
-
-            articles.add(string);
+            articlesList.getItems().add(article);
         }
 
-        articlesList.setItems(articles);
+        // Génération affichage éléments
+        articlesList.setCellFactory(cell -> new ListCell<Article>() {
+            final Tooltip tooltip = new Tooltip();
+
+            @Override
+            protected void updateItem(Article article, boolean isEmpty) {
+                if (article == null || isEmpty) {
+                    setText(null);
+                    setTooltip(null);
+                } else {
+                    String lineContent = "";
+                    lineContent += article.getTitle();
+                    lineContent += "\n\t";
+
+                    for (int i = 0; i < 3; i++)
+                        lineContent += article.getAuthors().get().get(i) + ", ";
+
+                    if (authors.size() > 3)
+                        lineContent += "+" + (authors.size()-3) + " autres";
+
+                    setText(lineContent);
+
+                    tooltip.setText(article.getAuthors().toString());
+                    setTooltip(tooltip);
+                }
+            }
+        });
 
         /* for (Article article : reader.....) {
             articlesListText.append(article.)
@@ -87,5 +114,10 @@ public class ArxivOrgController implements Initializable {
             articleView.getChildren().clear();
             articleView.getChildren().add(textArticle);
         }
+    }
+
+    @FXML
+    public void onMouseHoverArticle() {
+
     }
 }
