@@ -1,13 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.arxivorg.controller.ArxivOrgController">
-    <children>
-        <Button fx:id="helloWorldButton" layoutX="45.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#displayHelloWorld" text="Hello World" />
-        <Button fx:id="goodByeWorldButton" layoutX="175.0" layoutY="87.0" mnemonicParsing="false" onMouseClicked="#goodByeWorld" text="Good Bye World" />
-        <Label fx:id="label" layoutX="100.0" layoutY="150.0" prefHeight="25.0" prefWidth="100.0" wrapText="true" />
-    </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.arxivorg.controller.ArxivOrgController">
+
+    <!-- Panneau des filtres -->
+    <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+     <columnConstraints>
+       <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.0" minWidth="10.0" percentWidth="100.0" />
+     </columnConstraints>
+     <rowConstraints>
+       <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+       <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+       <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="150.0" minHeight="150.0" prefHeight="150.0" vgrow="SOMETIMES" />
+         <RowConstraints vgrow="SOMETIMES" />
+     </rowConstraints>
+      <children>
+         <Label alignment="CENTER" prefWidth="170.0" text="FILTRES" textAlignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="TOP">
+            <font>
+               <Font size="27.0" />
+            </font>
+         </Label>
+          <Line endX="145.0" strokeWidth="2.0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+
+          <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Catégories :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+          <ChoiceBox fx:id="categoryChoiceBox" prefHeight="25.0" prefWidth="130.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+
+          <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Période :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+          <ChoiceBox fx:id="periodChoiceBox" prefHeight="25.0" prefWidth="130.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+
+          <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Auteurs :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+         <TextArea maxWidth="140.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+
+          <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Mots-clefs :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="TOP" />
+          <TextArea maxWidth="140.0" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Tout télécharger" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="BOTTOM" />
+      </children>
+   </GridPane>
+
+    <!-- Panneau liste + vue de l'article -->
+    <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="153.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ListView fx:id="articlesList" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" onMouseClicked="#onMouseClickArticle" />
+        <TextFlow fx:id="articleView" prefHeight="298.0" prefWidth="248.0" style="-fx-background-color: white; -fx-border-color: lightgray;" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+
+      <columnConstraints>
+         <ColumnConstraints percentWidth="100.0" />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints percentHeight="60.0" />
+         <RowConstraints percentHeight="40.0" />
+         <RowConstraints maxHeight="322.0" minHeight="0.0" prefHeight="0.0" />
+      </rowConstraints>
+    </GridPane>
 </AnchorPane>
