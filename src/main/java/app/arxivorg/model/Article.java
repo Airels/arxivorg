@@ -1,5 +1,7 @@
 package app.arxivorg.model;
 
+import java.util.List;
+
 public class Article {
     private String title;
     private Authors authors;
@@ -7,8 +9,14 @@ public class Article {
     private Category category;
     private SubCategories subCategories;
 
-    public Article(String title, Authors authors, String content, Category category, SubCategories subCategories) throws Exception {
-        if(title.isEmpty()) throw new IllegalAccessException("title is Empty");
+    public Article(String title, Authors authors, String content, Category category, SubCategories subCategories) throws IllegalArgumentException {
+        if(title.isEmpty()) throw new IllegalArgumentException("title is Empty");
+        if(authors.get().isEmpty()) throw new IllegalArgumentException("there must be at least one author");
+        if(content.isEmpty()) throw new IllegalArgumentException("content is empty");
+        if(category==null) throw new IllegalArgumentException("category must be defined");
+        if(subCategories==null){
+            subCategories = new SubCategories();
+        }
         this.title = title;
         this.authors = authors;
         this.content = content;
