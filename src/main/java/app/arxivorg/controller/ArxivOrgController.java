@@ -128,9 +128,4 @@ public class ArxivOrgController implements Initializable {
             articleView.getChildren().add(text);
         }
     }
-
-    @FXML
-    public void onMouseHoverArticle() {
-
-    }
 }
