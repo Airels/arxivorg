@@ -88,7 +88,7 @@ public class ArxivOrgController implements Initializable {
                     lineContent += "\n\t";
 
                     for (int i = 0; i < 3; i++)
-                        lineContent += article.getAuthors().get().get(i) + ", ";
+                        lineContent += article.getAuthors().get().get(i) + ", "; // TODO : Attente de modifications de Tom
 
                     if (authors.size() > 3)
                         lineContent += "+" + (authors.size()-3) + " autres";
@@ -97,6 +97,9 @@ public class ArxivOrgController implements Initializable {
 
                     tooltip.setText(article.getAuthors().toString());
                     setTooltip(tooltip);
+
+                    EventHandler<MouseEvent> eventHandler = e -> onMouseClickArticle(e, article);
+                    addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
                 }
             }
         });
@@ -107,12 +110,19 @@ public class ArxivOrgController implements Initializable {
     }
 
     @FXML
-    public void onMouseClickArticle(MouseEvent event) { // EN DOUBLE CLICK OU SIMPLE CLICK ?
+    public void onMouseClickArticle(MouseEvent event, Article article) { // EN DOUBLE CLICK OU SIMPLE CLICK ?
         if (event.getButton() == MouseButton.PRIMARY) {
-            Text textArticle = new Text(articlesList.getSelectionModel().getSelectedItem().toString());
+            String textArticle = "";
+
+            textArticle += article.getTitle() + "\n\t";
+            textArticle += article.getAuthors().get() + "\n";
+            textArticle += "--------------------\n";
+            textArticle += "Résumé: ";
+            textArticle += article.getContent();
+
 
             articleView.getChildren().clear();
-            articleView.getChildren().add(textArticle);
+            articleView.getChildren().add(new Text(textArticle));
         }
     }
 
