@@ -38,13 +38,11 @@ public class XmlReader
 
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);
-                Node primaryNode = primarylist.item(temp);
                 Node secondNode = secondlist.item(temp);
 
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element entryNode = (Element) nNode;
-                    Element primarycategoryNode = (Element) primaryNode;
                     Element secondcategoryNode = (Element) secondNode;
 
                     int lenghtauthor = entryNode.getElementsByTagName("author").getLength();
@@ -64,7 +62,7 @@ public class XmlReader
 
                     ArrayList subcategories = new ArrayList<String>();
 
-                    subcategories.add(primarycategoryNode
+                    subcategories.add(secondcategoryNode
                             .getAttribute("term"));
 
                     SubCategories tempsub = new SubCategories(subcategories);
