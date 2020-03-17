@@ -25,10 +25,18 @@ public class AuthorsTest {
         assert (!authors.add("Martin Dupont"));
     }
     @Test
-    public void TestGet(){
-        assert (authors.get().equals(getTest));
-        assert (!authors.get().equals(getTest2));
+    public void TestGetList(){
+        assert (authors.getList().equals(getTest));
+        assert (!authors.getList().equals(getTest2));
     }
+
+    @Test
+    public void TestGet(){
+        assertThrows(IllegalArgumentException.class,()-> authors.get(3));
+        assertThrows(IllegalArgumentException.class,()-> authors.get(-1));
+        assert (authors.get(0).equals("Martin Dupont"));
+    }
+
     @Test
     public  void TestConstructor(){
         assertThrows(IllegalArgumentException.class, ()-> new Authors(new ArrayList<>()));

@@ -11,7 +11,7 @@ public class Article {
 
     public Article(String title, Authors authors, String content, Category category, SubCategories subCategories) throws IllegalArgumentException {
         if(title.isEmpty()) throw new IllegalArgumentException("title is Empty");
-        if(authors.get().isEmpty()) throw new IllegalArgumentException("there must be at least one author");
+        if(authors.getList().isEmpty()) throw new IllegalArgumentException("there must be at least one author");
         if(content.isEmpty()) throw new IllegalArgumentException("content is empty");
         if(category==null) throw new IllegalArgumentException("category must be defined");
         if(subCategories==null){
