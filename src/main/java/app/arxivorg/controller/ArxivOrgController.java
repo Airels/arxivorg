@@ -88,7 +88,14 @@ public class ArxivOrgController implements Initializable {
                     tooltip.setText(article.getAuthors().toString());
                     setTooltip(tooltip);
 
-                    EventHandler<MouseEvent> eventHandler = e -> onMouseClickArticle(e, article);
+                    EventHandler<MouseEvent> eventHandler = e -> {
+                        // Définition élement à focus
+                        int articleIndex = articlesList.getItems().indexOf(article);
+                        articlesList.getFocusModel().focus(articleIndex);
+
+                        //Définition évènement click
+                        onMouseClickArticle(e, article);
+                    };
                     addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
                 }
             }
