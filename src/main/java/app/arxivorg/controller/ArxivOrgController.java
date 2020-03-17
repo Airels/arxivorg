@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -120,9 +121,11 @@ public class ArxivOrgController implements Initializable {
             textArticle += "Résumé: ";
             textArticle += article.getContent();
 
+            Text text = new Text(textArticle);
+            text.setWrappingWidth(Region.USE_COMPUTED_SIZE);
 
             articleView.getChildren().clear();
-            articleView.getChildren().add(new Text(textArticle));
+            articleView.getChildren().add(text);
         }
     }
 
