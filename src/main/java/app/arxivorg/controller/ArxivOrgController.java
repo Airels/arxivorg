@@ -46,9 +46,12 @@ public class ArxivOrgController implements Initializable {
     }
 
     private void generateCategoryChoiceBox() {
-        String categories[] = {"A", "B", "C"};
+        List<Category> categories = new ArrayList<>();
+
+        for (Category category : Category.values())
+            categories.add(category);
+
         categoryChoiceBox.setItems(FXCollections.observableArrayList(categories));
-        categoryChoiceBox.setValue("A");
     }
 
     private void generatePeriodChoiceBox() {
