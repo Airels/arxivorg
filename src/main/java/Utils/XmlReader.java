@@ -47,7 +47,8 @@ public class XmlReader
                     int lengthAuthor = entryNode.getElementsByTagName("author").getLength();
                     ArrayList<String> tempList = new ArrayList<String>();
 
-                    for (int index = 0 ; index > lengthAuthor ; index ++ ){
+                    for (int index = 0 ; index < lengthAuthor ; index ++ ){
+
                         tempList.add(entryNode.getElementsByTagName("name").item(index).getTextContent());
 
                     }
@@ -82,5 +83,13 @@ public class XmlReader
 
         return articles;
 
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Article> test = Reader(new File("1.atom"));
+
+        for (int i = 0 ; i < test.size(); i++) {
+            System.out.println("test");
+        }
     }
 }
