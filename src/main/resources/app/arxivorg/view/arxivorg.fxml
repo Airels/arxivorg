@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
@@ -50,11 +51,36 @@
     <!-- Panneau liste + vue de l'article -->
     <GridPane alignment="TOP_RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="154.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <ListView fx:id="articlesList" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-        <ScrollPane fx:id="scrollPaneArticleView" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-            <content>
+
+        <GridPane GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <ScrollPane fx:id="scrollPaneArticleView" prefHeight="300.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="CENTER">
                 <TextFlow fx:id="articleView" style="-fx-background-color: white; -fx-border-color: lightgray;" />
-            </content>
-        </ScrollPane>
+            </ScrollPane>
+
+            <GridPane nodeOrientation="RIGHT_TO_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <CheckBox fx:id="favCheckBox" nodeOrientation="RIGHT_TO_LEFT" style="-fx-background-color: white; -fx-border-color: lightgray;" text="Favoris :" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+                    <padding>
+                        <Insets bottom="3.0" left="7.0" right="7.0" top="3.0" />
+                    </padding></CheckBox>
+
+                <Button fx:id="btnDownload" maxWidth="80.0" minWidth="80.0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="80.0" text="Télécharger" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <columnConstraints>
+                    <ColumnConstraints maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints maxHeight="20.0" minHeight="25.0" prefHeight="25.0" />
+                    <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" />
+                    <RowConstraints />
+                </rowConstraints>
+            </GridPane>
+         <columnConstraints>
+            <ColumnConstraints percentWidth="88.0" />
+            <ColumnConstraints maxWidth="80.0" minWidth="80.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints percentHeight="100.0" />
+         </rowConstraints>
+        </GridPane>
 
       <columnConstraints>
          <ColumnConstraints percentWidth="100.0" />
