@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.arxivorg.controller.ArxivOrgController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.arxivorg.controller.ArxivOrgController">
 
     <!-- Panneau des filtres -->
     <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -25,27 +25,25 @@
          <RowConstraints maxHeight="150.0" minHeight="150.0" prefHeight="150.0" vgrow="SOMETIMES" />
          <RowConstraints vgrow="SOMETIMES" />
      </rowConstraints>
-      <children>
-         <Label alignment="CENTER" prefWidth="170.0" text="FILTRES" textAlignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="TOP">
-            <font>
-               <Font size="27.0" />
-            </font>
-         </Label>
-          <Line endX="145.0" strokeWidth="2.0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+     <Label alignment="CENTER" prefWidth="170.0" text="FILTRES" textAlignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="TOP">
+        <font>
+           <Font size="27.0" />
+        </font>
+     </Label>
+      <Line endX="145.0" strokeWidth="2.0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
 
-          <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Catégories :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-          <ChoiceBox fx:id="categoryChoiceBox" prefHeight="25.0" prefWidth="130.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+      <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Catégories :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+      <ChoiceBox fx:id="categoryChoiceBox" prefHeight="25.0" prefWidth="130.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
 
-          <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Période :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
-          <ChoiceBox fx:id="periodChoiceBox" prefHeight="25.0" prefWidth="130.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+      <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Période :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+      <ChoiceBox fx:id="periodChoiceBox" prefHeight="25.0" prefWidth="130.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
 
-          <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Auteurs :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP" />
-         <TextArea maxWidth="140.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+      <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Auteurs :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+     <TextArea maxWidth="140.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
 
-          <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Mots-clefs :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="TOP" />
-          <TextArea maxWidth="140.0" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-         <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Tout télécharger" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="BOTTOM" />
-      </children>
+      <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Mots-clefs :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="TOP" />
+      <TextArea maxWidth="140.0" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+     <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Tout télécharger" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="BOTTOM" />
    </GridPane>
 
     <!-- Panneau liste + vue de l'article -->
@@ -74,8 +72,8 @@
                 </rowConstraints>
             </GridPane>
          <columnConstraints>
-            <ColumnConstraints percentWidth="88.0" />
-            <ColumnConstraints maxWidth="80.0" minWidth="80.0" />
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints maxWidth="80.0" minWidth="42.0" prefWidth="80.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints percentHeight="100.0" />
