@@ -39,10 +39,11 @@
       <ChoiceBox fx:id="periodChoiceBox" prefHeight="25.0" prefWidth="130.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
 
       <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Auteurs :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP" />
-     <TextArea maxWidth="140.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+     <TextArea fx:id="authorsPredicate" maxWidth="140.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
 
       <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Mots-clefs :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="TOP" />
-      <TextArea maxWidth="140.0" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+      <TextArea fx:id="keywordsPredicate" maxWidth="140.0" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+
      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Tout télécharger" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="BOTTOM" />
    </GridPane>
 

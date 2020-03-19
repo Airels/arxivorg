@@ -29,6 +29,8 @@ public class ArxivOrgController implements Initializable {
     @FXML private ChoiceBox periodChoiceBox;
     @FXML private TextFlow articleView;
     @FXML private ScrollPane scrollPaneArticleView;
+    @FXML private TextArea authorsPredicate;
+    @FXML private TextArea keywordsPredicate;
     @FXML private CheckBox favCheckBox;
     @FXML private Button btnDownload;
 
@@ -36,6 +38,9 @@ public class ArxivOrgController implements Initializable {
     public void initialize(URL location, ResourceBundle resourceBundle) {
         scrollPaneArticleView.setFitToWidth(true);
         scrollPaneArticleView.setFitToHeight(true);
+
+        authorsPredicate.setWrapText(true);
+        keywordsPredicate.setWrapText(true);
 
         favCheckBox.setDisable(true);
         btnDownload.setDisable(true);
