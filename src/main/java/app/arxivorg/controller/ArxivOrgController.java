@@ -55,7 +55,6 @@ public class ArxivOrgController implements Initializable {
         categoryChoiceBox.setValue(Category.All);
     }
 
-    // TODO : A implémenter avec des vrais sous-catégories
     private void generatePeriodChoiceBox() {
         String periods[] = {"A", "B", "C"};
         periodChoiceBox.setItems(FXCollections.observableArrayList(periods));
