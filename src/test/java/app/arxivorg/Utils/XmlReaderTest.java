@@ -68,11 +68,11 @@ public class XmlReaderTest {
         SubCategories subCategories = new SubCategories();
         subCategories.add("cs.LG");
         SubCategories testedSubCategories = testedArticle.getSubCategories();
-        assertEquals(subCategories.get().size(), testedSubCategories.get().size());
+        assertEquals(subCategories.getList().size(), testedSubCategories.getList().size());
 
-        for (int i = 0; i <subCategories.get().size() ; i++) {
+        for (int i = 0; i <subCategories.getList().size() ; i++) {
 
-            assertEquals(subCategories.get().get(i),testedSubCategories.get().get(i));
+            assertEquals(subCategories.getList().get(i),testedSubCategories.getList().get(i));
         }
     }
 

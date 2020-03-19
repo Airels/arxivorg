@@ -28,16 +28,19 @@ public class XmlReader {
             doc.getDocumentElement().normalize();
             NodeList nList = doc.getElementsByTagName("entry");
             NodeList secondList = doc.getElementsByTagName("category");
+            NodeList linkList = doc.getElementsByTagName("link");
 
             
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);
                 Node secondNode = secondList.item(temp);
+                Node linkNode = linkList.item(temp);
 
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element entryNode = (Element) nNode;
                     Element secondCategoryNode = (Element) secondNode;
+                    Element linkGetterNode = (Element) linkNode;
 
                     int lengthAuthor = entryNode.getElementsByTagName("author").getLength();
                     ArrayList<String> tempList = new ArrayList<String>();
@@ -68,13 +71,13 @@ public class XmlReader {
 
                     SubCategories tempSub = new SubCategories(subcategories);
 
-
-
                     Category primalCategory = Category.Computer_Science;
 
+                    String tempLink = linkGetterNode.getAttribute("href");
 
-                    Article tempArticle = new Article(tempTitle, tempAuthors, tempContent, primalCategory, tempSub );
+                    Article tempArticle = new Article(tempTitle, tempAuthors, tempContent, primalCategory, tempSub,tempLink);
                     articles.add(tempArticle);
+                    System.out.println(tempLink);
 
                 }
             }
@@ -87,7 +90,7 @@ public class XmlReader {
     }
 
     public static void main(String[] args) {
-        ArrayList<Article> test = Reader(new File("test.atom"));
+        ArrayList<Article> test = Reader(new File("1.atom"));
 
         for (int i = 0 ; i < test.size(); i++) {
             System.out.println("test");
