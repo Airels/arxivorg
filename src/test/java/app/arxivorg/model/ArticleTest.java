@@ -18,13 +18,15 @@ public class ArticleTest {
         auth.add("test");
         Authors authors = new Authors(auth);
         //No Title :
-        assertThrows(IllegalArgumentException.class,()-> new Article("",authors,"content",Category.Economics,new SubCategories()));
+        assertThrows(IllegalArgumentException.class,()-> new Article("",authors,"content",Category.Economics,new SubCategories(),"link"));
         //No Content
-        assertThrows(IllegalArgumentException.class,()-> new Article("title",authors,"",Category.Economics,new SubCategories()));
+        assertThrows(IllegalArgumentException.class,()-> new Article("title",authors,"",Category.Economics,new SubCategories(),"link"));
         //No authors
-        assertThrows(IllegalArgumentException.class,()-> new Article("title",new Authors(new ArrayList<>()),"content",Category.Economics,new SubCategories()));
+        assertThrows(IllegalArgumentException.class,()-> new Article("title",new Authors(new ArrayList<>()),"content",Category.Economics,new SubCategories(),"link"));
         //Null Category
-        assertThrows(IllegalArgumentException.class,()-> new Article("title",authors,"content",null,new SubCategories()));
+        assertThrows(IllegalArgumentException.class,()-> new Article("title",authors,"content",null,new SubCategories(),"link"));
+        //Null link
+        assertThrows(IllegalArgumentException.class,()-> new Article("title",authors,"content",Category.Physics,new SubCategories(),null));
     }
 
     @Test
@@ -37,13 +39,14 @@ public class ArticleTest {
         subC.add("Covid-19");
         SubCategories subCategories = new SubCategories(subC);
 
-        Article article = new Article("title",authors,"content",Category.Physics,subCategories);
+        Article article = new Article("title",authors,"content",Category.Physics,subCategories,"link");
 
         assert (article.getAuthors() == authors);
         assert (article.getCategory() == Category.Physics);
         assert (article.getContent().equals("content"));
         assert (article.getSubCategories() == subCategories);
         assert (article.getTitle().equals("title"));
+        assert (article.getLink().equals("link"));
 
     }
 
@@ -64,19 +67,21 @@ public class ArticleTest {
         SubCategories subCategories = new SubCategories(subCat);
 
 
-        Article article = new Article("title_false",authors_false,"content_false",Category.Economics,subCategories_false);
+        Article article = new Article("title_false",authors_false,"content_false",Category.Economics,subCategories_false,"link_false");
 
         article.setAuthors(authors);
         article.setCategory(Category.Physics);
         article.setContent("content");
         article.setTitle("title");
         article.setSubCategories(subCategories);
+        article.setLink("link");
 
         assert (article.getAuthors() == authors);
         assert (article.getCategory() == Category.Physics);
         assert (article.getContent().equals("content"));
         assert (article.getSubCategories() == subCategories);
         assert (article.getTitle().equals("title"));
+        assert (article.getLink().equals("link"));
 
     }
 }

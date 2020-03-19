@@ -8,20 +8,28 @@ public class Article {
     private String content;
     private Category category;
     private SubCategories subCategories;
+    private String link;
 
-    public Article(String title, Authors authors, String content, Category category, SubCategories subCategories) throws IllegalArgumentException {
+    public Article(String title, Authors authors, String content, Category category, SubCategories subCategories, String link) throws IllegalArgumentException {
         if(title.isEmpty()) throw new IllegalArgumentException("title is Empty");
         if(authors.getList().isEmpty()) throw new IllegalArgumentException("there must be at least one author");
         if(content.isEmpty()) throw new IllegalArgumentException("content is empty");
         if(category==null) throw new IllegalArgumentException("category must be defined");
-        if(subCategories==null){
-            subCategories = new SubCategories();
-        }
+        if(link == null) throw  new IllegalArgumentException("Link can't be null or null");
+        if(subCategories==null)subCategories = new SubCategories();
+
         this.title = title;
         this.authors = authors;
         this.content = content;
         this.category = category;
         this.subCategories = subCategories;
+        this.link = link;
+    }
+
+
+
+    public void setLink(String link) {
+        this.link = link;
     }
 
     public void setTitle(String title) {
@@ -42,6 +50,10 @@ public class Article {
 
     public void setSubCategories(SubCategories subCategories) {
         this.subCategories = subCategories;
+    }
+
+    public String getLink() {
+        return link;
     }
 
     public String getTitle() {

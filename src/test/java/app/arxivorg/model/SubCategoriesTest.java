@@ -2,6 +2,8 @@ package app.arxivorg.model;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class SubCategoriesTest {
     private SubCategories subCategories = new SubCategories();
 
@@ -12,9 +14,18 @@ public class SubCategoriesTest {
     }
 
     @Test
+    public void getListTest(){
+        subCategories.add("test");
+        assert (subCategories.getList().get(0).equals("test"));
+        assert (!subCategories.getList().get(0).equals("testFalse"));
+    }
+
+    @Test
     public void getTest(){
         subCategories.add("test");
-        assert (subCategories.get().get(0).equals("test"));
-        assert (!subCategories.get().get(0).equals("testFalse"));
+        assertThrows(IllegalArgumentException.class,()-> subCategories.get(-1));
+        assertThrows(IllegalArgumentException.class,()-> subCategories.get(1));
+        assert (subCategories.get(0).equals("test"));
+
     }
 }
