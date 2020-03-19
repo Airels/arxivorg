@@ -76,8 +76,6 @@ public class XmlReader {
 
                     Article tempArticle = new Article(tempTitle, tempAuthors, tempContent, primalCategory, tempSub,tempLink);
                     articles.add(tempArticle);
-                    System.out.println(tempLink);
-
                 }
             }
         } catch (Exception e) {
