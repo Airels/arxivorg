@@ -8,5 +8,6 @@ public enum Category {
     Quantitative_Finance,
     Statistics,
     Electrical_Engineering_and_Systems_Science,
-    Economics
+    Economics,
+    All
 }
