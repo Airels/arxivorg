@@ -8,10 +8,8 @@ import app.arxivorg.model.Category;
 import app.arxivorg.model.SubCategories;
 import org.junit.jupiter.api.Test;
 
-import javax.swing.plaf.SeparatorUI;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -20,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class XmlReaderTest {
 
-    List<Article> articles = XmlReader.Reader(new File("test.atom"));
+    List<Article> articles = XmlReader.read("test.atom");
     Article testedArticle = articles.get(0);
 
 
