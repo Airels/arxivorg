@@ -33,4 +33,30 @@
     <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
     <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
   </entry>
+  <entry>
+      <id>http://arxiv.org/abs/2003.04887v2</id>
+      <updated>2020-03-10T17:58:01Z</updated>
+      <published>2020-03-10T17:58:01Z</published>
+      <title>I am a nottest</title>
+      <summary>I am not working</summary>
+      <author>
+        <name>Guillome Nicolai</name>
+      </author>
+      <author>
+        <name>Iohan Vizcaino</name>
+      </author>
+      <author>
+        <name>Tam David-Broglio</name>
+      </author>
+      <author>
+        <name>Aymerikk Sybiak</name>
+      </author>
+
+      <link href="http://arxiv.org/abs/2003.04887v2" rel="alternate" type="text/html"/>
+      <link title="pdf" href="http://arxiv.org/pdf/2003.04887v2" rel="related" type="application/pdf"/>
+      <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+      <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+      <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+      <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
+    </entry>
   </feed>

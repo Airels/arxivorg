@@ -12,14 +12,13 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class XmlReaderTest {
 
     List<Article> articles = XmlReader.read("test.atom");
     Article testedArticle = articles.get(0);
+
 
 
     @Test
@@ -34,6 +33,7 @@ public class XmlReaderTest {
         Authors testedAuthors = testedArticle.getAuthors();
 
         assertEquals(authors.toString(), testedAuthors.toString());
+
 
     }
 
@@ -73,5 +73,16 @@ public class XmlReaderTest {
             assertEquals(subCategories.getList().get(i),testedSubCategories.getList().get(i));
         }
     }
+
+    @Test
+    public void LinkTest(){
+        String linkContent = "http://arxiv.org/pdf/2003.04887v1";
+
+        String testedArticleLink = testedArticle.getLink();
+
+
+        assertEquals(linkContent, testedArticleLink);
+    }
+
 
 }
