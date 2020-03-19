@@ -38,7 +38,7 @@ public class ArxivOrgController implements Initializable {
     @FXML private CheckBox favCheckBox;
     @FXML private Button btnDownload;
 
-    //    @Override
+    //@Override
     public void initialize(URL location, ResourceBundle resourceBundle) {
         scrollPaneArticleView.setFitToWidth(true);
         scrollPaneArticleView.setFitToHeight(true);
@@ -60,6 +60,7 @@ public class ArxivOrgController implements Initializable {
         categoryChoiceBox.setItems(FXCollections.observableArrayList(categories));
     }
 
+    // TODO : A implémenter avec des vrais sous-catégories
     private void generatePeriodChoiceBox() {
         String periods[] = {"A", "B", "C"};
         periodChoiceBox.setItems(FXCollections.observableArrayList(periods));
@@ -74,7 +75,7 @@ public class ArxivOrgController implements Initializable {
         articlesList.setCellFactory(cell -> new ListCell<Article>() {
             final Tooltip tooltip = new Tooltip();
 
-            @Override
+            @Override       // Affichage et définition actions pour chaque élément
             protected void updateItem(Article article, boolean isEmpty) {
                 if (article == null || isEmpty) {
                     setText(null);
@@ -127,7 +128,6 @@ public class ArxivOrgController implements Initializable {
 
             articleView.getChildren().clear();
             articleView.getChildren().add(text);
-            // System.out.println(articleView.getChildren());
 
             favCheckBox.setDisable(false);
             btnDownload.setDisable(false);
