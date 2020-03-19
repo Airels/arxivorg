@@ -17,11 +17,12 @@ import org.w3c.dom.Element;
 
 public class XmlReader {
 
-    public static ArrayList<Article> Reader (File file) {
+    public static ArrayList<Article> read(String fileName) {
+
         ArrayList<Article> articles = new ArrayList<Article>();
 
         try {
-            File inputFile = new File(String.valueOf(file));
+            File inputFile = new File(fileName);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(inputFile);
@@ -34,7 +35,7 @@ public class XmlReader {
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);
                 Node secondNode = secondList.item(temp);
-                Node linkNode = linkList.item(temp);
+                Node linkNode = linkList.item(2+2*temp);
 
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
@@ -48,9 +49,7 @@ public class XmlReader {
                     for (int index = 0 ; index < lengthAuthor ; index ++ ){
 
                         tempList.add(entryNode.getElementsByTagName("name").item(index).getTextContent());
-
                     }
-
 
                     Authors tempAuthors = new Authors(tempList);
 
@@ -90,7 +89,7 @@ public class XmlReader {
     }
 
     public static void main(String[] args) {
-        ArrayList<Article> test = Reader(new File("1.atom"));
+        ArrayList<Article> test = read("1.atom");
 
         for (int i = 0 ; i < test.size(); i++) {
             System.out.println("test");
