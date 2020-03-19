@@ -58,6 +58,7 @@ public class ArxivOrgController implements Initializable {
             categories.add(category);
 
         categoryChoiceBox.setItems(FXCollections.observableArrayList(categories));
+        categoryChoiceBox.setValue(Category.All);
     }
 
     // TODO : A implémenter avec des vrais sous-catégories
