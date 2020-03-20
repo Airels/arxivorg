@@ -29,7 +29,7 @@
     <link href="http://arxiv.org/abs/2003.04887v1" rel="alternate" type="text/html"/>
     <link title="pdf" href="http://arxiv.org/pdf/2003.04887v1" rel="related" type="application/pdf"/>
     <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
-    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="I test category" scheme="http://arxiv.org/schemas/atom"/>
     <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
     <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
   </entry>
@@ -54,8 +54,8 @@
 
       <link href="http://arxiv.org/abs/2003.04887v2" rel="alternate" type="text/html"/>
       <link title="pdf" href="http://arxiv.org/pdf/2003.04887v2" rel="related" type="application/pdf"/>
-      <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
-      <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+      <arxiv:primary_category xmlns:arxiv="http://arxiv.org/schemas/atom" term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+      <category term="I also test it" scheme="http://arxiv.org/schemas/atom"/>
       <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
       <category term="stat.ML" scheme="http://arxiv.org/schemas/atom"/>
     </entry>

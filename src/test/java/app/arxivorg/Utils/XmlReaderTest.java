@@ -18,6 +18,7 @@ public class XmlReaderTest {
 
     List<Article> articles = XmlReader.read("test.atom");
     Article testedArticle = articles.get(0);
+    Article secondTestedArticle = articles.get(1);
 
 
 
@@ -30,9 +31,18 @@ public class XmlReaderTest {
         auth.add("Aymeric Sybiak");
         Authors authors = new Authors(auth);
 
+        List<String> secondAuth = new ArrayList<>();
+        secondAuth.add("Guillome Nicolai");
+        secondAuth.add("Iohan Vizcaino");
+        secondAuth.add("Tam David-Broglio");
+        secondAuth.add("Aymerikk Sybiak");
+        Authors secondAuthors = new Authors(secondAuth);
+
         Authors testedAuthors = testedArticle.getAuthors();
+        Authors secondTestedAuthors = secondTestedArticle.getAuthors();
 
         assertEquals(authors.toString(), testedAuthors.toString());
+        assertEquals(secondAuthors.toString(), secondTestedAuthors.toString());
 
 
     }
@@ -42,7 +52,11 @@ public class XmlReaderTest {
         String title = "I am a test";
         String testedTitle = testedArticle.getTitle();
 
+        String secondTitle = "I am a nottest";
+        String secondTestedTitle = secondTestedArticle.getTitle();
+
         assertEquals(title,testedTitle);
+        assertEquals(secondTitle,secondTestedTitle);
     }
 
     @Test
@@ -50,7 +64,11 @@ public class XmlReaderTest {
         String articleContent = "I am working";
         String testedArticleContent = testedArticle.getContent();
 
+        String secondArticleContent = "I am not working";
+        String secondTestArticleContent = secondTestedArticle.getContent();
+
         assertEquals(articleContent, testedArticleContent);
+        assertEquals(secondArticleContent,secondTestArticleContent);
     }
 
     @Test
@@ -64,24 +82,33 @@ public class XmlReaderTest {
     @Test
     public void SubCategoryTest(){
         SubCategories subCategories = new SubCategories();
-        subCategories.add("cs.LG");
+        subCategories.add("I test category");
         SubCategories testedSubCategories = testedArticle.getSubCategories();
+        SubCategories secondTestSubCategory = secondTestedArticle.getSubCategories();
+
+        SubCategories secondEntryCategories = new SubCategories();
+        secondEntryCategories.add("I also test it");
+        assertEquals(secondEntryCategories.getList().size(),secondTestSubCategory.getList().size());
         assertEquals(subCategories.getList().size(), testedSubCategories.getList().size());
 
         for (int i = 0; i <subCategories.getList().size() ; i++) {
 
             assertEquals(subCategories.getList().get(i),testedSubCategories.getList().get(i));
+            assertEquals(secondTestSubCategory.getList().get(i), secondTestSubCategory.getList().get(i));
         }
     }
 
     @Test
     public void LinkTest(){
         String linkContent = "http://arxiv.org/pdf/2003.04887v1";
+        String secondLinkContent = "http://arxiv.org/pdf/2003.04887v2";
 
         String testedArticleLink = testedArticle.getLink();
+        String secondArticleLink = secondTestedArticle.getLink();
 
 
         assertEquals(linkContent, testedArticleLink);
+        assertEquals(secondLinkContent, secondArticleLink);
     }
 
 
