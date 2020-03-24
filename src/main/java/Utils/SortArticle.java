@@ -3,7 +3,7 @@ package Utils;
 import app.arxivorg.model.Article;
 import java.util.ArrayList;
 
-public class Sort {
+public class SortArticle {
 
     public static ArrayList<Article> Sortbyauthors (ArrayList<Article> list , String name) {
 
