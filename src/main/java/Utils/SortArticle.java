@@ -6,6 +6,8 @@ import app.arxivorg.model.Category;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 
 public class SortArticle {
@@ -156,17 +158,68 @@ public class SortArticle {
         return result;
     }*/
 
+    private static int Compare ( String title1, String title2, int nb)
+    {
+        if (title1.equals(title2)) return 0 ;
+
+        if (title1.charAt(nb) == title2.charAt(nb)) return Compare(title1,title2,nb+1);
+
+        return title1.charAt(nb) - title2.charAt(nb);
+
+    }
+
+    public static ArrayList<Article> SortbyTitle (ArrayList<Article> list) {
+
+        ArrayList<Article> changelist = list;
+        int mid = list.size()/2;
+
+
+        if (list.size() > 2){
+
+            ArrayList<Article> leftpart = new ArrayList<>();
+            ArrayList<Article> rightpart = new ArrayList<>();
+
+
+            for (int index = 0 ; index < list.size() ; index++){
+
+                if ( index < mid) leftpart.add(list.get(index));
+
+                else rightpart.add(list.get(index));
+
+            }
+
+
+            ArrayList<Article> resultleft = SortbyTitle(leftpart);
+            ArrayList<Article> resultright = SortbyTitle(rightpart);
+
+            ArrayList<Article> result = resultleft;
+            result.addAll(resultright);
+
+            return result;
+        }
+
+
+        else for (int index2 = 0 ; index2 < 1; index2 ++){
+            int minus = changelist.size()-index2-1;
+            if (Compare(changelist.get(index2).getTitle(), changelist.get(minus).getTitle(), 0) > 0)
+                Collections.swap(changelist, index2, minus);
+        }
+
+        return changelist;
+    }
+
 
 
 
     public static void main(String[] args) {
         ArrayList<Article> authors = XmlReader.read("1.atom");
-        ArrayList<Article> test = SortbySubCategories(authors , "cs.LG");
+        ArrayList<Article> test = SortbyTitle(authors);
 
 
 
         for (int index = 0 ; index < test.size(); index ++) {
             System.out.println(test.get(index).getTitle());
+            System.out.println(" ");
         }
     }
 }
