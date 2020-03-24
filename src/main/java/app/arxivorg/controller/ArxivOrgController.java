@@ -26,7 +26,7 @@ public class ArxivOrgController implements Initializable {
 
     @FXML private ListView articlesList;
     @FXML private ChoiceBox categoryChoiceBox;
-    @FXML private ChoiceBox periodChoiceBox;
+    @FXML private DatePicker periodDatePicker;
     @FXML private TextFlow articleView;
     @FXML private ScrollPane scrollPaneArticleView;
     @FXML private TextArea authorsPredicate;
@@ -46,7 +46,6 @@ public class ArxivOrgController implements Initializable {
         btnDownload.setDisable(true);
 
         generateCategoryChoiceBox();
-        generatePeriodChoiceBox();
         generateArticlesList();
     }
 
@@ -58,12 +57,6 @@ public class ArxivOrgController implements Initializable {
 
         categoryChoiceBox.setItems(FXCollections.observableArrayList(categories));
         categoryChoiceBox.setValue(Category.All);
-    }
-
-    private void generatePeriodChoiceBox() {
-        String periods[] = {"A", "B", "C"};
-        periodChoiceBox.setItems(FXCollections.observableArrayList(periods));
-        periodChoiceBox.setValue("A");
     }
 
     private void generateArticlesList() {
