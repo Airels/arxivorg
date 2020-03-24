@@ -5,10 +5,7 @@ import app.arxivorg.model.Category;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
+import java.util.*;
 
 public class SortArticle {
 
@@ -170,42 +167,8 @@ public class SortArticle {
 
     public static ArrayList<Article> SortbyTitle (ArrayList<Article> list) {
 
-        ArrayList<Article> changelist = list;
-        int mid = list.size()/2;
-
-
-        if (list.size() > 2){
-
-            ArrayList<Article> leftpart = new ArrayList<>();
-            ArrayList<Article> rightpart = new ArrayList<>();
-
-
-            for (int index = 0 ; index < list.size() ; index++){
-
-                if ( index < mid) leftpart.add(list.get(index));
-
-                else rightpart.add(list.get(index));
-
-            }
-
-
-            ArrayList<Article> resultleft = SortbyTitle(leftpart);
-            ArrayList<Article> resultright = SortbyTitle(rightpart);
-
-            ArrayList<Article> result = resultleft;
-            result.addAll(resultright);
-
-            return result;
-        }
-
-
-        else for (int index2 = 0 ; index2 < 1; index2 ++){
-            int minus = changelist.size()-index2-1;
-            if (Compare(changelist.get(index2).getTitle(), changelist.get(minus).getTitle(), 0) > 0)
-                Collections.swap(changelist, index2, minus);
-        }
-
-        return changelist;
+        list.sort(Comparator.comparing(Article::getTitle));
+        return list;
     }
 
 
