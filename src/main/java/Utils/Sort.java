@@ -1,9 +1,6 @@
 package Utils;
 
 import app.arxivorg.model.Article;
-import app.arxivorg.model.Authors;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Sort {
