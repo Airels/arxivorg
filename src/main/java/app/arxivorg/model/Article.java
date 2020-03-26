@@ -57,6 +57,8 @@ public class Article {
         this.subCategories = subCategories;
     }
 
+    public void setDate(LocalDate date) { this.date = date; }
+
     public String getLink() {
         return link;
     }
@@ -80,4 +82,6 @@ public class Article {
     public SubCategories getSubCategories() {
         return subCategories;
     }
+
+    public LocalDate getDate() { return date; }
 }
