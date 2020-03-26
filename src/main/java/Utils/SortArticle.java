@@ -144,14 +144,15 @@ public class SortArticle {
         }
 
 
-        LocalDate datetocompar = list.get(0).getLocalDate;
 
         else {
+            LocalDate datetocompar = list.get(0).getDate();
+
             if (datemin.compareTo(datetocompar) >= 0 && datemax.compareTo(datetocompar) <= 0) result.add(list.get(0));
         }
 
         return result;
-    }*/
+    }
 
     private static int Compare ( String title1, String title2, int nb)
     {
