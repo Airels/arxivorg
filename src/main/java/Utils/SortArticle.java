@@ -9,7 +9,7 @@ import java.util.*;
 
 public class SortArticle {
 
-    public static ArrayList<Article> SortbyAuthors(ArrayList<Article> list , String name) {
+    public static ArrayList<Article> byAuthors(ArrayList<Article> list , String name) {
 
         ArrayList<Article> result = new ArrayList<>();
 
@@ -28,9 +28,8 @@ public class SortArticle {
 
             }
 
-
-            ArrayList<Article> resultleft = SortbyAuthors(leftpart , name);
-            ArrayList<Article> resultright = SortbyAuthors(rightpart, name);
+            ArrayList<Article> resultleft = byAuthors(leftpart , name);
+            ArrayList<Article> resultright = byAuthors(rightpart, name);
 
             result.addAll(resultleft);
             result.addAll(resultright);
@@ -46,7 +45,7 @@ public class SortArticle {
     }
 
 
-    public static ArrayList<Article> SortbyCategory (ArrayList<Article> list , Category type ) {
+    public static ArrayList<Article> byCategory (ArrayList<Article> list , Category type ) {
 
         ArrayList<Article> result = new ArrayList<>();
 
@@ -66,8 +65,8 @@ public class SortArticle {
             }
 
 
-            ArrayList<Article> resultleft = SortbyCategory(leftpart , type);
-            ArrayList<Article> resultright = SortbyCategory(rightpart, type);
+            ArrayList<Article> resultleft = byCategory(leftpart , type);
+            ArrayList<Article> resultright = byCategory(rightpart, type);
 
             result.addAll(resultleft);
             result.addAll(resultright);
@@ -80,7 +79,7 @@ public class SortArticle {
         return result;
     }
 
-    public static ArrayList<Article> SortbySubCategories (ArrayList<Article> list , String sub) {
+    public static ArrayList<Article> bySubCategories (ArrayList<Article> list , String sub) {
 
         ArrayList<Article> result = new ArrayList<>();
 
@@ -100,8 +99,8 @@ public class SortArticle {
             }
 
 
-            ArrayList<Article> resultleft = SortbySubCategories(leftpart , sub);
-            ArrayList<Article> resultright = SortbySubCategories(rightpart, sub);
+            ArrayList<Article> resultleft = bySubCategories(leftpart , sub);
+            ArrayList<Article> resultright = bySubCategories(rightpart, sub);
 
             result.addAll(resultleft);
             result.addAll(resultright);
@@ -116,7 +115,7 @@ public class SortArticle {
         return result;
     }
 
-    /*public static ArrayList<Article> SortbyDate(ArrayList<Article> list , String date1 , String date2 ) throws ParseException {
+    /*public static ArrayList<Article> byDate(ArrayList<Article> list , String date1 , String date2 ) throws ParseException {
 
         ArrayList<Article> result = new ArrayList<>();
 
@@ -136,8 +135,8 @@ public class SortArticle {
             }
 
 
-            ArrayList<Article> resultleft = SortbyDate(leftpart , date1, date2);
-            ArrayList<Article> resultright = SortbyDate(rightpart, date1 , date2);
+            ArrayList<Article> resultleft = byDate(leftpart , date1, date2);
+            ArrayList<Article> resultright = byDate(rightpart, date1 , date2);
 
             result.addAll(resultleft);
             result.addAll(resultright);
@@ -165,7 +164,7 @@ public class SortArticle {
 
     }
 
-    public static ArrayList<Article> SortbyTitle (ArrayList<Article> list) {
+    public static ArrayList<Article> byTitle (ArrayList<Article> list) {
 
         list.sort(Comparator.comparing(Article::getTitle));
         return list;
@@ -176,7 +175,7 @@ public class SortArticle {
 
     public static void main(String[] args) {
         ArrayList<Article> authors = XmlReader.read("1.atom");
-        ArrayList<Article> test = SortbyTitle(authors);
+        ArrayList<Article> test = byAuthors(authors,"Thomas Bachlechner");
 
 
 
