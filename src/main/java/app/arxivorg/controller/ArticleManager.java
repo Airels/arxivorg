@@ -67,7 +67,7 @@ public class ArticleManager {
     }
 
     // BRIDGE PREDICATES WITH INTERFACE
-    void setPredicates(@NotNull Category category, List<String> authors, LocalDate startPeriod, LocalDate endPeriod /*, List<String> keywords */) {
+    void setPredicates(@NotNull Category category, List<String> authors, @NotNull LocalDate startPeriod, @NotNull LocalDate endPeriod /*, List<String> keywords */) {
         resetArticlesList();
 
         if (authors != null)
