@@ -204,6 +204,8 @@ public class ArxivOrgController implements Initializable {
             }
 
             articleManager.setAuthorsPredicate(authors);
+        } else if (authorsPredicate.getText().isEmpty()) {
+            articleManager.setAuthorsPredicate(null);
         }
     }
 

@@ -41,11 +41,7 @@ public class ArticleManager {
     private void categoryPredicate(Category category) {
         this.category = category;
 
-        if (category == Category.All) {
-            resetArticlesList();
-            updateInterface();
-        } else
-            actualArticles = SortArticle.byCategory(actualArticles, category);
+        actualArticles = SortArticle.byCategory(actualArticles, category);
     }
 
     private void periodPredicate(LocalDate startPeriod, LocalDate endPeriod) {
@@ -56,7 +52,7 @@ public class ArticleManager {
     }
 
     private void authorsPredicate(List<String> authors) {
-        this.authors = authors;
+        // this.authors = authors;
 
         for (String author : authors)
             actualArticles = SortArticle.byAuthors(actualArticles, author);
@@ -70,6 +66,7 @@ public class ArticleManager {
     void setPredicates(@NotNull Category category, List<String> authors, @NotNull LocalDate startPeriod, @NotNull LocalDate endPeriod /*, List<String> keywords */) {
         resetArticlesList();
 
+        this.authors = authors;
         if (authors != null)
             authorsPredicate(authors);
 
@@ -83,7 +80,7 @@ public class ArticleManager {
         setPredicates(category, authors, startPeriod, endPeriod);
     }
 
-    void setAuthorsPredicate(List<String> authors) {
+     void setAuthorsPredicate(List<String> authors) {
         setPredicates(category, authors, startPeriod, endPeriod);
     }
 
