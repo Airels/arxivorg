@@ -12,6 +12,8 @@ public class SortArticle {
 
     public static ArrayList<Article> byAuthors(ArrayList<Article> list , String name) {
 
+        if (name.equals(" ")) return list;
+
         ArrayList<Article> result = new ArrayList<>();
 
         if (list.size() != 1){
