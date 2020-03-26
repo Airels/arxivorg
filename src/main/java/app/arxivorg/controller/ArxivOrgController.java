@@ -56,6 +56,8 @@ public class ArxivOrgController implements Initializable {
 
         periodDatePickerStart.valueProperty().addListener(this::onDatePickerStartUpdate);
         periodDatePickerEnd.valueProperty().addListener(this::onDatePickerEndUpdate);
+
+        new ArticleManager(this);
     }
 
     private void generateCategoryChoiceBox() {
