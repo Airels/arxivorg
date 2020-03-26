@@ -100,11 +100,4 @@ public class XmlReader {
 
     }
 
-    public static void main(String[] args) {
-        ArrayList<Article> test = read("1.atom");
-
-        for (int i = 0 ; i < test.size(); i++) {
-            System.out.println("test");
-        }
-    }
 }
