@@ -186,10 +186,22 @@ public class ArxivOrgController implements Initializable {
 
     @FXML
     public void onAuthorsKeyReleased(KeyEvent e) {
-        if (e.getText().equals(","))
+        if (e.getText().equals(",")) {
             authorsPredicate.appendText("\n");
 
-        System.out.println(authorsPredicate.getText());
+            String[] authorsArray = authorsPredicate.getText().split(",");
+            List<String> authors = new ArrayList<>();
+
+            for (String author : authorsArray) {
+                // MISTYPING CORRECTION
+                author = author.replace(";", "");
+                author = author.replace("\n", "");
+
+                authors.add(author);
+            }
+
+            articleManager.setAuthorsPredicate(authors);
+        }
     }
 
 
