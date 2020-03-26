@@ -50,6 +50,9 @@ public class SortArticle {
 
     public static ArrayList<Article> byCategory (ArrayList<Article> list , Category type ) {
 
+        if (type == Category.All)
+            return list;
+
         ArrayList<Article> result = new ArrayList<>();
 
         if (list.size() != 1){
