@@ -177,7 +177,7 @@ public class SortArticle {
 
     public static void main(String[] args) {
         ArrayList<Article> authors = XmlReader.read("1.atom");
-        ArrayList<Article> test = byAuthors(authors,"");
+        ArrayList<Article> test = byAuthors(authors,"Thomas Bachlechner");
 
 
 
