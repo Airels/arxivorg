@@ -3,6 +3,7 @@ package app.arxivorg.controller;
 import Utils.XmlReader;
 import app.arxivorg.model.Article;
 import app.arxivorg.model.Category;
+import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.Event;
@@ -25,10 +26,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static javafx.scene.input.KeyCode.T;
+
 public class ArxivOrgController implements Initializable {
 
+    private ArticleManager articleManager;
+
     @FXML private ListView articlesList;
-    @FXML private ChoiceBox categoryChoiceBox;
+    @FXML private ChoiceBox<Category> categoryChoiceBox;
     @FXML private DatePicker periodDatePickerStart;
     @FXML private DatePicker periodDatePickerEnd;
     @FXML private TextFlow articleView;
@@ -40,6 +45,7 @@ public class ArxivOrgController implements Initializable {
 
     //@Override
     public void initialize(URL location, ResourceBundle resourceBundle) {
+        // DISPLAY PARAMS
         scrollPaneArticleView.setFitToWidth(true);
         scrollPaneArticleView.setFitToHeight(true);
 
@@ -54,10 +60,17 @@ public class ArxivOrgController implements Initializable {
         periodDatePickerStart.setValue(LocalDate.now());
         periodDatePickerEnd.setValue(LocalDate.now());
 
+        // EVENTS
+        categoryChoiceBox.getSelectionModel().selectedItemProperty().addListener(this::onCategoryChanged);
+
+
+
         periodDatePickerStart.valueProperty().addListener(this::onDatePickerStartUpdate);
         periodDatePickerEnd.valueProperty().addListener(this::onDatePickerEndUpdate);
 
-        new ArticleManager(this);
+        // ARTICLE MANAGER
+        articleManager = new ArticleManager(this);
+        articleManager.setPredicates(Category.All, null, periodDatePickerStart.getValue(), periodDatePickerEnd.getValue());
     }
 
     private void generateCategoryChoiceBox() {
@@ -71,6 +84,7 @@ public class ArxivOrgController implements Initializable {
     }
 
     public void showArticles(List<Article> articles) {
+        articlesList.getItems().clear();
         articlesList.getItems().addAll(articles);
 
         // Génération affichage éléments
@@ -115,6 +129,11 @@ public class ArxivOrgController implements Initializable {
     }
 
     // EVENTS
+    @FXML void onCategoryChanged(Observable ov, Category oldCategory, Category newCategory) {
+        if (!oldCategory.equals(newCategory))
+            articleManager.setCategoryPredicate(newCategory);
+    }
+
     @FXML
     public void onMouseClickArticle(MouseEvent event, Article article) { // EN DOUBLE CLICK OU SIMPLE CLICK ?
         if (event.getButton() == MouseButton.PRIMARY) {
@@ -142,7 +161,10 @@ public class ArxivOrgController implements Initializable {
         if (newValue.compareTo(periodDatePickerEnd.getValue()) > 0) {
             showErrorMessage("Date invalide !", "Impossible d'entrer une date supérieur à la date de fin");
             periodDatePickerStart.setValue(oldValue);
+            return;
         }
+
+        articleManager.setPeriodPredicate(periodDatePickerStart.getValue(), periodDatePickerEnd.getValue());
     }
 
     @FXML
@@ -150,10 +172,14 @@ public class ArxivOrgController implements Initializable {
         if (newValue.compareTo(periodDatePickerStart.getValue()) < 0) {
             showErrorMessage("Date invalide !", "Impossible d'entrer une date inférieur à la date de début");
             periodDatePickerEnd.setValue(oldValue);
+            return;
         } else if (newValue.compareTo(LocalDate.now()) > 0) {
             // showInfoMessage("Date invalide !", "Impossible d'entrer une date au delà du " + LocalDate.now() + ".\nDate réglé sur aujourd'hui");
             periodDatePickerEnd.setValue(LocalDate.now());
+            return;
         }
+
+        articleManager.setPeriodPredicate(periodDatePickerStart.getValue(), periodDatePickerEnd.getValue());
     }
 
 
