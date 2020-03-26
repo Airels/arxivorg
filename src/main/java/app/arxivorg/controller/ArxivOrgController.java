@@ -164,10 +164,9 @@ public class ArxivOrgController implements Initializable {
         if (newValue.compareTo(periodDatePickerEnd.getValue()) > 0) {
             showErrorMessage("Date invalide !", "Impossible d'entrer une date supérieur à la date de fin");
             periodDatePickerStart.setValue(oldValue);
-            return;
+        } else {
+            articleManager.setPeriodPredicate(periodDatePickerStart.getValue(), periodDatePickerEnd.getValue());
         }
-
-        articleManager.setPeriodPredicate(periodDatePickerStart.getValue(), periodDatePickerEnd.getValue());
     }
 
     @FXML
@@ -175,14 +174,12 @@ public class ArxivOrgController implements Initializable {
         if (newValue.compareTo(periodDatePickerStart.getValue()) < 0) {
             showErrorMessage("Date invalide !", "Impossible d'entrer une date inférieur à la date de début");
             periodDatePickerEnd.setValue(oldValue);
-            return;
         } else if (newValue.compareTo(LocalDate.now()) > 0) {
             // showInfoMessage("Date invalide !", "Impossible d'entrer une date au delà du " + LocalDate.now() + ".\nDate réglé sur aujourd'hui");
             periodDatePickerEnd.setValue(LocalDate.now());
-            return;
+        } else {
+            articleManager.setPeriodPredicate(periodDatePickerStart.getValue(), periodDatePickerEnd.getValue());
         }
-
-        articleManager.setPeriodPredicate(periodDatePickerStart.getValue(), periodDatePickerEnd.getValue());
     }
 
     @FXML
