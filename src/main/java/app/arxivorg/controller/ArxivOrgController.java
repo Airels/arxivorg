@@ -50,7 +50,6 @@ public class ArxivOrgController implements Initializable {
         btnDownload.setDisable(true);
 
         generateCategoryChoiceBox();
-        generateArticlesList();
 
         periodDatePickerStart.setValue(LocalDate.now());
         periodDatePickerEnd.setValue(LocalDate.now());
@@ -69,8 +68,7 @@ public class ArxivOrgController implements Initializable {
         categoryChoiceBox.setValue(Category.All);
     }
 
-    private void generateArticlesList() {
-        List<Article> articles = XmlReader.read("1.atom");
+    public void showArticles(List<Article> articles) {
         articlesList.getItems().addAll(articles);
 
         // Génération affichage éléments
