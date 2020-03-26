@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
@@ -23,6 +24,7 @@ import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -63,7 +65,7 @@ public class ArxivOrgController implements Initializable {
         // EVENTS
         categoryChoiceBox.getSelectionModel().selectedItemProperty().addListener(this::onCategoryChanged);
 
-
+        authorsPredicate.addEventFilter(KeyEvent.KEY_RELEASED, this::onAuthorsKeyReleased);
 
         periodDatePickerStart.valueProperty().addListener(this::onDatePickerStartUpdate);
         periodDatePickerEnd.valueProperty().addListener(this::onDatePickerEndUpdate);
@@ -180,6 +182,11 @@ public class ArxivOrgController implements Initializable {
         }
 
         articleManager.setPeriodPredicate(periodDatePickerStart.getValue(), periodDatePickerEnd.getValue());
+    }
+
+    @FXML
+    public void onAuthorsKeyReleased(KeyEvent e) {
+        System.out.println(authorsPredicate.getText());
     }
 
 
