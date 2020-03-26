@@ -186,6 +186,9 @@ public class ArxivOrgController implements Initializable {
 
     @FXML
     public void onAuthorsKeyReleased(KeyEvent e) {
+        if (e.getText().equals(","))
+            authorsPredicate.appendText("\n");
+
         System.out.println(authorsPredicate.getText());
     }
 
