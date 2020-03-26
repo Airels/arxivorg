@@ -1,7 +1,12 @@
 package Utils;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 
@@ -53,6 +58,15 @@ public class XmlReader {
 
                     Authors tempAuthors = new Authors(tempList);
 
+                    String tempfulldate = entryNode.getElementsByTagName("published").item(0).getTextContent();
+                    tempfulldate = tempfulldate.substring(0,10);
+
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    dtf = dtf.withLocale(Locale.UK);
+                    LocalDate tempdate = LocalDate.parse(tempfulldate, dtf);
+
+
+
                     String tempTitle = entryNode.getElementsByTagName("title").item(0).getTextContent();
 
                     String tempContent = entryNode.getElementsByTagName("summary").item(0).getTextContent();
@@ -74,7 +88,7 @@ public class XmlReader {
 
                     String tempLink = linkGetterNode.getAttribute("href");
 
-                    Article tempArticle = new Article(tempTitle, tempAuthors, tempContent, primalCategory, tempSub,tempLink);
+                    Article tempArticle = new Article(tempTitle, tempAuthors, tempContent, primalCategory, tempSub,tempLink, tempdate);
                     articles.add(tempArticle);
                 }
             }
@@ -86,11 +100,6 @@ public class XmlReader {
 
     }
 
-    public static void main(String[] args) {
-        ArrayList<Article> test = read("1.atom");
 
-        for (int i = 0 ; i < test.size(); i++) {
-            System.out.println("test");
-        }
-    }
+
 }

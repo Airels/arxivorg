@@ -5,11 +5,14 @@ import app.arxivorg.model.Category;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 
 public class SortArticle {
 
     public static ArrayList<Article> byAuthors(ArrayList<Article> list , String name) {
+
+        if (name.equals("") || name.equals(" ")) return list;
 
         ArrayList<Article> result = new ArrayList<>();
 
@@ -46,6 +49,9 @@ public class SortArticle {
 
 
     public static ArrayList<Article> byCategory (ArrayList<Article> list , Category type ) {
+
+        if (type == Category.All)
+            return list;
 
         ArrayList<Article> result = new ArrayList<>();
 
@@ -115,7 +121,7 @@ public class SortArticle {
         return result;
     }
 
-    /*public static ArrayList<Article> byDate(ArrayList<Article> list , String date1 , String date2 ) throws ParseException {
+    public static ArrayList<Article> byDate(ArrayList<Article> list , LocalDate datemin , LocalDate datemax ) throws ParseException {
 
         ArrayList<Article> result = new ArrayList<>();
 
@@ -135,24 +141,23 @@ public class SortArticle {
             }
 
 
-            ArrayList<Article> resultleft = byDate(leftpart , date1, date2);
-            ArrayList<Article> resultright = byDate(rightpart, date1 , date2);
+            ArrayList<Article> resultleft = byDate(leftpart , datemin, datemax);
+            ArrayList<Article> resultright = byDate(rightpart, datemin , datemax);
 
             result.addAll(resultleft);
             result.addAll(resultright);
         }
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date datemin = sdf.parse(date1);
-        Date datemax = sdf.parse(date2);
-        Date datetocompar = sdf.parse(list.get(0).getDate);
+
 
         else {
+            LocalDate datetocompar = list.get(0).getDate();
+
             if (datemin.compareTo(datetocompar) >= 0 && datemax.compareTo(datetocompar) <= 0) result.add(list.get(0));
         }
 
         return result;
-    }*/
+    }
 
     private static int Compare ( String title1, String title2, int nb)
     {
