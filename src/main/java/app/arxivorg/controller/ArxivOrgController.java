@@ -66,6 +66,7 @@ public class ArxivOrgController implements Initializable {
         categoryChoiceBox.getSelectionModel().selectedItemProperty().addListener(this::onCategoryChanged);
 
         authorsPredicate.addEventFilter(KeyEvent.KEY_RELEASED, this::onAuthorsKeyReleased);
+        keywordsPredicate.addEventFilter(KeyEvent.KEY_RELEASED, this::onKeywordsKeyReleased);
 
         periodDatePickerStart.valueProperty().addListener(this::onDatePickerStartUpdate);
         periodDatePickerEnd.valueProperty().addListener(this::onDatePickerEndUpdate);
@@ -203,6 +204,27 @@ public class ArxivOrgController implements Initializable {
             }
 
             articleManager.setAuthorsPredicate(authors);
+        }
+    }
+
+    @FXML
+    public void onKeywordsKeyReleased(KeyEvent e) {
+        if (e.getText().equals(",")) {
+            keywordsPredicate.appendText("\n");
+
+            String[] keywordsArray = keywordsPredicate.getText().split(",");
+            List<String> keywords = new ArrayList<>();
+
+            for (int i = 0; i < keywordsArray.length-1; i++) {
+                String keyword = keywordsArray[i];
+
+                keyword = keyword.replace(";", "");
+                keyword = keyword.replace("\n", "");
+
+                keywords.add(keyword);
+            }
+
+            // articleManager.seyKeywordsPredicate(keywords);
         }
     }
 
