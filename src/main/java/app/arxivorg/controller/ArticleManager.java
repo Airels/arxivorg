@@ -34,6 +34,7 @@ public class ArticleManager {
 
     private void updateInterface() {
         controller.showArticles(actualArticles);
+        System.out.println("Articles updated !");
     }
 
     // PREDICATES
@@ -43,9 +44,8 @@ public class ArticleManager {
         if (category == Category.All) {
             resetArticlesList();
             updateInterface();
-        }
-
-        actualArticles = SortArticle.byCategory(actualArticles, category);
+        } else
+            actualArticles = SortArticle.byCategory(actualArticles, category);
     }
 
     private void periodPredicate(LocalDate startPeriod, LocalDate endPeriod) {
