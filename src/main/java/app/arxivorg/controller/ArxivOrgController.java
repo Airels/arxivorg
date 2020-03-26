@@ -192,7 +192,9 @@ public class ArxivOrgController implements Initializable {
             String[] authorsArray = authorsPredicate.getText().split(",");
             List<String> authors = new ArrayList<>();
 
-            for (String author : authorsArray) {
+            for (int i = 0; i < authorsArray.length-1; i++) {
+                String author = authorsArray[i];
+
                 // MISTYPING CORRECTION
                 author = author.replace(";", "");
                 author = author.replace("\n", "");
