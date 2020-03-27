@@ -4,13 +4,14 @@ import app.arxivorg.model.Article;
 import app.arxivorg.model.Category;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 
 public class SortArticle {
 
     public static ArrayList<Article> byAuthors(ArrayList<Article> list , String name) {
+
+        if (list.isEmpty()) return list;
 
         if (name.equals("") || name.equals(" ")) return list;
 
@@ -50,6 +51,9 @@ public class SortArticle {
 
     public static ArrayList<Article> byCategory (ArrayList<Article> list , Category type ) {
 
+        if (list.isEmpty()) return list;
+
+
         if (type == Category.All)
             return list;
 
@@ -87,6 +91,9 @@ public class SortArticle {
 
     public static ArrayList<Article> bySubCategories (ArrayList<Article> list , String sub) {
 
+        if (list.isEmpty()) return list;
+
+
         ArrayList<Article> result = new ArrayList<>();
 
         if (list.size() != 1){
@@ -122,6 +129,9 @@ public class SortArticle {
     }
 
     public static ArrayList<Article> byDate(ArrayList<Article> list , LocalDate datemin , LocalDate datemax ) throws ParseException {
+
+        if (list.isEmpty()) return list;
+
 
         ArrayList<Article> result = new ArrayList<>();
 
@@ -171,6 +181,8 @@ public class SortArticle {
 
     public static ArrayList<Article> byTitle (ArrayList<Article> list) {
 
+        if (list.isEmpty()) return list;
+
         list.sort(Comparator.comparing(Article::getTitle));
         return list;
     }
@@ -180,7 +192,7 @@ public class SortArticle {
 
     public static void main(String[] args) {
         ArrayList<Article> authors = XmlReader.read("1.atom");
-        ArrayList<Article> test = byAuthors(authors,"Thomas Bachlechner");
+        ArrayList<Article> test = byAuthors(authors,"Aymeric Sibiak");
 
 
 
