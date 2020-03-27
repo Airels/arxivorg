@@ -1,14 +1,13 @@
-package app.arxivorg.Utils;
+package app.arxivorg.utils;
 
 
-import Utils.XmlReader;
+import utils.XmlReader;
 import app.arxivorg.model.Article;
 import app.arxivorg.model.Authors;
 import app.arxivorg.model.Category;
 import app.arxivorg.model.SubCategories;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 

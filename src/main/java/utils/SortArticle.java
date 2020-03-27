@@ -1,11 +1,9 @@
-package Utils;
+package utils;
 
 import app.arxivorg.model.Article;
 import app.arxivorg.model.Category;
 
-import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static app.arxivorg.model.Category.All;
