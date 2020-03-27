@@ -34,18 +34,21 @@ public class XmlReader {
             doc.getDocumentElement().normalize();
             NodeList nList = doc.getElementsByTagName("entry");
             NodeList secondList = doc.getElementsByTagName("category");
+            NodeList primalList = doc.getElementsByTagName("arxiv:primary_category");
             NodeList linkList = doc.getElementsByTagName("link");
 
             
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);
                 Node secondNode = secondList.item(temp);
+                Node primalNode = primalList.item(temp);
                 Node linkNode = linkList.item(2+2*temp);
 
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element entryNode = (Element) nNode;
                     Element secondCategoryNode = (Element) secondNode;
+                    Element primalCategoryNode = (Element) primalNode;
                     Element linkGetterNode = (Element) linkNode;
 
                     int lengthAuthor = entryNode.getElementsByTagName("author").getLength();
@@ -84,11 +87,44 @@ public class XmlReader {
 
                     SubCategories tempSub = new SubCategories(subcategories);
 
-                    Category primalCategory = Category.Computer_Science;
+                    String category = primalCategoryNode.getAttribute("term");
+                    int indexofdot = category.indexOf(".")-1;
+                    category = category.substring(0,indexofdot);
+
+                    Category primalcategory;
+
+                    switch(category){
+                        case "physics" : primalcategory = Category.Physics;
+                            break;
+
+                        case "math" : primalcategory = Category.Mathematics;
+                            break;
+
+                        case "q-bio": primalcategory = Category.Quantitative_Biology;
+                            break;
+
+                        case "cs" : primalcategory = Category.Computer_Science;
+                            break;
+
+                        case "q-fin" : primalcategory = Category.Quantitative_Finance;
+                            break;
+
+                        case "stat" : primalcategory = Category.Statistics;
+                            break;
+
+                        case "eess" : primalcategory = Category.Electrical_Engineering_and_Systems_Science;
+                            break;
+
+                        case "econ" : primalcategory = Category.Economics;
+                            break;
+
+                        default: primalcategory = Category.All;
+                    }
+
 
                     String tempLink = linkGetterNode.getAttribute("href");
 
-                    Article tempArticle = new Article(tempTitle, tempAuthors, tempContent, primalCategory, tempSub,tempLink, tempdate);
+                    Article tempArticle = new Article(tempTitle, tempAuthors, tempContent, primalcategory, tempSub,tempLink, tempdate);
                     articles.add(tempArticle);
                 }
             }
