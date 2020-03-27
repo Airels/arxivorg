@@ -90,7 +90,7 @@ public class SortArticle {
         return result;
     }
 
-    public static ArrayList<Article> bySubCategories (ArrayList<Article> list , String sub) {
+    public static ArrayList<Article> byKeyword (ArrayList<Article> list , String sub) {
 
         if (list.isEmpty()) return list;
 
@@ -113,16 +113,22 @@ public class SortArticle {
             }
 
 
-            ArrayList<Article> resultLeft = bySubCategories(leftPart , sub);
-            ArrayList<Article> resultRight = bySubCategories(rightPart, sub);
+            ArrayList<Article> resultLeft = byKeyword(leftPart , sub);
+            ArrayList<Article> resultRight = byKeyword(rightPart, sub);
 
             result.addAll(resultLeft);
             result.addAll(resultRight);
         }
 
         else {
-            for (int index2 = 0 ; index2 < list.get(0).getSubCategories().getList().size(); index2 ++){
+            if (list.get(0).getTitle().contains(sub)) result.add(list.get(0));
+
+            else if (list.get(0).getContent().contains(sub)) result.add(list.get(0));
+
+            else {
+                for (int index2 = 0 ; index2 < list.get(0).getSubCategories().getList().size(); index2 ++){
                 if (sub.equals(list.get(0).getSubCategories().getList().get(index2))) result.add(list.get(0));
+                }
             }
         }
 

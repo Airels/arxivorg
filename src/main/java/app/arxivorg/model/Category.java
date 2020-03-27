@@ -12,7 +12,8 @@ public enum Category {
     Quantitative_Finance("q-fin", "Finance Quantitative"),
     Statistics("stat", "Statistiques"),
     Electrical_Engineering_and_Systems_Science("eess", "Ingénierie Électrique et Sciences Des Systèmes"),
-    Economics("econ", "Économie");
+    Economics("econ", "Économie"),
+    Cond_Math("cond-mat", "Mathématique conditionel");
 
     private String name = "";
     private String frName;
@@ -49,6 +50,8 @@ public enum Category {
                 return Electrical_Engineering_and_Systems_Science;
             case "econ":
                 return Economics;
+            case "cond-mat":
+                return Cond_Math;
             default:
                 throw new IllegalArgumentException("Unknown category !");
         }
