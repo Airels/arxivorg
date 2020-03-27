@@ -89,35 +89,7 @@ public class XmlReader {
 
                     if (indexofdot >= 0)  category = category.substring(0,indexofdot);
 
-                    Category primalcategory;
-
-                    switch(category){
-                        case "physics" : primalcategory = Physics;
-                            break;
-
-                        case "math" : primalcategory = Mathematics;
-                            break;
-
-                        case "q-bio": primalcategory = Quantitative_Biology;
-                            break;
-
-                        case "cs" : primalcategory = Computer_Science;
-                            break;
-
-                        case "q-fin" : primalcategory = Quantitative_Finance;
-                            break;
-
-                        case "stat" : primalcategory = Statistics;
-                            break;
-
-                        case "eess" : primalcategory = Electrical_Engineering_and_Systems_Science;
-                            break;
-
-                        case "econ" : primalcategory = Economics;
-                            break;
-
-                        default: primalcategory = All;
-                    }
+                    Category primalcategory = getCategory(category);
 
 
                     String tempLink = linkGetterNode.getAttribute("href");
@@ -133,7 +105,6 @@ public class XmlReader {
         return articles;
 
     }
-
 
 
 }

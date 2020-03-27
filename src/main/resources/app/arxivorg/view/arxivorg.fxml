@@ -11,18 +11,20 @@
     <!-- Panneau des filtres -->
     <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
      <columnConstraints>
-       <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.0" minWidth="10.0" percentWidth="100.0" />
+       <ColumnConstraints hgrow="ALWAYS" maxWidth="160.0" minWidth="10.0" percentWidth="100.0" />
      </columnConstraints>
      <rowConstraints>
        <RowConstraints maxHeight="40.0" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
        <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
        <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
-         <RowConstraints maxHeight="60.0" minHeight="60.0" prefHeight="60.0" vgrow="SOMETIMES" />
-         <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
          <RowConstraints maxHeight="100.0" minHeight="100.0" prefHeight="100.0" vgrow="SOMETIMES" />
          <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
          <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
-         <RowConstraints maxHeight="150.0" minHeight="150.0" prefHeight="150.0" vgrow="SOMETIMES" />
+         <RowConstraints maxHeight="110.0" minHeight="110.0" prefHeight="110.0" vgrow="SOMETIMES" />
          <RowConstraints vgrow="SOMETIMES" />
      </rowConstraints>
      <Label alignment="CENTER" prefWidth="170.0" text="FILTRES" textAlignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="TOP">
@@ -36,19 +38,31 @@
       <ChoiceBox fx:id="categoryChoiceBox" prefHeight="25.0" prefWidth="130.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
 
       <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Période :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
-      <ChoiceBox fx:id="periodChoiceBox" prefHeight="25.0" prefWidth="130.0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+        <Label alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text=" De :" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+      <DatePicker fx:id="periodDatePickerStart" prefHeight="25.0" prefWidth="120.0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <GridPane.margin>
+            <Insets right="5.0" />
+         </GridPane.margin></DatePicker>
+        <Label alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="   À :" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+        <DatePicker fx:id="periodDatePickerEnd" prefHeight="25.0" prefWidth="120.0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets right="5.0" />
+         </GridPane.margin></DatePicker>
 
-      <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Auteurs :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="TOP" />
-     <TextArea fx:id="authorsPredicate" maxWidth="140.0" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+      <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Auteurs :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="BOTTOM" />
+     <TextArea fx:id="authorsPredicate" maxWidth="140.0" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
 
-      <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Mots-clefs :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="TOP" />
-      <TextArea fx:id="keywordsPredicate" maxWidth="140.0" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+      <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Mots-clefs :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="TOP" />
+      <TextArea fx:id="keywordsPredicate" maxWidth="140.0" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
 
-     <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Tout télécharger" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="BOTTOM" />
+     <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Tout télécharger" GridPane.halignment="CENTER" GridPane.rowIndex="11" GridPane.valignment="BOTTOM" />
    </GridPane>
 
     <!-- Panneau liste + vue de l'article -->
-    <GridPane alignment="TOP_RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="154.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <GridPane alignment="TOP_RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <ListView fx:id="articlesList" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
 
         <GridPane GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
@@ -74,7 +88,7 @@
             </GridPane>
          <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" />
-            <ColumnConstraints maxWidth="80.0" minWidth="42.0" prefWidth="80.0" />
+            <ColumnConstraints maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints percentHeight="100.0" />
