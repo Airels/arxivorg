@@ -4,6 +4,7 @@ import Utils.SortArticle;
 import Utils.XmlReader;
 import app.arxivorg.model.Article;
 import app.arxivorg.model.Category;
+import jdk.jfr.Experimental;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
@@ -38,11 +39,24 @@ public class ArticleManager {
         actualArticles = new ArrayList<>(initialArticles);
     }
 
+    /**
+     * @deprecated
+     * CONSTRUCTOR ONLY USED FOR TESTS PURPOSE, DO NOT USE
+     */
+    @Deprecated
+    public ArticleManager() {
+        initialArticles = XmlReader.read("1.atom");
+        actualArticles = new ArrayList<>(initialArticles);
+    }
+
     private void resetArticlesList() {
         actualArticles = new ArrayList<>(initialArticles);
     }
 
     private void updateInterface() {
+        if (controller == null)
+            return;
+
         controller.showArticles(actualArticles);
         System.out.println("Articles updated !");
     }
@@ -80,7 +94,7 @@ public class ArticleManager {
     }
 
     // BRIDGE PREDICATES WITH INTERFACE
-    void setPredicates(@NotNull Category category, List<String> authors, @NotNull LocalDate startPeriod, @NotNull LocalDate endPeriod, List<String> keywords) {
+    public void setPredicates(@NotNull Category category, List<String> authors, @NotNull LocalDate startPeriod, @NotNull LocalDate endPeriod, List<String> keywords) {
         resetArticlesList();
 
         categoryPredicate(category);
@@ -90,19 +104,19 @@ public class ArticleManager {
         updateInterface();
     }
 
-    void setCategoryPredicate(Category category) {
+    public void setCategoryPredicate(Category category) {
         setPredicates(category, authors, startPeriod, endPeriod, keywords);
     }
 
-    void setAuthorsPredicate(List<String> authors) {
+    public void setAuthorsPredicate(List<String> authors) {
         setPredicates(category, authors, startPeriod, endPeriod, keywords);
     }
 
-    void setPeriodPredicate(LocalDate startPeriod, LocalDate endPeriod) {
+    public void setPeriodPredicate(LocalDate startPeriod, LocalDate endPeriod) {
         setPredicates(category, authors, startPeriod, endPeriod, keywords);
     }
 
-    void setKeywordsPredicate(List<String> keywords) {
+    public void setKeywordsPredicate(List<String> keywords) {
         setPredicates(category, authors, startPeriod, endPeriod, keywords);
     }
 }
