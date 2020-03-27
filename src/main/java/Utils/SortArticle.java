@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import static Utils.XmlReader.read;
 import static app.arxivorg.model.Category.All;
 
 public class SortArticle {
@@ -92,7 +93,7 @@ public class SortArticle {
         return result;
     }
 
-    public static ArrayList<Article> bySubCategories (ArrayList<Article> list , String sub) {
+    public static ArrayList<Article> byKeyword (ArrayList<Article> list , String sub) {
 
         if (list.isEmpty()) return list;
 
@@ -115,16 +116,29 @@ public class SortArticle {
             }
 
 
-            ArrayList<Article> resultleft = bySubCategories(leftpart , sub);
-            ArrayList<Article> resultright = bySubCategories(rightpart, sub);
+            ArrayList<Article> resultleft = byKeyword(leftpart , sub);
+            ArrayList<Article> resultright = byKeyword(rightpart, sub);
 
             result.addAll(resultleft);
             result.addAll(resultright);
         }
 
         else {
-            for (int index2 = 0 ; index2 < list.get(0).getSubCategories().getList().size(); index2 ++){
-                if (sub.equals(list.get(0).getSubCategories().getList().get(index2))) result.add(list.get(0));
+
+            if (list.get(0).getTitle().contains(sub)) {
+                result.add(list.get(0));
+            }
+
+            else if (list.get(0).getContent().contains(sub)) {
+                result.add(list.get(0));
+            }
+
+            else {
+                for (int index2 = 0 ; index2 < list.get(0).getSubCategories().getList().size(); index2 ++){
+                    if (sub.equals(list.get(0).getSubCategories().getList().get(index2))) {
+                        result.add(list.get(0));
+                    }
+                }
             }
         }
 
@@ -189,5 +203,6 @@ public class SortArticle {
         list.sort(Comparator.comparing(Article::getTitle));
         return list;
     }
+
 
 }
