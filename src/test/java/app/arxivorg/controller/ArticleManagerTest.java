@@ -19,6 +19,7 @@ public class ArticleManagerTest {
         testPeriodPredicate();
         resetPredicates();
         testAuthorsPredicate();
+        resetPredicates();
         testKeyWordsPredicate();
     }
 
