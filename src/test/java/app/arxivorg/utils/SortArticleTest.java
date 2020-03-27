@@ -1,6 +1,7 @@
 package app.arxivorg.utils;
 
 
+import app.arxivorg.model.SubCategories;
 import utils.XmlReader;
 import utils.SortArticle;
 import app.arxivorg.model.Article;
@@ -95,16 +96,54 @@ public class SortArticleTest {
 
     }
     @Test
-    public void SortBySubCategoryTest() {
+    public void SortByKeywordTest() {
         ArrayList<Article> expected = new ArrayList<>();
-        String subcategories = "cs.LG";
-        expected.add(articles.get(0));
+        String keyWord = "I am not working";
+        expected.add(articles.get(1));
 
-        ArrayList<Article> testedSortSubCategory = SortArticle.bySubCategories(articles,subcategories);
-        assertEquals(expected.size(),testedSortSubCategory.size());
-        for (int i = 0; i < testedSortSubCategory.size(); i++) {
-            assertEquals(expected.get(i).getSubCategories(), testedSortSubCategory.get(i).getSubCategories());
+        ArrayList<Article> testedSortSummary = SortArticle.byKeyword(articles,keyWord);
+        assertEquals(expected.size(),testedSortSummary.size());
+        for (Article article : testedSortSummary) {
+            String articleText = article.getContent();
+            articleText += "\n" + article.getTitle();
+            for (String subCat: article.getSubCategories().getList()){
+                articleText += "\n" + subCat;
+            }
+            assert (articleText.contains(keyWord));
         }
+        ArrayList<Article> secondExpected = new ArrayList<>();
+        String secondKeyWord = "I am a nottest";
+        secondExpected.add(articles.get(1));
+
+        ArrayList<Article> secondTestedSortTitle = SortArticle.byKeyword(articles,secondKeyWord);
+        assertEquals(secondExpected.size(),secondTestedSortTitle.size());
+        for (Article article : secondTestedSortTitle) {
+            String articleText = article.getContent();
+            articleText += "\n" + article.getTitle();
+            for (String subCat: article.getSubCategories().getList()){
+                articleText += "\n" + subCat;
+            }
+            assert (articleText.contains(secondKeyWord));
+        }
+
+        ArrayList<Article> thirdExpected = new ArrayList<>();
+        String thirdKeyWord = "stat.ML";
+        thirdExpected.add(articles.get(0));
+
+        ArrayList<Article> thirdTestedSortSubCategory = SortArticle.byKeyword(articles,thirdKeyWord);
+
+        assertEquals(thirdExpected.size(),thirdTestedSortSubCategory.size());
+
+        for (Article article: thirdTestedSortSubCategory) {
+            String articleText = article.getContent();
+            articleText += "\n" + article.getTitle();
+            for (String subCat: article.getSubCategories().getList()){
+                articleText += "\n" + subCat;
+            }
+
+            assert (articleText.contains(thirdKeyWord));
+        }
+
     }
 
     @Test

@@ -13,15 +13,11 @@ public class SortArticle {
     public static ArrayList<Article> byAuthors(ArrayList<Article> list , String name) {
 
         if (list.isEmpty()) return list;
-
         if (name.equals("") || name.equals(" ")) return list;
 
         ArrayList<Article> result = new ArrayList<>();
-
         if (list.size() != 1){
-
             int mid = list.size()/2;
-
             ArrayList<Article> leftPart = new ArrayList<>();
             ArrayList<Article> rightPart = new ArrayList<>();
 
@@ -94,24 +90,17 @@ public class SortArticle {
 
         if (list.isEmpty()) return list;
 
-
         ArrayList<Article> result = new ArrayList<>();
 
         if (list.size() != 1){
-
             int mid = list.size()/2;
-
             ArrayList<Article> leftPart = new ArrayList<>();
             ArrayList<Article> rightPart = new ArrayList<>();
 
             for (int index = 0 ; index < list.size() ; index++){
-
                 if ( index < mid) leftPart.add(list.get(index));
-
                 else rightPart.add(list.get(index));
-
             }
-
 
             ArrayList<Article> resultLeft = byKeyword(leftPart , sub);
             ArrayList<Article> resultRight = byKeyword(rightPart, sub);
@@ -122,9 +111,7 @@ public class SortArticle {
 
         else {
             if (list.get(0).getTitle().contains(sub)) result.add(list.get(0));
-
             else if (list.get(0).getContent().contains(sub)) result.add(list.get(0));
-
             else {
                 for (int index2 = 0 ; index2 < list.get(0).getSubCategories().getList().size(); index2 ++){
                 if (sub.equals(list.get(0).getSubCategories().getList().get(index2))) result.add(list.get(0));
