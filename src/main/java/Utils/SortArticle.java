@@ -188,23 +188,4 @@ public class SortArticle {
         return list;
     }
 
-
-
-
-    public static void main(String[] args) {
-        ArrayList<Article> authors = XmlReader.read("1.atom");
-
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        dtf = dtf.withLocale(Locale.UK);
-        LocalDate datetest  = LocalDate.parse("2020-03-10", dtf);
-        LocalDate datenow = LocalDate.parse("2020-03-27", dtf );
-        ArrayList<Article> test = byDate(authors,datetest, datenow );
-
-
-
-        for (int index = 0 ; index < test.size(); index ++) {
-            System.out.println(test.get(index).getTitle());
-            System.out.println(" ");
-        }
-    }
 }
