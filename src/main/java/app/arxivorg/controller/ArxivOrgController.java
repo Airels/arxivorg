@@ -10,6 +10,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -28,6 +29,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static app.arxivorg.model.Category.*;
 import static javafx.scene.input.KeyCode.T;
 
 public class ArxivOrgController implements Initializable {
@@ -35,7 +37,7 @@ public class ArxivOrgController implements Initializable {
     private ArticleManager articleManager;
 
     @FXML private ListView articlesList;
-    @FXML private ChoiceBox<Category> categoryChoiceBox;
+    @FXML private ChoiceBox<String> categoryChoiceBox;
     @FXML private DatePicker periodDatePickerStart;
     @FXML private DatePicker periodDatePickerEnd;
     @FXML private TextFlow articleView;
@@ -59,7 +61,7 @@ public class ArxivOrgController implements Initializable {
 
         generateCategoryChoiceBox();
 
-        periodDatePickerStart.setValue(LocalDate.now());
+        periodDatePickerStart.setValue(LocalDate.now().minusWeeks(1));
         periodDatePickerEnd.setValue(LocalDate.now());
 
         // EVENTS
@@ -73,17 +75,24 @@ public class ArxivOrgController implements Initializable {
 
         // ARTICLE MANAGER
         articleManager = new ArticleManager(this);
-        articleManager.setPredicates(Category.All, null, periodDatePickerStart.getValue(), periodDatePickerEnd.getValue());
+        articleManager.setPredicates(All, null, periodDatePickerStart.getValue(), periodDatePickerEnd.getValue());
     }
 
     private void generateCategoryChoiceBox() {
-        List<Category> categories = new ArrayList<>();
+        List<String> categories = new ArrayList<>();
 
-        for (Category category : Category.values())
-            categories.add(category);
+        categories.add("Toutes");
+        categories.add("Physiques");
+        categories.add("Mathématiques");
+        categories.add("Biologie Quantitative");
+        categories.add("Informatique");
+        categories.add("Finance Quantitative");
+        categories.add("Statistiques");
+        categories.add("Ingénierie Électrique et Sciences Des Systèmes");
+        categories.add("Économie");
 
         categoryChoiceBox.setItems(FXCollections.observableArrayList(categories));
-        categoryChoiceBox.setValue(Category.All);
+        categoryChoiceBox.setValue("Toutes");
     }
 
     public void showArticles(List<Article> articles) {
@@ -132,9 +141,44 @@ public class ArxivOrgController implements Initializable {
     }
 
     // EVENTS
-    @FXML void onCategoryChanged(Observable ov, Category oldCategory, Category newCategory) {
-        if (!oldCategory.equals(newCategory))
-            articleManager.setCategoryPredicate(newCategory);
+    @FXML void onCategoryChanged(Observable ov, String oldCategory, String newCategory) {
+        if (oldCategory.equals(newCategory))
+            return;
+
+        Category category;
+        switch (newCategory) {
+            case "Toutes":
+                category = All;
+                break;
+            case "Physiques":
+                category = Physics;
+                break;
+            case "Mathématiques":
+                category = Mathematics;
+                break;
+            case "Biologie Quantitative":
+                category = Quantitative_Biology;
+                break;
+            case "Informatique":
+                category = Computer_Science;
+                break;
+            case "Finance Quantitative":
+                category = Quantitative_Finance;
+                break;
+            case "Statistiques":
+                category = Statistics;
+                break;
+            case "Ingénierie Électrique et Sciences Des Systèmes":
+                category = Electrical_Engineering_and_Systems_Science;
+                break;
+            case "Économie":
+                category = Economics;
+                break;
+            default:
+                throw new RuntimeException("Unknown category !");
+        }
+
+        articleManager.setCategoryPredicate(category);
     }
 
     @FXML
