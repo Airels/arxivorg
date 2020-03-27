@@ -2,24 +2,28 @@ package app.arxivorg.model;
 
 public enum Category {
 
-    ALL("ALL"),
-    Physics("physics"),
-    Mathematics("math"),
-    Quantitative_Biology("q-bio"),
-    Computer_Science("cs"),
-    Quantitative_Finance("q_fin"),
-    Statistics("stat"),
-    Electrical_Engineering_and_Systems_Science("eess"),
-    Economics("econ"),
-    quant_ph("quant-ph"),
-    hep_th("hep-th");
+    ALL("All", "Toutes"),
+    Physics("physics", "Physiques"),
+    Mathematics("math", "Mathématiques"),
+    Quantitative_Biology("q-bio", "Biologie Quantitative"),
+    Computer_Science("cs", "Informatique"),
+    Quantitative_Finance("q_fin", "Finance Quantitative"),
+    Statistics("stat", "Statistiques"),
+    Electrical_Engineering_and_Systems_Science("eess", "Ingénierie Électrique et Sciences Des Systèmes"),
+    Economics("econ", "Économie");
 
     private String name = "";
-    Category(String name){
+    private String frName;
+    Category(String name, String frName){
         this.name = name;
+        this.frName = frName;
     }
 
-    public String toString(){
+    public String getName(){
         return name;
+    }
+
+    public String getFrName() {
+        return frName;
     }
 }
