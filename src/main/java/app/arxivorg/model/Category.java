@@ -56,7 +56,7 @@ public enum Category {
             case "cmp-lg":
                 return CMP_LG;
             default:
-                return Others;
+                throw new IllegalArgumentException("Unknown category '" + name + "' !");
         }
     }
 }
