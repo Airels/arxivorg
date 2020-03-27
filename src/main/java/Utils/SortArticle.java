@@ -5,6 +5,7 @@ import app.arxivorg.model.Category;
 
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class SortArticle {
@@ -128,7 +129,7 @@ public class SortArticle {
         return result;
     }
 
-    public static ArrayList<Article> byDate(ArrayList<Article> list , LocalDate datemin , LocalDate datemax ) throws ParseException {
+    public static ArrayList<Article> byDate(ArrayList<Article> list , LocalDate datemin , LocalDate datemax ) {
 
         if (list.isEmpty()) return list;
 
@@ -163,7 +164,7 @@ public class SortArticle {
         else {
             LocalDate datetocompar = list.get(0).getDate();
 
-            if (datemin.compareTo(datetocompar) >= 0 && datemax.compareTo(datetocompar) <= 0) result.add(list.get(0));
+            if (datemin.compareTo(datetocompar) <= 0 && datemax.compareTo(datetocompar) >= 0) result.add(list.get(0));
         }
 
         return result;
@@ -192,7 +193,12 @@ public class SortArticle {
 
     public static void main(String[] args) {
         ArrayList<Article> authors = XmlReader.read("1.atom");
-        ArrayList<Article> test = byAuthors(authors,"Aymeric Sibiak");
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        dtf = dtf.withLocale(Locale.UK);
+        LocalDate datetest  = LocalDate.parse("2020-03-10", dtf);
+        LocalDate datenow = LocalDate.parse("2020-03-27", dtf );
+        ArrayList<Article> test = byDate(authors,datetest, datenow );
 
 
 
