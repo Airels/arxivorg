@@ -85,7 +85,7 @@ public class XmlReader {
                     String category = primalCategoryNode.getAttribute("term");
                     int indexofdot = category.indexOf(".");
 
-                    if (indexofdot >= 0 &&  !category.equals("cmp-lg"))  category = category.substring(0,indexofdot);
+                    if (indexofdot >= 0)  category = category.substring(0,indexofdot);
 
 
                     Category primalcategory = getCategory(category);
