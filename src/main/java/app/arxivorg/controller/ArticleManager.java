@@ -31,6 +31,10 @@ public class ArticleManager {
         this.controller = controller;
 
         initialArticles = XmlReader.read("1.atom");
+        initialArticles.addAll(XmlReader.read("2.atom"));
+        initialArticles.addAll(XmlReader.read("3.atom"));
+        initialArticles.addAll(XmlReader.read("4.atom"));
+        initialArticles.addAll(XmlReader.read("5.atom"));
         actualArticles = new ArrayList<>(initialArticles);
     }
 
