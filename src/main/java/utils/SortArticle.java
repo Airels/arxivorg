@@ -42,7 +42,7 @@ public class SortArticle {
 
         else {
             for (int index2 = 0 ; index2 < list.get(0).getAuthors().getList().size(); index2 ++){
-                if (name.equals(list.get(0).getAuthors().getList().get(index2))) result.add(list.get(0));
+                if (name.toLowerCase().equals(list.get(0).getAuthors().getList().get(index2).toLowerCase())) result.add(list.get(0));
             }
         }
 
