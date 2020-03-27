@@ -11,6 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleManager {
+    /***
+     * IMPOSSIBLE DE FAIRE DES TESTS POUR CETTE CLASSE CAR ELLE DÉPENDS DE L'INTERFACE
+     * D'AILLEURS LES TESTS IMPLIQUERAI DE TESTER SI LES METHODES TRIENT CORRECTEMENT,
+     * IL EXISTE DÉJA DES TESTS POUR CELA
+     */
+
     private ArxivOrgController controller;
     private final ArrayList<Article> initialArticles;
     private ArrayList<Article> actualArticles;
@@ -48,7 +54,7 @@ public class ArticleManager {
         this.startPeriod = startPeriod;
         this.endPeriod = endPeriod;
 
-        // SortArticle.byDate();
+        actualArticles = SortArticle.byDate(actualArticles, startPeriod, endPeriod);
     }
 
     private void authorsPredicate(List<String> authors) {
@@ -79,7 +85,7 @@ public class ArticleManager {
         setPredicates(category, authors, startPeriod, endPeriod);
     }
 
-     void setAuthorsPredicate(List<String> authors) {
+    void setAuthorsPredicate(List<String> authors) {
         setPredicates(category, authors, startPeriod, endPeriod);
     }
 
