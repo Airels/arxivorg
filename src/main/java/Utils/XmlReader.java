@@ -88,7 +88,7 @@ public class XmlReader {
                     SubCategories tempSub = new SubCategories(subcategories);
 
                     String category = primalCategoryNode.getAttribute("term");
-                    int indexofdot = category.indexOf(".")-1;
+                    int indexofdot = category.indexOf(".");
                     category = category.substring(0,indexofdot);
 
                     Category primalcategory;
