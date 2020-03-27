@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import static app.arxivorg.model.Category.All;
+
 public class SortArticle {
 
     public static ArrayList<Article> byAuthors(ArrayList<Article> list , String name) {
@@ -55,7 +57,7 @@ public class SortArticle {
         if (list.isEmpty()) return list;
 
 
-        if (type == Category.All)
+        if (type == All)
             return list;
 
         ArrayList<Article> result = new ArrayList<>();
