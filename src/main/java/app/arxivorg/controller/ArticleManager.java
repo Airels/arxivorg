@@ -39,16 +39,6 @@ public class ArticleManager {
         actualArticles = new ArrayList<>(initialArticles);
     }
 
-    /**
-     * @deprecated
-     * CONSTRUCTOR ONLY USED FOR TESTS PURPOSE, DO NOT USE
-     */
-    @Deprecated
-    public ArticleManager() {
-        initialArticles = XmlReader.read("1.atom");
-        actualArticles = new ArrayList<>(initialArticles);
-    }
-
     private void resetArticlesList() {
         actualArticles = new ArrayList<>(initialArticles);
     }
@@ -89,8 +79,8 @@ public class ArticleManager {
         if (keywords == null)
             return;
 
-        /* for (String keyword : keywords)
-            actualArticles = SortArticle.byKeywords(actualArticles, keyword); */
+        for (String keyword : keywords)
+            actualArticles = SortArticle.byKeyword(actualArticles, keyword);
     }
 
     // BRIDGE PREDICATES WITH INTERFACE
@@ -118,5 +108,33 @@ public class ArticleManager {
 
     public void setKeywordsPredicate(List<String> keywords) {
         setPredicates(category, authors, startPeriod, endPeriod, keywords);
+    }
+
+
+    /**
+     * ALL METHODS HERE IS USED FOR TEST PURPOSE ONLY
+     */
+
+    /**
+     * @deprecated
+     * CONSTRUCTOR ONLY USED FOR TESTS PURPOSE, DO NOT USE
+     */
+    @Deprecated
+    public ArticleManager() {
+        initialArticles = XmlReader.read("1.atom");
+        initialArticles.addAll(XmlReader.read("2.atom"));
+        initialArticles.addAll(XmlReader.read("3.atom"));
+        initialArticles.addAll(XmlReader.read("4.atom"));
+        initialArticles.addAll(XmlReader.read("5.atom"));
+        actualArticles = new ArrayList<>(initialArticles);
+    }
+
+    /**
+     * @deprecated
+     * METHOD ONLY USED FOR TESTS PURPOSE, DO NOT USE
+     */
+    @Deprecated
+    public List<Article> getArticles() {
+        return actualArticles;
     }
 }
