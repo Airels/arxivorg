@@ -1,7 +1,7 @@
 package app.arxivorg.controller;
 
-import Utils.SortArticle;
-import Utils.XmlReader;
+import utils.SortArticle;
+import utils.XmlReader;
 import app.arxivorg.model.Article;
 import app.arxivorg.model.Category;
 import jdk.jfr.Experimental;

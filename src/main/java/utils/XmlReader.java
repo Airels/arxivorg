@@ -1,11 +1,9 @@
-package Utils;
+package utils;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -18,6 +16,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+
+import static app.arxivorg.model.Category.*;
 
 
 public class XmlReader {
@@ -77,11 +77,6 @@ public class XmlReader {
                     ArrayList subcategories = new ArrayList<String>();
 
 
-                    /**
-                     * Only print Primary SubCategory, must be changed
-                     * Tests are done with this predicate.
-                     */
-
                     subcategories.add(secondCategoryNode
                             .getAttribute("term"));
 
@@ -92,35 +87,7 @@ public class XmlReader {
 
                     if (indexofdot >= 0)  category = category.substring(0,indexofdot);
 
-                    Category primalcategory;
-
-                    switch(category){
-                        case "physics" : primalcategory = Category.Physics;
-                            break;
-
-                        case "math" : primalcategory = Category.Mathematics;
-                            break;
-
-                        case "q-bio": primalcategory = Category.Quantitative_Biology;
-                            break;
-
-                        case "cs" : primalcategory = Category.Computer_Science;
-                            break;
-
-                        case "q-fin" : primalcategory = Category.Quantitative_Finance;
-                            break;
-
-                        case "stat" : primalcategory = Category.Statistics;
-                            break;
-
-                        case "eess" : primalcategory = Category.Electrical_Engineering_and_Systems_Science;
-                            break;
-
-                        case "econ" : primalcategory = Category.Economics;
-                            break;
-
-                        default: primalcategory = Category.All;
-                    }
+                    Category primalcategory = getCategory(category);
 
 
                     String tempLink = linkGetterNode.getAttribute("href");
@@ -136,7 +103,6 @@ public class XmlReader {
         return articles;
 
     }
-
 
 
 }
