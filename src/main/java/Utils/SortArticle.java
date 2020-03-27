@@ -24,22 +24,22 @@ public class SortArticle {
 
             int mid = list.size()/2;
 
-            ArrayList<Article> leftpart = new ArrayList<>();
-            ArrayList<Article> rightpart = new ArrayList<>();
+            ArrayList<Article> leftPart = new ArrayList<>();
+            ArrayList<Article> rightPart = new ArrayList<>();
 
             for (int index = 0 ; index < list.size() ; index++){
 
-                if ( index < mid) leftpart.add(list.get(index));
+                if ( index < mid) leftPart.add(list.get(index));
 
-                else rightpart.add(list.get(index));
+                else rightPart.add(list.get(index));
 
             }
 
-            ArrayList<Article> resultleft = byAuthors(leftpart , name);
-            ArrayList<Article> resultright = byAuthors(rightpart, name);
+            ArrayList<Article> resultLeft = byAuthors(leftPart , name);
+            ArrayList<Article> resultRight = byAuthors(rightPart, name);
 
-            result.addAll(resultleft);
-            result.addAll(resultright);
+            result.addAll(resultLeft);
+            result.addAll(resultRight);
         }
 
         else {
@@ -66,23 +66,23 @@ public class SortArticle {
 
             int mid = list.size()/2;
 
-            ArrayList<Article> leftpart = new ArrayList<>();
-            ArrayList<Article> rightpart = new ArrayList<>();
+            ArrayList<Article> leftPart = new ArrayList<>();
+            ArrayList<Article> rightPart = new ArrayList<>();
 
             for (int index = 0 ; index < list.size() ; index++){
 
-                if ( index < mid) leftpart.add(list.get(index));
+                if ( index < mid) leftPart.add(list.get(index));
 
-                else rightpart.add(list.get(index));
+                else rightPart.add(list.get(index));
 
             }
 
 
-            ArrayList<Article> resultleft = byCategory(leftpart , type);
-            ArrayList<Article> resultright = byCategory(rightpart, type);
+            ArrayList<Article> resultLeft = byCategory(leftPart , type);
+            ArrayList<Article> resultRight = byCategory(rightPart, type);
 
-            result.addAll(resultleft);
-            result.addAll(resultright);
+            result.addAll(resultLeft);
+            result.addAll(resultRight);
         }
 
         else {
@@ -103,23 +103,23 @@ public class SortArticle {
 
             int mid = list.size()/2;
 
-            ArrayList<Article> leftpart = new ArrayList<>();
-            ArrayList<Article> rightpart = new ArrayList<>();
+            ArrayList<Article> leftPart = new ArrayList<>();
+            ArrayList<Article> rightPart = new ArrayList<>();
 
             for (int index = 0 ; index < list.size() ; index++){
 
-                if ( index < mid) leftpart.add(list.get(index));
+                if ( index < mid) leftPart.add(list.get(index));
 
-                else rightpart.add(list.get(index));
+                else rightPart.add(list.get(index));
 
             }
 
 
-            ArrayList<Article> resultleft = bySubCategories(leftpart , sub);
-            ArrayList<Article> resultright = bySubCategories(rightpart, sub);
+            ArrayList<Article> resultLeft = bySubCategories(leftPart , sub);
+            ArrayList<Article> resultRight = bySubCategories(rightPart, sub);
 
-            result.addAll(resultleft);
-            result.addAll(resultright);
+            result.addAll(resultLeft);
+            result.addAll(resultRight);
         }
 
         else {
@@ -131,7 +131,7 @@ public class SortArticle {
         return result;
     }
 
-    public static ArrayList<Article> byDate(ArrayList<Article> list , LocalDate datemin , LocalDate datemax ) {
+    public static ArrayList<Article> byDate(ArrayList<Article> list , LocalDate dateMin , LocalDate dateMax ) {
 
         if (list.isEmpty()) return list;
 
@@ -142,31 +142,31 @@ public class SortArticle {
 
             int mid = list.size()/2;
 
-            ArrayList<Article> leftpart = new ArrayList<>();
-            ArrayList<Article> rightpart = new ArrayList<>();
+            ArrayList<Article> leftPart = new ArrayList<>();
+            ArrayList<Article> rightPart = new ArrayList<>();
 
             for (int index = 0 ; index < list.size() ; index++){
 
-                if ( index < mid) leftpart.add(list.get(index));
+                if ( index < mid) leftPart.add(list.get(index));
 
-                else rightpart.add(list.get(index));
+                else rightPart.add(list.get(index));
 
             }
 
 
-            ArrayList<Article> resultleft = byDate(leftpart , datemin, datemax);
-            ArrayList<Article> resultright = byDate(rightpart, datemin , datemax);
+            ArrayList<Article> resultLeft = byDate(leftPart , dateMin, dateMax);
+            ArrayList<Article> resultRight = byDate(rightPart, dateMin , dateMax);
 
-            result.addAll(resultleft);
-            result.addAll(resultright);
+            result.addAll(resultLeft);
+            result.addAll(resultRight);
         }
 
 
 
         else {
-            LocalDate datetocompar = list.get(0).getDate();
+            LocalDate dateToCompare = list.get(0).getDate();
 
-            if (datemin.compareTo(datetocompar) <= 0 && datemax.compareTo(datetocompar) >= 0) result.add(list.get(0));
+            if (dateMin.compareTo(dateToCompare) <= 0 && dateMax.compareTo(dateToCompare) >= 0) result.add(list.get(0));
         }
 
         return result;
