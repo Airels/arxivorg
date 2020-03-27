@@ -2,7 +2,7 @@ package app.arxivorg.model;
 
 public enum Category {
 
-    ALL("All", "Toutes"),
+    All("All", "Toutes"),
     Physics("physics", "Physiques"),
     Mathematics("math", "Mathématiques"),
     Quantitative_Biology("q-bio", "Biologie Quantitative"),
@@ -23,7 +23,7 @@ public enum Category {
         return name;
     }
 
-    public String getFrName() {
+    public String toString() {
         return frName;
     }
 }

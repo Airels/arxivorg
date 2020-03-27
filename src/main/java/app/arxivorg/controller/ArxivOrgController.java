@@ -37,7 +37,7 @@ public class ArxivOrgController implements Initializable {
     private ArticleManager articleManager;
 
     @FXML private ListView articlesList;
-    @FXML private ChoiceBox<String> categoryChoiceBox;
+    @FXML private ChoiceBox<Category> categoryChoiceBox;
     @FXML private DatePicker periodDatePickerStart;
     @FXML private DatePicker periodDatePickerEnd;
     @FXML private TextFlow articleView;
@@ -79,20 +79,13 @@ public class ArxivOrgController implements Initializable {
     }
 
     private void generateCategoryChoiceBox() {
-        List<String> categories = new ArrayList<>();
+        List<Category> categories = new ArrayList<>();
 
-        categories.add("Toutes");
-        categories.add("Physiques");
-        categories.add("Mathématiques");
-        categories.add("Biologie Quantitative");
-        categories.add("Informatique");
-        categories.add("Finance Quantitative");
-        categories.add("Statistiques");
-        categories.add("Ingénierie Électrique et Sciences Des Systèmes");
-        categories.add("Économie");
+        for (Category category : Category.values())
+            categories.add(category);
 
         categoryChoiceBox.setItems(FXCollections.observableArrayList(categories));
-        categoryChoiceBox.setValue("Toutes");
+        categoryChoiceBox.setValue(All);
     }
 
     public void showArticles(List<Article> articles) {
@@ -141,44 +134,9 @@ public class ArxivOrgController implements Initializable {
     }
 
     // EVENTS
-    @FXML void onCategoryChanged(Observable ov, String oldCategory, String newCategory) {
-        if (oldCategory.equals(newCategory))
-            return;
-
-        Category category;
-        switch (newCategory) {
-            case "Toutes":
-                category = All;
-                break;
-            case "Physiques":
-                category = Physics;
-                break;
-            case "Mathématiques":
-                category = Mathematics;
-                break;
-            case "Biologie Quantitative":
-                category = Quantitative_Biology;
-                break;
-            case "Informatique":
-                category = Computer_Science;
-                break;
-            case "Finance Quantitative":
-                category = Quantitative_Finance;
-                break;
-            case "Statistiques":
-                category = Statistics;
-                break;
-            case "Ingénierie Électrique et Sciences Des Systèmes":
-                category = Electrical_Engineering_and_Systems_Science;
-                break;
-            case "Économie":
-                category = Economics;
-                break;
-            default:
-                throw new RuntimeException("Unknown category !");
-        }
-
-        articleManager.setCategoryPredicate(category);
+    @FXML void onCategoryChanged(Observable ov, Category oldCategory, Category newCategory) {
+        if (!oldCategory.equals(newCategory))
+            articleManager.setCategoryPredicate(newCategory);
     }
 
     @FXML
