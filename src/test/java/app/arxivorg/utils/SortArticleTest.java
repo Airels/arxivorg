@@ -1,21 +1,14 @@
-package app.arxivorg.Utils;
+package app.arxivorg.utils;
 
 
-import Utils.XmlReader;
-import Utils.SortArticle;
+import utils.XmlReader;
+import utils.SortArticle;
 import app.arxivorg.model.Article;
-import app.arxivorg.model.Authors;
 import app.arxivorg.model.Category;
-import app.arxivorg.model.SubCategories;
-import org.assertj.core.internal.AtomicReferenceArrayElementComparisonStrategy;
-import org.assertj.core.internal.bytebuddy.TypeCache;
-import org.assertj.core.internal.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 import static app.arxivorg.model.Category.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -121,8 +114,8 @@ public class SortArticleTest {
         ArrayList<Article> expected = new ArrayList<>();
         expected.add(articles.get(0)); // article 0 plus récent que article 1
         expected.add(articles.get(1));
-        LocalDate dateMin = LocalDate.of(2020, 03, 9);
-        LocalDate dateMax = LocalDate.of(2020, 03, 13);
+        LocalDate dateMin = LocalDate.of(2020, 3, 9);
+        LocalDate dateMax = LocalDate.of(2020, 3, 13);
 
         ArrayList<Article> testedSortByDate = SortArticle.byDate(articles, dateMin, dateMax);
 
@@ -134,7 +127,7 @@ public class SortArticleTest {
 
         ArrayList<Article> secondExpected = new ArrayList<>();
         secondExpected.add(articles.get(0));
-        LocalDate dateMinBis = LocalDate.of(2020, 03, 11);
+        LocalDate dateMinBis = LocalDate.of(2020, 3, 11);
 
         ArrayList<Article> testedSortByDateSecond = SortArticle.byDate(articles, dateMinBis, dateMax);
 

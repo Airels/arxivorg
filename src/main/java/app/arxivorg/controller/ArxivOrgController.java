@@ -1,16 +1,13 @@
 package app.arxivorg.controller;
 
-import Utils.XmlReader;
 import app.arxivorg.model.Article;
 import app.arxivorg.model.Category;
 import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -21,16 +18,13 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
-import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import static app.arxivorg.model.Category.*;
-import static javafx.scene.input.KeyCode.T;
 
 public class ArxivOrgController implements Initializable {
 
