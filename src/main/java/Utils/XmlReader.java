@@ -19,6 +19,8 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
+import static app.arxivorg.model.Category.*;
+
 
 public class XmlReader {
 
@@ -77,11 +79,6 @@ public class XmlReader {
                     ArrayList subcategories = new ArrayList<String>();
 
 
-                    /**
-                     * Only print Primary SubCategory, must be changed
-                     * Tests are done with this predicate.
-                     */
-
                     subcategories.add(secondCategoryNode
                             .getAttribute("term"));
 
@@ -95,31 +92,31 @@ public class XmlReader {
                     Category primalcategory;
 
                     switch(category){
-                        case "physics" : primalcategory = Category.Physics;
+                        case "physics" : primalcategory = Physics;
                             break;
 
-                        case "math" : primalcategory = Category.Mathematics;
+                        case "math" : primalcategory = Mathematics;
                             break;
 
-                        case "q-bio": primalcategory = Category.Quantitative_Biology;
+                        case "q-bio": primalcategory = Quantitative_Biology;
                             break;
 
-                        case "cs" : primalcategory = Category.Computer_Science;
+                        case "cs" : primalcategory = Computer_Science;
                             break;
 
-                        case "q-fin" : primalcategory = Category.Quantitative_Finance;
+                        case "q-fin" : primalcategory = Quantitative_Finance;
                             break;
 
-                        case "stat" : primalcategory = Category.Statistics;
+                        case "stat" : primalcategory = Statistics;
                             break;
 
-                        case "eess" : primalcategory = Category.Electrical_Engineering_and_Systems_Science;
+                        case "eess" : primalcategory = Electrical_Engineering_and_Systems_Science;
                             break;
 
-                        case "econ" : primalcategory = Category.Economics;
+                        case "econ" : primalcategory = Economics;
                             break;
 
-                        default: primalcategory = Category.All;
+                        default: primalcategory = All;
                     }
 
 
