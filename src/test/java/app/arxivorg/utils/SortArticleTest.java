@@ -47,6 +47,18 @@ public class SortArticleTest {
             assert(testedAuthorSort.get(i).getAuthors().toString().contains(name));
         }
 
+        ArrayList<Article> thirdExpected = new ArrayList<>(articles);
+        String thirdName = "Yohan Vizcaino";
+
+        ArrayList<Article> thirdTestedAuthorsSort = SortArticle.byAuthors(articles,thirdName);
+
+        assertEquals(thirdExpected.size(),thirdTestedAuthorsSort.size());
+
+        for (int i = 0; i < thirdExpected.size();i++){
+            assertEquals(thirdExpected.get(i).getAuthors(),thirdTestedAuthorsSort.get(i).getAuthors());
+            assert(thirdTestedAuthorsSort.get(i).getAuthors().toString().contains(thirdName));
+        }
+
     }
 
     @Test
