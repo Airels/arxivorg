@@ -5,6 +5,7 @@ import app.arxivorg.model.Category;
 
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class SortArticle {
@@ -128,7 +129,7 @@ public class SortArticle {
         return result;
     }
 
-    public static ArrayList<Article> byDate(ArrayList<Article> list , LocalDate datemin , LocalDate datemax ) throws ParseException {
+    public static ArrayList<Article> byDate(ArrayList<Article> list , LocalDate datemin , LocalDate datemax ) {
 
         if (list.isEmpty()) return list;
 
@@ -163,7 +164,7 @@ public class SortArticle {
         else {
             LocalDate datetocompar = list.get(0).getDate();
 
-            if (datemin.compareTo(datetocompar) >= 0 && datemax.compareTo(datetocompar) <= 0) result.add(list.get(0));
+            if (datemin.compareTo(datetocompar) <= 0 && datemax.compareTo(datetocompar) >= 0) result.add(list.get(0));
         }
 
         return result;
@@ -187,18 +188,4 @@ public class SortArticle {
         return list;
     }
 
-
-
-
-    public static void main(String[] args) {
-        ArrayList<Article> authors = XmlReader.read("1.atom");
-        ArrayList<Article> test = byAuthors(authors,"Aymeric Sibiak");
-
-
-
-        for (int index = 0 ; index < test.size(); index ++) {
-            System.out.println(test.get(index).getTitle());
-            System.out.println(" ");
-        }
-    }
 }
