@@ -52,7 +52,9 @@ public class ArticleManager {
     }
 
     private void authorsPredicate(List<String> authors) {
-        // this.authors = authors;
+        this.authors = authors;
+        if (authors == null)
+            return;
 
         for (String author : authors)
             actualArticles = SortArticle.byAuthors(actualArticles, author);
@@ -66,11 +68,8 @@ public class ArticleManager {
     void setPredicates(@NotNull Category category, List<String> authors, @NotNull LocalDate startPeriod, @NotNull LocalDate endPeriod /*, List<String> keywords */) {
         resetArticlesList();
 
-        this.authors = authors;
-        if (authors != null)
-            authorsPredicate(authors);
-
         categoryPredicate(category);
+        authorsPredicate(authors);
         periodPredicate(startPeriod, endPeriod);
         // keywordsPredicate(keywords);
         updateInterface();
