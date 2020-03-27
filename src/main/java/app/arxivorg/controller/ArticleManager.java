@@ -72,34 +72,37 @@ public class ArticleManager {
 
     private void keywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
+        if (keywords == null)
+            return;
+
+        /* for (String keyword : keywords)
+            actualArticles = SortArticle.byKeywords(actualArticles, keyword); */
     }
 
     // BRIDGE PREDICATES WITH INTERFACE
-    void setPredicates(@NotNull Category category, List<String> authors, @NotNull LocalDate startPeriod, @NotNull LocalDate endPeriod /*, List<String> keywords */) {
+    void setPredicates(@NotNull Category category, List<String> authors, @NotNull LocalDate startPeriod, @NotNull LocalDate endPeriod, List<String> keywords) {
         resetArticlesList();
 
         categoryPredicate(category);
         authorsPredicate(authors);
         periodPredicate(startPeriod, endPeriod);
-        // keywordsPredicate(keywords);
+        keywordsPredicate(keywords);
         updateInterface();
     }
 
     void setCategoryPredicate(Category category) {
-        setPredicates(category, authors, startPeriod, endPeriod);
+        setPredicates(category, authors, startPeriod, endPeriod, keywords);
     }
 
     void setAuthorsPredicate(List<String> authors) {
-        setPredicates(category, authors, startPeriod, endPeriod);
+        setPredicates(category, authors, startPeriod, endPeriod, keywords);
     }
 
     void setPeriodPredicate(LocalDate startPeriod, LocalDate endPeriod) {
-        setPredicates(category, authors, startPeriod, endPeriod);
+        setPredicates(category, authors, startPeriod, endPeriod, keywords);
     }
 
-    /*
     void setKeywordsPredicate(List<String> keywords) {
-
+        setPredicates(category, authors, startPeriod, endPeriod, keywords);
     }
-    */
 }
