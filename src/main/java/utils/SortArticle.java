@@ -46,7 +46,9 @@ public class SortArticle {
     }
 
     public static ArrayList<Article> byAuthors ( String searchsubjet){
-        sendGet("au", searchsubjet);
+        ArrayList<Article> articlesbyauthor = APICall.requestApi("au", searchsubjet);
+
+        return articlesbyauthor;
     }
 
 

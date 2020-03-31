@@ -16,12 +16,12 @@ import java.util.List;
 
 public class APICall {
 
-    private final HttpClient httpClient = HttpClient.newBuilder()
+    private static HttpClient httpClient = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_2)
             .build();
 
 
-    private HttpRequest createGet(String typesearch, String searchsubjet){
+    private static HttpRequest createGet(String typesearch, String searchsubjet){
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("http://export.arxiv.org/api/query?search_query=" + typesearch + ":" + searchsubjet))
@@ -32,7 +32,7 @@ public class APICall {
 
     }
 
-    public ArrayList<Article> requestApi (String typesearch, String searchsubjet) {
+    public static ArrayList<Article> requestApi (String typesearch, String searchsubjet) {
 
         try {
 
