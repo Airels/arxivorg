@@ -64,6 +64,12 @@ public class SortArticle {
         return articlesByCategory;
     }
 
+    public static ArrayList<Article> byKeyword (String searchsubjet){
+        ArrayList<Article> allArticle = APICall.requestApi("all:",  searchsubjet);
+
+        return allArticle;
+    }
+
 
     public static ArrayList<Article> byCategory (ArrayList<Article> list , Category type ) {
 
@@ -199,5 +205,6 @@ public class SortArticle {
         list.sort(Comparator.comparing(Article::getTitle));
         return list;
     }
+
 
 }
