@@ -45,6 +45,10 @@ public class SortArticle {
         return result;
     }
 
+    /*public static ArrayList<Article> byAuthors ( String searchsubjet){
+        sendGet("au", searchsubjet);
+    }*/
+
 
     public static ArrayList<Article> byCategory (ArrayList<Article> list , Category type ) {
 

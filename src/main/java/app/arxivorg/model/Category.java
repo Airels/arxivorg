@@ -14,7 +14,8 @@ public enum Category {
     Electrical_Engineering_and_Systems_Science("eess", "Ingénierie Électrique et Sciences Des Systèmes"),
     Economics("econ", "Économie"),
     Cond_Math("cond-mat", "Mathématique conditionel"),
-    CMP_LG("cmp-lg","cpm-lg");
+    CMP_LG("cmp-lg","cpm-lg"),
+    UNKNOW ("unknow", "inconue");
 
     private String name = "";
     private String frName;
@@ -56,7 +57,8 @@ public enum Category {
             case "cmp-lg":
                 return CMP_LG;
             default:
-                throw new IllegalArgumentException("Unknown category '" + name + "' !");
+                return UNKNOW;
+                //throw new IllegalArgumentException("Unknown category '" + name + "' !");
         }
     }
 }

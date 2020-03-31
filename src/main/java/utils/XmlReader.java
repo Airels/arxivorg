@@ -78,8 +78,6 @@ public class XmlReader {
                         Element secondCategoryNode = (Element) subitem;
                         String sub = secondCategoryNode.getAttribute("term");
 
-                        System.out.println(sub);
-
                         subcategories.add(sub);
 
                     }
