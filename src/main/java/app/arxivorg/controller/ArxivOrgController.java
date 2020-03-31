@@ -219,7 +219,7 @@ public class ArxivOrgController implements Initializable {
             }
 
             articleManager.setKeywordsPredicate(keywords);
-        } else if (e.getText().isEmpty()) {
+        } else if (keywordsPredicate.getText().isEmpty()) {
             articleManager.setKeywordsPredicate(null);
         }
     }
