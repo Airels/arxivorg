@@ -46,9 +46,22 @@ public class SortArticle {
     }
 
     public static ArrayList<Article> byAuthors ( String searchsubjet){
-        ArrayList<Article> articlesbyauthor = APICall.requestApi("au", searchsubjet);
+        ArrayList<Article> articlesByAuthor = APICall.requestApi("au", searchsubjet);
 
-        return articlesbyauthor;
+        return articlesByAuthor;
+    }
+
+    public static ArrayList<Article> byTitle ( String searchsubjet){
+        ArrayList<Article> articlesByTitle = APICall.requestApi("ti", searchsubjet);
+
+        return articlesByTitle;
+
+    }
+
+    public static ArrayList<Article> byCategory (String searchsubjet){
+        ArrayList<Article> articlesByCategory = APICall.requestApi("cat", searchsubjet);
+
+        return articlesByCategory;
     }
 
 

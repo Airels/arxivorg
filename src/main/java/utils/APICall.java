@@ -23,8 +23,10 @@ public class APICall {
 
     private static HttpRequest createGet(String typesearch, String searchsubjet){
 
+        String whithourspace = searchsubjet.replace(" ", "+");
+
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://export.arxiv.org/api/query?search_query=" + typesearch + ":" + searchsubjet))
+                .uri(URI.create("http://export.arxiv.org/api/query?search_query=" + typesearch + ":" + whithourspace))
                 .GET()
                 .build();
 
