@@ -4,6 +4,7 @@ import utils.SortArticle;
 import utils.XmlReader;
 import app.arxivorg.model.Article;
 import app.arxivorg.model.Category;
+import jdk.jfr.Experimental;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
@@ -43,6 +44,9 @@ public class ArticleManager {
     }
 
     private void updateInterface() {
+        if (controller == null)
+            return;
+
         controller.showArticles(actualArticles);
         System.out.println("Articles updated !");
     }
@@ -72,34 +76,65 @@ public class ArticleManager {
 
     private void keywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
+        if (keywords == null)
+            return;
+
+        for (String keyword : keywords)
+            actualArticles = SortArticle.byKeyword(actualArticles, keyword);
     }
 
     // BRIDGE PREDICATES WITH INTERFACE
-    void setPredicates(@NotNull Category category, List<String> authors, @NotNull LocalDate startPeriod, @NotNull LocalDate endPeriod /*, List<String> keywords */) {
+    public void setPredicates(@NotNull Category category, List<String> authors, @NotNull LocalDate startPeriod, @NotNull LocalDate endPeriod, List<String> keywords) {
         resetArticlesList();
 
         categoryPredicate(category);
         authorsPredicate(authors);
         periodPredicate(startPeriod, endPeriod);
-        // keywordsPredicate(keywords);
+        keywordsPredicate(keywords);
         updateInterface();
     }
 
-    void setCategoryPredicate(Category category) {
-        setPredicates(category, authors, startPeriod, endPeriod);
+    public void setCategoryPredicate(Category category) {
+        setPredicates(category, authors, startPeriod, endPeriod, keywords);
     }
 
-    void setAuthorsPredicate(List<String> authors) {
-        setPredicates(category, authors, startPeriod, endPeriod);
+    public void setAuthorsPredicate(List<String> authors) {
+        setPredicates(category, authors, startPeriod, endPeriod, keywords);
     }
 
-    void setPeriodPredicate(LocalDate startPeriod, LocalDate endPeriod) {
-        setPredicates(category, authors, startPeriod, endPeriod);
+    public void setPeriodPredicate(LocalDate startPeriod, LocalDate endPeriod) {
+        setPredicates(category, authors, startPeriod, endPeriod, keywords);
     }
 
-    /*
-    void setKeywordsPredicate(List<String> keywords) {
-
+    public void setKeywordsPredicate(List<String> keywords) {
+        setPredicates(category, authors, startPeriod, endPeriod, keywords);
     }
-    */
+
+
+    /**
+     * ALL METHODS HERE IS USED FOR TEST PURPOSE ONLY
+     */
+
+    /**
+     * @deprecated
+     * CONSTRUCTOR ONLY USED FOR TESTS PURPOSE, DO NOT USE
+     */
+    @Deprecated
+    public ArticleManager() {
+        initialArticles = XmlReader.read("1.atom");
+        initialArticles.addAll(XmlReader.read("2.atom"));
+        initialArticles.addAll(XmlReader.read("3.atom"));
+        initialArticles.addAll(XmlReader.read("4.atom"));
+        initialArticles.addAll(XmlReader.read("5.atom"));
+        actualArticles = new ArrayList<>(initialArticles);
+    }
+
+    /**
+     * @deprecated
+     * METHOD ONLY USED FOR TESTS PURPOSE, DO NOT USE
+     */
+    @Deprecated
+    public List<Article> getArticles() {
+        return actualArticles;
+    }
 }

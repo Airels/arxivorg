@@ -13,7 +13,8 @@ public enum Category {
     Statistics("stat", "Statistiques"),
     Electrical_Engineering_and_Systems_Science("eess", "Ingénierie Électrique et Sciences Des Systèmes"),
     Economics("econ", "Économie"),
-    Cond_Math("cond-mat", "Mathématique conditionel");
+    Cond_Math("cond-mat", "Mathématique conditionel"),
+    CMP_LG("cmp-lg","cpm-lg");
 
     private String name = "";
     private String frName;
@@ -52,8 +53,10 @@ public enum Category {
                 return Economics;
             case "cond-mat":
                 return Cond_Math;
+            case "cmp-lg":
+                return CMP_LG;
             default:
-                throw new IllegalArgumentException("Unknown category !");
+                throw new IllegalArgumentException("Unknown category '" + name + "' !");
         }
     }
 }

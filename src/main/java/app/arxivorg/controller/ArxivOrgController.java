@@ -69,7 +69,7 @@ public class ArxivOrgController implements Initializable {
 
         // ARTICLE MANAGER
         articleManager = new ArticleManager(this);
-        articleManager.setPredicates(All, null, periodDatePickerStart.getValue(), periodDatePickerEnd.getValue());
+        articleManager.setPredicates(All, null, periodDatePickerStart.getValue(), periodDatePickerEnd.getValue(), null);
     }
 
     private void generateCategoryChoiceBox() {
@@ -189,8 +189,7 @@ public class ArxivOrgController implements Initializable {
             for (int i = 0; i < authorsArray.length-1; i++) {
                 String author = authorsArray[i];
 
-                // MISTYPING CORRECTION
-                author = author.replace(";", "");
+                author = author.replace(";", ""); // MISTYPING CORRECTION
                 author = author.replace("\n", "");
 
                 authors.add(author);
@@ -213,13 +212,15 @@ public class ArxivOrgController implements Initializable {
             for (int i = 0; i < keywordsArray.length-1; i++) {
                 String keyword = keywordsArray[i];
 
-                keyword = keyword.replace(";", "");
+                keyword = keyword.replace(";\n", ""); // MISTYPING CORRECTION
                 keyword = keyword.replace("\n", "");
 
                 keywords.add(keyword);
             }
 
-            // articleManager.seyKeywordsPredicate(keywords);
+            articleManager.setKeywordsPredicate(keywords);
+        } else if (keywordsPredicate.getText().isEmpty()) {
+            articleManager.setKeywordsPredicate(null);
         }
     }
 
