@@ -33,21 +33,18 @@ public class XmlReader {
             Document doc = dBuilder.parse(inputFile);
             doc.getDocumentElement().normalize();
             NodeList nList = doc.getElementsByTagName("entry");
-            NodeList secondList = doc.getElementsByTagName("category");
             NodeList primalList = doc.getElementsByTagName("arxiv:primary_category");
             NodeList linkList = doc.getElementsByTagName("link");
 
             
             for (int temp = 0; temp < nList.getLength(); temp++) {
                 Node nNode = nList.item(temp);
-                Node secondNode = secondList.item(temp);
                 Node primalNode = primalList.item(temp);
                 Node linkNode = linkList.item(2+2*temp);
 
 
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element entryNode = (Element) nNode;
-                    Element secondCategoryNode = (Element) secondNode;
                     Element primalCategoryNode = (Element) primalNode;
                     Element linkGetterNode = (Element) linkNode;
 
@@ -68,17 +65,24 @@ public class XmlReader {
                     dtf = dtf.withLocale(Locale.UK);
                     LocalDate tempdate = LocalDate.parse(tempfulldate, dtf);
 
-
-
                     String tempTitle = entryNode.getElementsByTagName("title").item(0).getTextContent();
 
                     String tempContent = entryNode.getElementsByTagName("summary").item(0).getTextContent();
 
-                    ArrayList subcategories = new ArrayList<String>();
+                    ArrayList<String> subcategories = new ArrayList<String>();
 
+                    int nbsub = ((Element) nNode).getElementsByTagName("category").getLength();
 
-                    subcategories.add(secondCategoryNode
-                            .getAttribute("term"));
+                    for (int indexsub = 0 ; indexsub < nbsub ; indexsub++){
+                        Node subitem = ((Element) nNode).getElementsByTagName("category").item(indexsub);
+                        Element secondCategoryNode = (Element) subitem;
+                        String sub = secondCategoryNode.getAttribute("term");
+
+                        System.out.println(sub);
+
+                        subcategories.add(sub);
+
+                    }
 
                     SubCategories tempSub = new SubCategories(subcategories);
 
