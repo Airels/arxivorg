@@ -39,8 +39,6 @@ public class APICall {
             HttpResponse<String> response =
                     httpClient.send(createGet(typesearch, searchsubjet), HttpResponse.BodyHandlers.ofString());
 
-            System.out.println(response.statusCode());
-            System.out.println(response.uri());
 
             if (response.statusCode() == 200) {
 
@@ -60,15 +58,6 @@ public class APICall {
         }
 
         return new ArrayList<Article>();
-    }
-
-    public static void main(String[] args) {
-        APICall apitest = new APICall();
-        ArrayList<Article> test = apitest.requestApi("au" , "Bachlechner");
-
-        for (int index =0 ; index < 3 ; index ++){
-            System.out.println(test.get(index).getTitle());
-        }
     }
 
 }
