@@ -1,6 +1,7 @@
 package utils;
 
 import app.arxivorg.model.Article;
+import app.arxivorg.model.Authors;
 import app.arxivorg.model.Category;
 
 import java.time.LocalDate;
@@ -45,8 +46,9 @@ public class SortArticle {
         return result;
     }
 
-    public static ArrayList<Article> byAuthors ( String searchsubjet){
-        ArrayList<Article> articlesByAuthor = APICall.requestApi("au", searchsubjet);
+    public static ArrayList<Article> byAuthors ( Authors searchsubjet){
+        String tempAuthors = searchsubjet.toString();
+        ArrayList<Article> articlesByAuthor = APICall.requestApi("au", tempAuthors);
 
         return articlesByAuthor;
     }
