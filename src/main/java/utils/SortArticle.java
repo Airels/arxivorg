@@ -68,8 +68,36 @@ public class SortArticle {
         return articlesByCategory;
     }
 
+    public static ArrayList<Article> byAuthorsFromTo ( Authors searchsubjet, int start, int to){
+        String tempAuthors = searchsubjet.toString();
+        ArrayList<Article> articlesByAuthor = APICall.requestApiFromTo("au", tempAuthors, start, to);
+
+        return articlesByAuthor;
+    }
+
+    public static ArrayList<Article> byTitleFromTo ( String searchsubjet, int start, int to){
+        ArrayList<Article> articlesByTitle = APICall.requestApiFromTo("ti", searchsubjet, start, to);
+
+        return articlesByTitle;
+
+    }
+
+    public static ArrayList<Article> byCategoryFromTo (Category searchcategory, int start , int to){
+        String tempcategory = searchcategory.getName();
+
+        ArrayList<Article> articlesByCategory = APICall.requestApiFromTo("cat", tempcategory, start, to);
+
+        return articlesByCategory;
+    }
+
     public static ArrayList<Article> byKeyword (String searchsubjet){
         ArrayList<Article> allArticle = APICall.requestApi("all:",  searchsubjet);
+
+        return allArticle;
+    }
+
+    public static ArrayList<Article> byKeywordFromTo (String searchsubjet, int start , int to){
+        ArrayList<Article> allArticle = APICall.requestApiFromTo("all:",  searchsubjet, start , to);
 
         return allArticle;
     }

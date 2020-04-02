@@ -34,6 +34,19 @@ public class APICall {
 
     }
 
+    private static HttpRequest createGetFromToAsk(String typesearch, String searchsubjet, int start, int to){
+
+        String whithourspace = searchsubjet.replace(" ", "+");
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("http://export.arxiv.org/api/query?search_query=" + typesearch + ":" + whithourspace +"&start=" + start + "max_results=" + to))
+                .GET()
+                .build();
+
+        return request;
+
+    }
+
     public static ArrayList<Article> requestApi (String typesearch, String searchsubjet) {
 
         try {
@@ -61,6 +74,36 @@ public class APICall {
 
         return new ArrayList<Article>();
     }
+
+    public static ArrayList<Article> requestApiFromTo (String typesearch, String searchsubjet,int start, int to) {
+
+        try {
+
+            HttpResponse<String> response =
+                    httpClient.send(createGetFromToAsk(typesearch, searchsubjet, start , to), HttpResponse.BodyHandlers.ofString());
+
+
+            if (response.statusCode() == 200) {
+
+                File requestfile = new File("temp.atom");
+                FileWriter writer = new FileWriter(requestfile);
+                writer.write(response.body());
+                writer.flush();
+
+                ArrayList<Article> requestArticles = XmlReader.read("temp.atom");
+
+                requestfile.delete();
+
+                return requestArticles;
+            }
+        } catch (Exception e) {
+            System.out.println("Request failed");
+        }
+
+        return new ArrayList<Article>();
+    }
+
+
 
 }
 
