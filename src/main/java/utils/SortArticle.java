@@ -441,18 +441,6 @@ public class SortArticle {
         return list;
     }
 
-    public static void main(String[] args) {
-
-        ArrayList<Article> test = byCategory(Physics);
-
-        System.out.println(test.size());
-
-        for(int index = 0 ; index < 10; index++){
-            System.out.println(test.get(index).getSubCategories().getList());
-
-
-        }
-    }
 
 
 }

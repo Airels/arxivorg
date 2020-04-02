@@ -71,14 +71,6 @@ public class APICall {
         return requestArticles;
     }
 
-    public static void main(String[] args) {
-        ArrayList<Article> test = requestApi("cat", "stat.AP");
-
-        for (int index = 0 ; index < 9 ; index++){
-            System.out.println(test.get(index).getTitle());
-        }
-    }
-
 
 
 }
