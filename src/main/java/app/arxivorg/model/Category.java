@@ -14,16 +14,16 @@ public enum Category {
     Statistics("stat", "Statistiques"),
     Electrical_Engineering_and_Systems_Science("eess", "Ingénierie Électrique et Sciences Des Systèmes"),
     Economics("econ", "Économie"),
-    General_Relativity_and_Quantum_Cosmology("gr-qp", "relativité géneral et cosmolgy quantics"),
-    High_Energy_Physics("hep","Phydique de haute énergie"),
-    Cellular_Automata("nlin", "Automate cecullaire"),
+    General_Relativity_and_Quantum_Cosmology("gr-qp", "Relativité géneral et Cosmologie Quantique"),
+    High_Energy_Physics("hep","Physique de haute énergie"),
+    Cellular_Automata("nlin", "Automate cellulaire"),
     Nuclear("nucl", "Nucléaire"),
-    Cond_Math("cond-mat", "physique des solides"),
+    Cond_Math("cond-mat", "Physique des solides"),
     Quantum_Physics("quant-ph", "Physique quantique"),
     CMP_LG("cmp-lg","cpm-lg");
 
-    private String name = "";
-    private String frName;
+    private String name, frName;
+
     Category(String name, String frName){
         this.name = name;
         this.frName = frName;
