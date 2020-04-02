@@ -134,7 +134,7 @@ public class ArxivOrgController implements Initializable {
     }
 
     @FXML
-    public void onMouseClickArticle(MouseEvent event, Article article) { // EN DOUBLE CLICK OU SIMPLE CLICK ?
+    public void onMouseClickArticle(MouseEvent event, Article article) {
         if (event.getButton() == MouseButton.PRIMARY) {
             String textArticle = "";
 
