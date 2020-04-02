@@ -245,7 +245,6 @@ public class SortArticle {
 
     public static ArrayList<Article> byCategory (Category searchcategory){
         ArrayList<String> subcat = getAllSubCategories(searchcategory);
-        System.out.println(subcat.size());
         ArrayList<Article> articlesByCategory = new ArrayList<>();
 
         if (searchcategory.getName().equals("gr-qp") || searchcategory.getName().equals("math-ph") ||
@@ -255,9 +254,7 @@ public class SortArticle {
 
         else for (int index = 0 ; index < subcat.size(); index++){
             String looking = searchcategory.getName()+subcat.get(index);
-            System.out.println(looking);
             articlesByCategory.addAll(APICall.requestApi("cat", looking ));
-            System.out.println(articlesByCategory.size()+ "\n");
         }
 
         return articlesByCategory;
@@ -278,9 +275,18 @@ public class SortArticle {
     }
 
     public static ArrayList<Article> byCategoryFromTo (Category searchcategory, int start , int to){
-        String tempcategory = searchcategory.getName();
+        ArrayList<String> subcat = getAllSubCategories(searchcategory);
+        ArrayList<Article> articlesByCategory = new ArrayList<>();
 
-        ArrayList<Article> articlesByCategory = APICall.requestApiFromTo("cat", tempcategory, start, to);
+        if (searchcategory.getName().equals("gr-qp") || searchcategory.getName().equals("math-ph") ||
+                searchcategory.getName().equals("quant-ph") || searchcategory.getName().equals("cmp-lg")) {
+            articlesByCategory = APICall.requestApiFromTo("cat", searchcategory.getName(),start,to);
+        }
+
+        else for (int index = 0 ; index < subcat.size(); index++){
+            String looking = searchcategory.getName()+subcat.get(index);
+            articlesByCategory.addAll(APICall.requestApiFromTo("cat", looking ,start, to));
+        }
 
         return articlesByCategory;
     }
@@ -440,6 +446,7 @@ public class SortArticle {
         list.sort(Comparator.comparing(Article::getTitle));
         return list;
     }
+
 
 
 

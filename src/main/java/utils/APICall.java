@@ -46,7 +46,6 @@ public class APICall {
             HttpResponse<String> response =
                     httpClient.send(createGetFromToAsk(typesearch, searchsubjet, start , to), HttpResponse.BodyHandlers.ofString());
 
-            System.out.println(response.statusCode());
             if (response.statusCode() == 200) {
 
                 File requestfile = new File("temp.atom");
