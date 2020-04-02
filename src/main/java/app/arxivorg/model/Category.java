@@ -5,6 +5,7 @@ import javafx.scene.chart.CategoryAxis;
 public enum Category {
 
     All("All", "Toutes"),
+    Astrophysics ("astro-ph", "astrophysique"),
     Physics("physics", "Physiques"),
     Mathematics("math", "Mathématiques"),
     Quantitative_Biology("q-bio", "Biologie Quantitative"),
@@ -13,9 +14,13 @@ public enum Category {
     Statistics("stat", "Statistiques"),
     Electrical_Engineering_and_Systems_Science("eess", "Ingénierie Électrique et Sciences Des Systèmes"),
     Economics("econ", "Économie"),
-    Cond_Math("cond-mat", "Mathématique conditionel"),
-    CMP_LG("cmp-lg","cpm-lg"),
-    UNKNOW ("unknow", "inconue");
+    General_Relativity_and_Quantum_Cosmology("gr-qp", "relativité géneral et cosmolgy quantics"),
+    High_Energy_Physics("hep","Phydique de haute énergie"),
+    Cellular_Automata("nlin", "Automate cecullaire"),
+    Nuclear("nucl", "Nucléaire"),
+    Cond_Math("cond-mat", "physique des solides"),
+    Quantum_Physics("quant-ph", "Physique quantique"),
+    CMP_LG("cmp-lg","cpm-lg");
 
     private String name = "";
     private String frName;
@@ -38,6 +43,8 @@ public enum Category {
                 return All;
             case "physics":
                return Physics;
+            case "astro-ph":
+                return Astrophysics;
             case "math":
                 return Mathematics;
             case "q-bio":
@@ -52,13 +59,22 @@ public enum Category {
                 return Electrical_Engineering_and_Systems_Science;
             case "econ":
                 return Economics;
+            case "gr-qp":
+                return General_Relativity_and_Quantum_Cosmology;
+            case "hep":
+                return High_Energy_Physics;
+            case "nlin":
+                return Cellular_Automata;
+            case "nucl":
+                return Nuclear;
             case "cond-mat":
                 return Cond_Math;
+            case "quant-ph":
+                return Quantum_Physics;
             case "cmp-lg":
                 return CMP_LG;
             default:
-                return UNKNOW;
-                //throw new IllegalArgumentException("Unknown category '" + name + "' !");
+                throw new IllegalArgumentException("Unknown category '" + name + "' !");
         }
     }
 }

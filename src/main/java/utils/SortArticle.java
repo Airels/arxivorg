@@ -58,8 +58,10 @@ public class SortArticle {
 
     }
 
-    public static ArrayList<Article> byCategory (String searchsubjet){
-        ArrayList<Article> articlesByCategory = APICall.requestApi("cat", searchsubjet);
+    public static ArrayList<Article> byCategory (Category searchcategory){
+        String tempcategory = searchcategory.getName();
+
+        ArrayList<Article> articlesByCategory = APICall.requestApi("cat", tempcategory);
 
         return articlesByCategory;
     }
