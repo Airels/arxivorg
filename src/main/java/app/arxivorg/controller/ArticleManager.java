@@ -12,12 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArticleManager {
-    /***
-     * IMPOSSIBLE DE FAIRE DES TESTS POUR CETTE CLASSE CAR ELLE DÉPENDS DE L'INTERFACE
-     * D'AILLEURS LES TESTS IMPLIQUERAI DE TESTER SI LES METHODES TRIENT CORRECTEMENT,
-     * IL EXISTE DÉJA DES TESTS POUR CELA
-     */
-
     private ArxivOrgController controller;
     private final ArrayList<Article> initialArticles;
     private ArrayList<Article> actualArticles;
