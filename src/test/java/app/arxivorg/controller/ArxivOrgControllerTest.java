@@ -2,22 +2,25 @@ package app.arxivorg.controller;
 
 import app.arxivorg.model.Category;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.api.FxAssert;
 import org.testfx.api.FxRobot;
 import org.testfx.assertions.api.Assertions;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
+import org.testfx.matcher.control.LabeledMatchers;
 
-public class ArxivOrgControllerTest extends ApplicationTest {
+@ExtendWith(ApplicationExtension.class)
+public class ArxivOrgControllerTest {
 
     @Start
     public void start(Stage stage) throws Exception {
@@ -40,23 +43,20 @@ public class ArxivOrgControllerTest extends ApplicationTest {
         robot.type(KeyCode.DOWN);
         robot.type(KeyCode.ENTER);
 
-        Button btn = robot.lookup("#categoryChoiceBox").queryButton();
-        Assertions.assertThat(btn).hasText(Category.Physics.toString());
+        ChoiceBox<Category> choiceBox = (ChoiceBox<Category>) robot.lookup("#categoryChoiceBox").tryQuery().get();
+        Assertions.assertThat(choiceBox.getSelectionModel().getSelectedIndex()).isEqualTo(1);
+
     }
 
     @Test
     void testPeriods(FxRobot robot) {
-        ListView lv = robot.lookup("#articlesList").queryListView();
-        System.out.println(lv.getItems().size());
-
 
     }
 
     @Test
     void testAuthors(FxRobot robot) {
         ListView lv = robot.lookup("#articlesList").queryListView();
-        System.out.println(lv.getItems().size());
-        Assertions.assertThat(lv.getItems().size() > 0);
+        // Assertions.assertThat(lv.getItems().size()).isGreaterThan(0);
 
         robot.clickOn("#authorsPredicate");
         robot.write("isaypoopythings,");
@@ -68,7 +68,7 @@ public class ArxivOrgControllerTest extends ApplicationTest {
     void testKeywords(FxRobot robot) {
         ListView lv = robot.lookup("#articlesList").queryListView();
         System.out.println(lv.getItems().size());
-        Assertions.assertThat(lv.getItems().size() > 0);
+        // Assertions.assertThat(lv.getItems().size()).isGreaterThan(0);
 
         robot.clickOn("#keywordsPredicate");
         robot.write("notavalidwordlolelolol,");
