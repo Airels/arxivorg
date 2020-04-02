@@ -19,12 +19,14 @@ public class APICall {
             .build();
 
 
+
+
     private static HttpRequest createGetFromToAsk(String typesearch, String searchsubjet, int start, int to){
 
         String whithourspace = searchsubjet.replace(" ", "+");
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://export.arxiv.org/api/query?search_query=" + typesearch + ":" + whithourspace +"&start=" + start + "max_results=" + to))
+                .uri(URI.create("http://export.arxiv.org/api/query?search_query=" + typesearch + ":" + whithourspace + "&start=" + start + "&max_results=" + to))
                 .GET()
                 .build();
 
@@ -33,17 +35,18 @@ public class APICall {
     }
 
     protected static ArrayList<Article> requestApi (String typesearch, String searchsubjet) {
-        return requestApiFromTo(typesearch, searchsubjet, 0 , 100);
+
+        return requestApiFromTo(typesearch, searchsubjet, 0 , 10);
     }
 
     protected static ArrayList<Article> requestApiFromTo (String typesearch, String searchsubjet,int start, int to) {
-
+        ArrayList<Article> requestArticles;
         try {
 
             HttpResponse<String> response =
                     httpClient.send(createGetFromToAsk(typesearch, searchsubjet, start , to), HttpResponse.BodyHandlers.ofString());
 
-
+            System.out.println(response.statusCode());
             if (response.statusCode() == 200) {
 
                 File requestfile = new File("temp.atom");
@@ -51,17 +54,29 @@ public class APICall {
                 writer.write(response.body());
                 writer.flush();
 
-                ArrayList<Article> requestArticles = XmlReader.read("temp.atom");
+                requestArticles = XmlReader.read("temp.atom");
 
                 requestfile.delete();
 
-                return requestArticles;
             }
+
+            else requestArticles = new ArrayList<>();
+
         } catch (Exception e) {
             System.out.println("Request failed");
+
+            requestArticles = new ArrayList<>();
         }
 
-        return new ArrayList<Article>();
+        return requestArticles;
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Article> test = requestApi("cat", "stat.AP");
+
+        for (int index = 0 ; index < 9 ; index++){
+            System.out.println(test.get(index).getTitle());
+        }
     }
 
 

@@ -7,9 +7,192 @@ import app.arxivorg.model.Category;
 import java.time.LocalDate;
 import java.util.*;
 
-import static app.arxivorg.model.Category.All;
+import static app.arxivorg.model.Category.*;
 
 public class SortArticle {
+
+   public static ArrayList<String> getAllSubCategories (Category category) {
+
+       ArrayList<String> subCategories = new ArrayList<>();
+
+       if (category.getName().equals("astro-ph")) {
+           subCategories.add(".CO");
+           subCategories.add(".EP");
+           subCategories.add(".GA");
+           subCategories.add(".HE");
+           subCategories.add(".IM");
+           subCategories.add(".SR");
+       }
+
+       if (category.getName().equals("cond-mat")) {
+           subCategories.add(".dis-nn");
+           subCategories.add(".mes-hall");
+           subCategories.add(".mtrl-sci");
+           subCategories.add(".other");
+           subCategories.add(".quant-gas");
+           subCategories.add(".soft");
+           subCategories.add(".stat-mech");
+           subCategories.add(".str-el");
+           subCategories.add(".supr-con");
+       }
+
+       if (category.getName().equals("cs")) {
+           subCategories.add(".AI");
+           subCategories.add(".AR");
+           subCategories.add(".CC");
+           subCategories.add(".CE");
+           subCategories.add(".CG");
+           subCategories.add(".CL");
+           subCategories.add(".CR");
+           subCategories.add(".CV");
+           subCategories.add(".CY");
+           subCategories.add(".DB");
+           subCategories.add(".DC");
+           subCategories.add(".DL");
+           subCategories.add(".DM");
+           subCategories.add(".DS");
+           subCategories.add(".ET");
+           subCategories.add(".FL");
+           subCategories.add(".GL");
+           subCategories.add(".GR");
+           subCategories.add(".GT");
+           subCategories.add(".HC");
+           subCategories.add(".IR");
+           subCategories.add(".IT");
+           subCategories.add(".LG");
+           subCategories.add(".LO");
+           subCategories.add(".MA");
+           subCategories.add(".MM");
+           subCategories.add(".MS");
+           subCategories.add(".NA");
+           subCategories.add(".NE");
+           subCategories.add(".NI");
+           subCategories.add(".OH");
+           subCategories.add(".OS");
+           subCategories.add(".PF");
+           subCategories.add(".PL");
+           subCategories.add(".RO");
+           subCategories.add(".SC");
+           subCategories.add(".SD");
+           subCategories.add(".SE");
+           subCategories.add(".SI");
+           subCategories.add(".SY");
+       }
+       if (category.getName().equals("econ")) subCategories.add(".EM");
+       if (category.getName().equals("eess")) {
+           subCategories.add(".AS");
+           subCategories.add(".IV");
+           subCategories.add(".SP");
+       }
+       if (category.getName().equals("hep")){
+           subCategories.add("-ex");
+           subCategories.add("-lat");
+           subCategories.add("-ph");
+           subCategories.add("-th");
+        }
+       if (category.getName().equals("math")) {
+           subCategories.add(".AC");
+           subCategories.add(".AG");
+           subCategories.add(".AP");
+           subCategories.add(".AT");
+           subCategories.add(".CA");
+           subCategories.add(".CO");
+           subCategories.add(".CT");
+           subCategories.add(".CV");
+           subCategories.add(".DG");
+           subCategories.add(".DS");
+           subCategories.add(".FA");
+           subCategories.add(".GM");
+           subCategories.add(".GN");
+           subCategories.add(".GR");
+           subCategories.add(".GT");
+           subCategories.add(".HO");
+           subCategories.add(".IT");
+           subCategories.add(".KT");
+           subCategories.add(".LO");
+           subCategories.add(".MG");
+           subCategories.add(".MP");
+           subCategories.add(".NA");
+           subCategories.add(".NT");
+           subCategories.add(".OA");
+           subCategories.add(".OC");
+           subCategories.add(".PR");
+           subCategories.add(".QA");
+           subCategories.add(".RA");
+           subCategories.add(".RT");
+           subCategories.add(".SG");
+           subCategories.add(".SP");
+           subCategories.add(".ST");
+       }
+       if (category.getName().equals("nlin")) {
+           subCategories.add(".AO");
+           subCategories.add(".CD");
+           subCategories.add(".CG");
+           subCategories.add(".PS");
+           subCategories.add(".SI");
+       }
+       if (category.getName().equals("nucl")) {
+           subCategories.add("-ex");
+           subCategories.add("-th");
+       }
+       if (category.getName().equals("physics")) {
+           subCategories.add(".acc-ph");
+           subCategories.add(".ao-ph");
+           subCategories.add(".app-ph");
+           subCategories.add(".atm-clus");
+           subCategories.add(".atom-ph");
+           subCategories.add(".bio-ph");
+           subCategories.add(".chem-ph");
+           subCategories.add(".class-ph");
+           subCategories.add(".comp-ph");
+           subCategories.add(".data-an");
+           subCategories.add(".ed-ph");
+           subCategories.add(".flu-dyn");
+           subCategories.add(".gen-ph");
+           subCategories.add(".geo-ph");
+           subCategories.add(".hist-ph");
+           subCategories.add(".ins-det");
+           subCategories.add(".med-ph");
+           subCategories.add(".optics");
+           subCategories.add(".plasm-ph");
+           subCategories.add(".pop-ph");
+           subCategories.add(".soc-ph");
+           subCategories.add(".space-ph");
+       }
+       if (category.getName().equals("q-bio")) {
+           subCategories.add(".BM");
+           subCategories.add(".CB");
+           subCategories.add(".GN");
+           subCategories.add(".MN");
+           subCategories.add(".NC");
+           subCategories.add(".OT");
+           subCategories.add(".PE");
+           subCategories.add(".QM");
+           subCategories.add(".SC");
+           subCategories.add(".TO");
+       }
+       if (category.getName().equals("q-fin")) {
+           subCategories.add(".CP");
+           subCategories.add(".EC");
+           subCategories.add(".GN");
+           subCategories.add(".MF");
+           subCategories.add(".PM");
+           subCategories.add(".PR");
+           subCategories.add(".RM");
+           subCategories.add(".ST");
+           subCategories.add(".TR");
+       }
+       if (category.getName().equals("stat")) {
+           subCategories.add(".AP");
+           subCategories.add(".CO");
+           subCategories.add(".ME");
+           subCategories.add(".ML");
+           subCategories.add(".OT");
+           subCategories.add(".TH");
+       }
+
+       return subCategories;
+    }
 
     public static ArrayList<Article> byAuthors(ArrayList<Article> list , String name) {
 
@@ -61,9 +244,21 @@ public class SortArticle {
     }
 
     public static ArrayList<Article> byCategory (Category searchcategory){
-        String tempcategory = searchcategory.getName();
+        ArrayList<String> subcat = getAllSubCategories(searchcategory);
+        System.out.println(subcat.size());
+        ArrayList<Article> articlesByCategory = new ArrayList<>();
 
-        ArrayList<Article> articlesByCategory = APICall.requestApi("cat", tempcategory);
+        if (searchcategory.getName().equals("gr-qp") || searchcategory.getName().equals("math-ph") ||
+                searchcategory.getName().equals("quant-ph") || searchcategory.getName().equals("cmp-lg")) {
+            articlesByCategory = APICall.requestApi("cat", searchcategory.getName());
+        }
+
+        else for (int index = 0 ; index < subcat.size(); index++){
+            String looking = searchcategory.getName()+subcat.get(index);
+            System.out.println(looking);
+            articlesByCategory.addAll(APICall.requestApi("cat", looking ));
+            System.out.println(articlesByCategory.size()+ "\n");
+        }
 
         return articlesByCategory;
     }
@@ -101,6 +296,14 @@ public class SortArticle {
 
         return allArticle;
     }
+
+    public static ArrayList<Article> All (){
+        ArrayList<Article> allArticle = APICall.requestApi("all:","" );
+
+        return allArticle;
+    }
+
+
 
 
     public static ArrayList<Article> byCategory (ArrayList<Article> list , Category type ) {
@@ -236,6 +439,19 @@ public class SortArticle {
 
         list.sort(Comparator.comparing(Article::getTitle));
         return list;
+    }
+
+    public static void main(String[] args) {
+
+        ArrayList<Article> test = byCategory(Physics);
+
+        System.out.println(test.size());
+
+        for(int index = 0 ; index < 10; index++){
+            System.out.println(test.get(index).getSubCategories().getList());
+
+
+        }
     }
 
 
