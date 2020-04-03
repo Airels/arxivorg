@@ -50,29 +50,34 @@ public class ArxivOrgControllerTest {
 
     @Test
     void testPeriods(FxRobot robot) {
+        ListView lv = robot.lookup("#articlesList").queryListView();
+        int size = lv.getItems().size();
 
+        robot.clickOn("#periodDatePickerStart");
+        robot.write("30/01/2000");
+
+        Assertions.assertThat(lv.getItems().size()).isNotEqualTo(size);
     }
 
     @Test
     void testAuthors(FxRobot robot) {
         ListView lv = robot.lookup("#articlesList").queryListView();
-        // Assertions.assertThat(lv.getItems().size()).isGreaterThan(0);
+        int size = lv.getItems().size();
 
         robot.clickOn("#authorsPredicate");
         robot.write("isaypoopythings,");
 
-        Assertions.assertThat(lv.getItems()).hasSize(0);
+        Assertions.assertThat(lv.getItems().size()).isNotEqualTo(size);
     }
 
     @Test
     void testKeywords(FxRobot robot) {
         ListView lv = robot.lookup("#articlesList").queryListView();
-        System.out.println(lv.getItems().size());
-        // Assertions.assertThat(lv.getItems().size()).isGreaterThan(0);
+        int size = lv.getItems().size();
 
         robot.clickOn("#keywordsPredicate");
         robot.write("notavalidwordlolelolol,");
 
-        Assertions.assertThat(lv.getItems()).hasSize(0);
+        Assertions.assertThat(lv.getItems().size()).isNotEqualTo(size);
     }
 }
