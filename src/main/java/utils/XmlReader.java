@@ -89,6 +89,14 @@ public class XmlReader {
 
                     if (indexofdot >= 0)  category = category.substring(0,indexofdot);
 
+                    if (category.substring(category.indexOf("-")).equals("hep") && category.indexOf("-") == 3) {
+                        category = "hep";
+                    }
+
+                    if(category.substring(category.indexOf("-")).equals("nucl") && category.indexOf("-") == 4){
+                        category = "nucl";
+                    }
+
 
                     Category primalcategory = getCategory(category);
 
