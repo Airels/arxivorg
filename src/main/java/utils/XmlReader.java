@@ -87,7 +87,7 @@ public class XmlReader {
                     String category = primalCategoryNode.getAttribute("term");
                     Category primalcategory;
 
-                    if (category.equals("gr-qc") || category.equals("quant-ph"))  primalcategory = getCategory(category);
+                        if (category.equals("gr-qc") || category.equals("quant-ph"))  primalcategory = getCategory(category);
 
                     else if (category.contains(".")) {
                         int indexofdot = category.indexOf(".");
