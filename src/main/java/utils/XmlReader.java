@@ -85,7 +85,7 @@ public class XmlReader {
                     SubCategories tempSub = new SubCategories(subcategories);
 
                     String category = primalCategoryNode.getAttribute("term");
-                    Category primalcategory;
+                    Category primalcategory = Computer_Science;
 
                         if (category.equals("gr-qc") || category.equals("quant-ph"))  primalcategory = getCategory(category);
 
@@ -120,11 +120,6 @@ public class XmlReader {
 
     }
 
-    public static void main(String[] args) {
-        ArrayList<Article> test = SortArticle.byCategory(Statistics);
-
-        System.out.println(test.size());
-    }
 
 
 
