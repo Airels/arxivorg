@@ -69,7 +69,6 @@ public class ArxivOrgController implements Initializable {
 
         // ARTICLE MANAGER
         articleManager = new ArticleManager(this);
-        articleManager.setPredicates(All, null, periodDatePickerStart.getValue(), periodDatePickerEnd.getValue(), null);
     }
 
     private void generateCategoryChoiceBox() {
@@ -79,7 +78,6 @@ public class ArxivOrgController implements Initializable {
             categories.add(category);
 
         categoryChoiceBox.setItems(FXCollections.observableArrayList(categories));
-        categoryChoiceBox.setValue(All);
     }
 
     public void showArticles(List<Article> articles) {
