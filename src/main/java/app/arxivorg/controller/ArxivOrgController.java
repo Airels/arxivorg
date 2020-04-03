@@ -5,6 +5,7 @@ import app.arxivorg.model.Category;
 import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,10 +15,12 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
+import javax.swing.event.ChangeEvent;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -67,8 +70,6 @@ public class ArxivOrgController implements Initializable {
         periodDatePickerStart.valueProperty().addListener(this::onDatePickerStartUpdate);
         periodDatePickerEnd.valueProperty().addListener(this::onDatePickerEndUpdate);
 
-        scrollPaneArticleView.vvalueProperty().addListener(this::onScrollPaneArticleView);
-        scrollPaneArticleView.hvalueProperty().addListener(this::onScrollPaneArticleView);
 
         // ARTICLE MANAGER
         articleManager = new ArticleManager(this);
@@ -228,9 +229,8 @@ public class ArxivOrgController implements Initializable {
     }
 
     @FXML
-    public void onScrollPaneArticleView(ObservableValue<? extends Number> ov, Number oldVal, Number newVal) {
-        System.out.println(scrollPaneArticleView.getVvalue() + "/" + scrollPaneArticleView.getVmax());
-        System.out.println(scrollPaneArticleView.getHvalue() + "/" + scrollPaneArticleView.getHmax());
+    public void onScrollArticleList(Observable e) {
+        System.out.println("Scroll!");
     }
 
 
