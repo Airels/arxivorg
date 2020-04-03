@@ -74,13 +74,6 @@ public class APICall {
     }
 
 
-    public static void main(String[] args) {
-        ArrayList<Article> test = SortArticle.byCategory(Category.Computer_Science);
-
-        System.out.println(test.get(0).getTitle());
-    }
-
-
 
 }
 

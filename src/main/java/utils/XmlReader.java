@@ -85,16 +85,16 @@ public class XmlReader {
                     SubCategories tempSub = new SubCategories(subcategories);
 
                     String category = primalCategoryNode.getAttribute("term");
-                    int indexofdot = category.indexOf(".");
 
-                    if (indexofdot >= 0)  category = category.substring(0,indexofdot);
-
-                    else if (category.substring(category.indexOf("-")).equals("hep") && category.indexOf("-") == 3) {
-                        category = "hep";
+                    if (category.contains(".")) {
+                        int indexofdot = category.indexOf(".");
+                        category = category.substring(0, indexofdot);
                     }
 
-                    else if(category.substring(category.indexOf("-")).equals("nucl") && category.indexOf("-") == 4){
-                        category = "nucl";
+                    else if (category.contains("-")) {
+
+                        int indexoftrai = category.indexOf("-");
+                        category = category.substring(0, indexoftrai);
                     }
 
 
