@@ -63,9 +63,7 @@
 
     <!-- Panneau liste + vue de l'article -->
     <GridPane alignment="TOP_RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <ScrollPane fx:id="scrollPaneArticlesList" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER">
-            <ListView fx:id="articlesList" fixedCellSize="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" />
-        </ScrollPane>
+        <ListView fx:id="articlesList" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
 
         <GridPane GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
             <ScrollPane fx:id="scrollPaneArticleView" prefHeight="300.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="CENTER">

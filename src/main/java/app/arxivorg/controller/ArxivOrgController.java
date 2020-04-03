@@ -38,7 +38,6 @@ public class ArxivOrgController implements Initializable {
     @FXML private DatePicker periodDatePickerStart;
     @FXML private DatePicker periodDatePickerEnd;
     @FXML private TextFlow articleView;
-    @FXML private ScrollPane scrollPaneArticlesList;
     @FXML private ScrollPane scrollPaneArticleView;
     @FXML private TextArea authorsPredicate;
     @FXML private TextArea keywordsPredicate;
@@ -48,10 +47,6 @@ public class ArxivOrgController implements Initializable {
     //@Override
     public void initialize(URL location, ResourceBundle resourceBundle) {
         // DISPLAY PARAMS
-
-        scrollPaneArticlesList.setFitToWidth(true);
-        scrollPaneArticlesList.setFitToHeight(true);
-
         scrollPaneArticleView.setFitToWidth(true);
         scrollPaneArticleView.setFitToHeight(true);
 
