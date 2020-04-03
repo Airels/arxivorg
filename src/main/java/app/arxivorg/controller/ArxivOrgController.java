@@ -67,6 +67,8 @@ public class ArxivOrgController implements Initializable {
         periodDatePickerStart.valueProperty().addListener(this::onDatePickerStartUpdate);
         periodDatePickerEnd.valueProperty().addListener(this::onDatePickerEndUpdate);
 
+        scrollPaneArticleView.vvalueProperty().addListener(this::onScrollPaneArticleView);
+
         // ARTICLE MANAGER
         articleManager = new ArticleManager(this);
         articleManager.setPredicates(All, null, periodDatePickerStart.getValue(), periodDatePickerEnd.getValue(), null);
@@ -222,6 +224,11 @@ public class ArxivOrgController implements Initializable {
         } else if (keywordsPredicate.getText().isEmpty()) {
             articleManager.setKeywordsPredicate(null);
         }
+    }
+
+    @FXML
+    public void onScrollPaneArticleView(ObservableValue<? extends Number> ov, Number oldVal, Number newVal) {
+        System.out.println(newVal + "/" + scrollPaneArticleView.getVmax());
     }
 
 

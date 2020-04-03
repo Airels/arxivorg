@@ -39,7 +39,6 @@ public class ArticleManager {
         }
 
         actualArticles = new ArrayList<>(initialArticles);
-        updateInterface();
     }
 
     private void resetArticlesList() {
