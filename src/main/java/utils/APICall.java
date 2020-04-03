@@ -74,6 +74,13 @@ public class APICall {
     }
 
 
+    public static void main(String[] args) {
+        ArrayList<Article> test = SortArticle.byCategory(Category.Nuclear);
+
+        System.out.println(test.size());
+    }
+
+
 
 }
 
