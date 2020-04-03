@@ -77,7 +77,8 @@ public enum Category {
             case "cmp-lg":
                 return CMP_LG;
             default:
-                throw new IllegalArgumentException("Unknown category '" + name + "' !");
+                return All;
+                //throw new IllegalArgumentException("Unknown category '" + name + "' !");
         }
     }
 }

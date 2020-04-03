@@ -1,6 +1,7 @@
 package utils;
 
 import app.arxivorg.model.Article;
+import app.arxivorg.model.Category;
 
 import java.io.FileWriter;
 import java.net.URI;
@@ -26,7 +27,7 @@ public class APICall {
         String whithourspace = searchsubjet.replace(" ", "+");
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://export.arxiv.org/api/query?search_query=" + typesearch + ":" + whithourspace + "&start=" + start + "&max_results=" + to))
+                .uri(URI.create("http://export.arxiv.org/api/query?search_query=" + typesearch + ":" + whithourspace + "&start=" + start + "&max_results=" + to + "&sortBy=lastUpdatedDate&sortOrder=descending"))
                 .GET()
                 .build();
 
@@ -45,6 +46,8 @@ public class APICall {
 
             HttpResponse<String> response =
                     httpClient.send(createGetFromToAsk(typesearch, searchsubjet, start , to), HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 400) throw new RuntimeException("Commande mal formuler");
 
             if (response.statusCode() == 200) {
 
@@ -68,6 +71,13 @@ public class APICall {
         }
 
         return requestArticles;
+    }
+
+
+    public static void main(String[] args) {
+        ArrayList<Article> test = SortArticle.byCategory(Category.Computer_Science);
+
+        System.out.println(test.get(0).getTitle());
     }
 
 
