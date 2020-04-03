@@ -55,7 +55,7 @@ public class ArxivOrgController implements Initializable {
 
         generateCategoryChoiceBox();
 
-        periodDatePickerStart.setValue(LocalDate.now().minusWeeks(1));
+        periodDatePickerStart.setValue(LocalDate.now().minusMonths(1));
         periodDatePickerEnd.setValue(LocalDate.now());
 
         // EVENTS
