@@ -87,20 +87,23 @@ public class XmlReader {
                     String category = primalCategoryNode.getAttribute("term");
                     Category primalcategory = Computer_Science;
 
-                        if (category.equals("gr-qc") || category.equals("quant-ph"))  primalcategory = getCategory(category);
 
-                    else if (category.contains(".")) {
+
+                     if (category.contains(".")) {
                         int indexofdot = category.indexOf(".");
-                        category = category.substring(0, indexofdot);
-                         primalcategory = getCategory(category);
+                        String tempcategory = category.substring(0, indexofdot);
+                        primalcategory = getCategory(tempcategory);
                     }
 
                     else if (category.contains("-")) {
 
                         int indexoftrai = category.indexOf("-");
-                        category = category.substring(0, indexoftrai);
-                         primalcategory = getCategory(category);
+                        String tempcategory = category.substring(0, indexoftrai);
+                         primalcategory = getCategory(tempcategory);
                     }
+
+                    else if (category.equals("gr-qc") || category.equals("quant-ph"))  primalcategory = getCategory(category);
+
 
 
 
