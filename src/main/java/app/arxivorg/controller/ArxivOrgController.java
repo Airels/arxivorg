@@ -68,6 +68,7 @@ public class ArxivOrgController implements Initializable {
         periodDatePickerEnd.valueProperty().addListener(this::onDatePickerEndUpdate);
 
         scrollPaneArticleView.vvalueProperty().addListener(this::onScrollPaneArticleView);
+        scrollPaneArticleView.hvalueProperty().addListener(this::onScrollPaneArticleView);
 
         // ARTICLE MANAGER
         articleManager = new ArticleManager(this);
@@ -228,7 +229,8 @@ public class ArxivOrgController implements Initializable {
 
     @FXML
     public void onScrollPaneArticleView(ObservableValue<? extends Number> ov, Number oldVal, Number newVal) {
-        System.out.println(newVal + "/" + scrollPaneArticleView.getVmax());
+        System.out.println(scrollPaneArticleView.getVvalue() + "/" + scrollPaneArticleView.getVmax());
+        System.out.println(scrollPaneArticleView.getHvalue() + "/" + scrollPaneArticleView.getHmax());
     }
 
 

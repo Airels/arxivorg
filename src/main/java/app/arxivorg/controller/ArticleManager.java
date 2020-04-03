@@ -15,6 +15,7 @@ public class ArticleManager {
     private ArxivOrgController controller;
     private final ArrayList<Article> initialArticles;
     private ArrayList<Article> actualArticles;
+    private int end;
 
     // PREDICATE
     private Category category;
@@ -24,17 +25,15 @@ public class ArticleManager {
 
     ArticleManager(ArxivOrgController controller) {
         this.controller = controller;
-
-        /* initialArticles = XmlReader.read("1.atom");
-        initialArticles.addAll(XmlReader.read("2.atom"));
-        initialArticles.addAll(XmlReader.read("3.atom"));
-        initialArticles.addAll(XmlReader.read("4.atom"));
-        initialArticles.addAll(XmlReader.read("5.atom"));
-        actualArticles = new ArrayList<>(initialArticles); */
+        end = 1;
 
         initialArticles = new ArrayList<>();
 
+
+        System.out.println("Getting articles...");
         for (Category category : Category.values()) {
+            if (category == Category.All) continue;
+            System.out.println("..." + category);
             initialArticles.addAll(SortArticle.byCategory(category));
         }
 
