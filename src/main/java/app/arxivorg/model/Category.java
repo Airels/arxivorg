@@ -4,6 +4,7 @@ import javafx.scene.chart.CategoryAxis;
 
 public enum Category {
 
+    All("All", "Toutes"),
     Astrophysics ("astro-ph", "astrophysique"),
     Physics("physics", "Physiques"),
     Mathematics("math", "Mathématiques"),
@@ -38,6 +39,8 @@ public enum Category {
 
     public static Category getCategory(String name) throws IllegalArgumentException {
         switch(name){
+            case "all":
+                return All;
             case "physics":
                return Physics;
             case "astro-ph":

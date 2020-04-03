@@ -25,12 +25,21 @@ public class ArticleManager {
     ArticleManager(ArxivOrgController controller) {
         this.controller = controller;
 
-        initialArticles = XmlReader.read("1.atom");
+        /* initialArticles = XmlReader.read("1.atom");
         initialArticles.addAll(XmlReader.read("2.atom"));
         initialArticles.addAll(XmlReader.read("3.atom"));
         initialArticles.addAll(XmlReader.read("4.atom"));
         initialArticles.addAll(XmlReader.read("5.atom"));
+        actualArticles = new ArrayList<>(initialArticles); */
+
+        initialArticles = new ArrayList<>();
+
+        for (Category category : Category.values()) {
+            initialArticles.addAll(SortArticle.byCategory(category));
+        }
+
         actualArticles = new ArrayList<>(initialArticles);
+        updateInterface();
     }
 
     private void resetArticlesList() {
