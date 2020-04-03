@@ -45,6 +45,7 @@ import java.util.List;
 
             HttpResponse<String> response =
                     httpClient.send(createGetFromToAsk(typesearch, searchsubjet, start , to), HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 400)  throw new RuntimeException("mauvaise demande");
 
 
             if (response.statusCode() == 200) {
