@@ -85,20 +85,16 @@ public class XmlReader {
                     SubCategories tempSub = new SubCategories(subcategories);
 
                     String category = primalCategoryNode.getAttribute("term");
-
                     int indexofdot = category.indexOf(".");
 
                     if (indexofdot >= 0)  category = category.substring(0,indexofdot);
 
-                    if (category.contains("-")) {
+                    else if (category.substring(category.indexOf("-")).equals("hep") && category.indexOf("-") == 3) {
+                        category = "hep";
+                    }
 
-                        if (category.substring(category.indexOf("-")).equals("hep") && category.indexOf("-") == 3) {
-                            category = "hep";
-                        }
-
-                        if (category.substring(category.indexOf("-")).equals("nucl") && category.indexOf("-") == 4) {
-                            category = "nucl";
-                        }
+                    else if(category.substring(category.indexOf("-")).equals("nucl") && category.indexOf("-") == 4){
+                        category = "nucl";
                     }
 
 
@@ -119,11 +115,6 @@ public class XmlReader {
 
     }
 
-    public static void main(String[] args) {
-        ArrayList<Article> test = read("1.atom");
-
-        System.out.println((test.get(0).getTitle()));
-    }
 
 
 }

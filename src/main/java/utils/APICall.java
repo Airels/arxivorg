@@ -1,6 +1,7 @@
 package utils;
 
 import app.arxivorg.model.Article;
+import app.arxivorg.model.Category;
 
 import java.io.FileWriter;
 import java.net.URI;
@@ -10,15 +11,15 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.List;
 
 
- class APICall {
+public class APICall {
 
     private static HttpClient httpClient = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_2)
             .build();
+
+
 
 
     private static HttpRequest createGetFromToAsk(String typesearch, String searchsubjet, int start, int to){
@@ -26,7 +27,7 @@ import java.util.List;
         String whithourspace = searchsubjet.replace(" ", "+");
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://export.arxiv.org/api/query?search_query=" + typesearch + ":" + whithourspace +"&start=" + start + "max_results=" + to+"&sortBy=lastUpdatedDate&sortOrder=ascending"))
+                .uri(URI.create("http://export.arxiv.org/api/query?search_query=" + typesearch + ":" + whithourspace + "&start=" + start + "&max_results=" + to + "&sortBy=lastUpdatedDate&sortOrder=descending"))
                 .GET()
                 .build();
 
@@ -34,19 +35,19 @@ import java.util.List;
 
     }
 
-    public static ArrayList<Article> requestApi (String typesearch, String searchsubjet) {
+    protected static ArrayList<Article> requestApi (String typesearch, String searchsubjet) {
 
         return requestApiFromTo(typesearch, searchsubjet, 0 , 10);
     }
 
-    public static ArrayList<Article> requestApiFromTo (String typesearch, String searchsubjet,int start, int to) {
-
+    protected static ArrayList<Article> requestApiFromTo (String typesearch, String searchsubjet,int start, int to) {
+        ArrayList<Article> requestArticles;
         try {
 
             HttpResponse<String> response =
                     httpClient.send(createGetFromToAsk(typesearch, searchsubjet, start , to), HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() == 400)  throw new RuntimeException("mauvaise demande");
 
+            if (response.statusCode() == 400) throw new RuntimeException("Commande mal formuler");
 
             if (response.statusCode() == 200) {
 
@@ -55,17 +56,28 @@ import java.util.List;
                 writer.write(response.body());
                 writer.flush();
 
-                ArrayList<Article> requestArticles = XmlReader.read("temp.atom");
+                requestArticles = XmlReader.read("temp.atom");
 
                 requestfile.delete();
 
-                return requestArticles;
             }
+
+            else requestArticles = new ArrayList<>();
+
         } catch (Exception e) {
             System.out.println("Request failed");
+
+            requestArticles = new ArrayList<>();
         }
 
-        return new ArrayList<Article>();
+        return requestArticles;
+    }
+
+
+    public static void main(String[] args) {
+        ArrayList<Article> test = SortArticle.byCategory(Category.Computer_Science);
+
+        System.out.println(test.get(0).getTitle());
     }
 
 

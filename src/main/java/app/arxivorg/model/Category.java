@@ -8,6 +8,7 @@ public enum Category {
     Astrophysics ("astro-ph", "astrophysique"),
     Physics("physics", "Physiques"),
     Mathematics("math", "Mathématiques"),
+    Mathematical_Physics("math-ph", "Physique Matématique"),
     Quantitative_Biology("q-bio", "Biologie Quantitative"),
     Computer_Science("cs", "Informatique"),
     Quantitative_Finance("q-fin", "Finance Quantitative"),
@@ -47,6 +48,8 @@ public enum Category {
                 return Astrophysics;
             case "math":
                 return Mathematics;
+            case "math-ph":
+                return Mathematical_Physics;
             case "q-bio":
                 return Quantitative_Biology;
             case "cs":
@@ -74,7 +77,8 @@ public enum Category {
             case "cmp-lg":
                 return CMP_LG;
             default:
-                throw new IllegalArgumentException("Unknown category '" + name + "' !");
+                return All;
+                //throw new IllegalArgumentException("Unknown category '" + name + "' !");
         }
     }
 }
