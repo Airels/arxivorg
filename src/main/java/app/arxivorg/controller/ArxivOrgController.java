@@ -49,8 +49,6 @@ public class ArxivOrgController implements Initializable {
     public void initialize(URL location, ResourceBundle resourceBundle) {
         // DISPLAY PARAMS
 
-
-
         scrollPaneArticlesList.setFitToWidth(true);
         scrollPaneArticlesList.setFitToHeight(true);
 
