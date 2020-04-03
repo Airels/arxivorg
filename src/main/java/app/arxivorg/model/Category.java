@@ -15,7 +15,7 @@ public enum Category {
     Statistics("stat", "Statistiques"),
     Electrical_Engineering_and_Systems_Science("eess", "Ingénierie Électrique et Sciences Des Systèmes"),
     Economics("econ", "Économie"),
-    General_Relativity_and_Quantum_Cosmology("gr-qp", "Relativité géneral et Cosmologie Quantique"),
+    General_Relativity_and_Quantum_Cosmology("gr-qc", "Relativité géneral et Cosmologie Quantique"),
     High_Energy_Physics("hep","Physique de haute énergie"),
     Cellular_Automata("nlin", "Automate cellulaire"),
     Nuclear("nucl", "Nucléaire"),
@@ -62,7 +62,7 @@ public enum Category {
                 return Electrical_Engineering_and_Systems_Science;
             case "econ":
                 return Economics;
-            case "gr-qp":
+            case "gr-qc":
                 return General_Relativity_and_Quantum_Cosmology;
             case "hep":
                 return High_Energy_Physics;
