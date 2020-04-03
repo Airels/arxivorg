@@ -85,22 +85,25 @@ public class XmlReader {
                     SubCategories tempSub = new SubCategories(subcategories);
 
                     String category = primalCategoryNode.getAttribute("term");
+                    Category primalcategory;
 
-                    if (category.equals("gr-qc") || category.equals("quant-ph")) category = category;
+                        if (category.equals("gr-qc") || category.equals("quant-ph"))  primalcategory = getCategory(category);
 
                     else if (category.contains(".")) {
                         int indexofdot = category.indexOf(".");
                         category = category.substring(0, indexofdot);
+                         primalcategory = getCategory(category);
                     }
 
                     else if (category.contains("-")) {
 
                         int indexoftrai = category.indexOf("-");
                         category = category.substring(0, indexoftrai);
+                         primalcategory = getCategory(category);
                     }
 
 
-                    Category primalcategory = getCategory(category);
+
 
 
                     String tempLink = linkGetterNode.getAttribute("href");
@@ -115,6 +118,12 @@ public class XmlReader {
 
         return articles;
 
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Article> test = SortArticle.byCategory(Statistics);
+
+        System.out.println(test.size());
     }
 
 
