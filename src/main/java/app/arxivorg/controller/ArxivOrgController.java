@@ -33,6 +33,8 @@ public class ArxivOrgController implements Initializable {
 
     private ArticleManager articleManager;
 
+    private Article selectedArticle;
+
     @FXML private ListView articlesList;
     @FXML private ChoiceBox<Category> categoryChoiceBox;
     @FXML private DatePicker periodDatePickerStart;
@@ -70,6 +72,7 @@ public class ArxivOrgController implements Initializable {
         periodDatePickerStart.valueProperty().addListener(this::onDatePickerStartUpdate);
         periodDatePickerEnd.valueProperty().addListener(this::onDatePickerEndUpdate);
 
+        btnDownload.addEventFilter(MouseEvent.MOUSE_CLICKED, this::onBtnDownloadClicked);
 
         // ARTICLE MANAGER
         articleManager = new ArticleManager(this);
@@ -154,6 +157,8 @@ public class ArxivOrgController implements Initializable {
             articleView.getChildren().clear();
             articleView.getChildren().add(text);
 
+            selectedArticle = article;
+
             favCheckBox.setDisable(false);
             btnDownload.setDisable(false);
         }
@@ -231,6 +236,13 @@ public class ArxivOrgController implements Initializable {
     @FXML
     public void onScrollArticleList(Observable e) {
         System.out.println("Scroll!");
+    }
+
+    @FXML
+    public void onBtnDownloadClicked(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY) {
+            System.out.println(selectedArticle.getLink());
+        }
     }
 
 
