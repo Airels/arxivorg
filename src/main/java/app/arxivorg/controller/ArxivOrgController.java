@@ -20,8 +20,10 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.DirectoryChooser;
 
+import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -273,8 +275,11 @@ public class ArxivOrgController implements Initializable {
     private void showFileChooser() {
         DirectoryChooser dc = new DirectoryChooser();
         dc.setTitle("Télécharger l'article sous...");
-        dc.setInitialDirectory(new File(System.getProperty("user.home") + "/Downloads"));
+        dc.setInitialDirectory(new File(System.getProperty("user.home")));
         File selectedDir = dc.showDialog(btnDownload.getScene().getWindow());
+
+        if (selectedDir == null)
+            return;
 
         System.out.println(selectedDir.getAbsolutePath());
     }
