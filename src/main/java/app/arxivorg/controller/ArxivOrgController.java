@@ -74,9 +74,20 @@ public class ArxivOrgController implements Initializable {
 
         btnDownload.addEventFilter(MouseEvent.MOUSE_CLICKED, this::onBtnDownloadClicked);
 
+        articlesList.addEventFilter(ScrollEvent.ANY, this::onScrollArticleList);
+
         // ARTICLE MANAGER
         articleManager = new ArticleManager(this);
         articleManager.setPredicates(All, null, periodDatePickerStart.getValue(), periodDatePickerEnd.getValue(), null);
+    }
+
+    @FXML
+    public void onScrollArticleList(ScrollEvent event) {
+        if (event.getDeltaY() < 0) { // if scroll down
+            System.out.println("Scroll!");
+
+            System.out.println(articlesList.getSelectionModel().getSelectedItem());
+        }
     }
 
     private void generateCategoryChoiceBox() {
@@ -233,10 +244,7 @@ public class ArxivOrgController implements Initializable {
         }
     }
 
-    @FXML
-    public void onScrollArticleList(Observable e) {
-        System.out.println("Scroll!");
-    }
+// ---
 
     @FXML
     public void onBtnDownloadClicked(MouseEvent event) {
