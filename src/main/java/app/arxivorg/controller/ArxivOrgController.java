@@ -5,7 +5,6 @@ import app.arxivorg.model.Category;
 import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,8 +18,9 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.stage.DirectoryChooser;
 
-import javax.swing.event.ChangeEvent;
+import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -79,15 +79,6 @@ public class ArxivOrgController implements Initializable {
         // ARTICLE MANAGER
         articleManager = new ArticleManager(this);
         articleManager.setPredicates(All, null, periodDatePickerStart.getValue(), periodDatePickerEnd.getValue(), null);
-    }
-
-    @FXML
-    public void onScrollArticleList(ScrollEvent event) {
-        if (event.getDeltaY() < 0) { // if scroll down
-            System.out.println("Scroll!");
-
-            System.out.println(articlesList.getSelectionModel().getSelectedItem());
-        }
     }
 
     private void generateCategoryChoiceBox() {
@@ -244,12 +235,20 @@ public class ArxivOrgController implements Initializable {
         }
     }
 
-// ---
+    @FXML
+    public void onScrollArticleList(ScrollEvent event) {
+        if (event.getDeltaY() < 0) { // if scroll down
+            System.out.println("Scroll!");
+
+            System.out.println(articlesList.getSelectionModel().getSelectedItem());
+        }
+    }
 
     @FXML
     public void onBtnDownloadClicked(MouseEvent event) {
         if (event.getButton() == MouseButton.PRIMARY) {
             System.out.println(selectedArticle.getLink());
+            showFileChooser();
         }
     }
 
@@ -269,5 +268,14 @@ public class ArxivOrgController implements Initializable {
         alert.setHeaderText(message);
         alert.setContentText(subMessage);
         alert.show();
+    }
+
+    private void showFileChooser() {
+        DirectoryChooser dc = new DirectoryChooser();
+        dc.setTitle("Télécharger l'article sous...");
+        dc.setInitialDirectory(new File(System.getProperty("user.home") + "/Downloads"));
+        File selectedDir = dc.showDialog(btnDownload.getScene().getWindow());
+
+        System.out.println(selectedDir.getAbsolutePath());
     }
 }
