@@ -39,45 +39,11 @@ public enum Category {
     }
 
     public static Category getCategory(String name) throws IllegalArgumentException {
-        switch(name){
-            case "all":
-                return All;
-            case "physics":
-               return Physics;
-            case "astro-ph":
-                return Astrophysics;
-            case "math":
-                return Mathematics;
-            case "math-ph":
-                return Mathematical_Physics;
-            case "q-bio":
-                return Quantitative_Biology;
-            case "cs":
-                return Computer_Science;
-            case "q-fin":
-                return Quantitative_Finance;
-            case "stat":
-                return Statistics;
-            case "eess":
-                return Electrical_Engineering_and_Systems_Science;
-            case "econ":
-                return Economics;
-            case "gr-qc":
-                return General_Relativity_and_Quantum_Cosmology;
-            case "hep":
-                return High_Energy_Physics;
-            case "nlin":
-                return Cellular_Automata;
-            case "nucl":
-                return Nuclear;
-            case "cond-mat":
-                return Cond_Math;
-            case "quant-ph":
-                return Quantum_Physics;
-            case "cmp-lg":
-                return CMP_LG;
-            default:
-                throw new IllegalArgumentException("Unknown category '" + name + "' !");
+        for (Category category : Category.values()) {
+            if (name.equals(category.getName()))
+                return category;
         }
+
+        throw new IllegalArgumentException("Unknown category '" + name + "' !");
     }
 }
