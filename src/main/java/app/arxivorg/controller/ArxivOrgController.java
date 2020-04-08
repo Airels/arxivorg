@@ -19,6 +19,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.DirectoryChooser;
+import utils.PDFDownloader;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
@@ -250,7 +251,13 @@ public class ArxivOrgController implements Initializable {
     public void onBtnDownloadClicked(MouseEvent event) {
         if (event.getButton() == MouseButton.PRIMARY) {
             System.out.println(selectedArticle.getLink());
-            showFileChooser();
+
+            File selectedFile = showFileChooser();
+
+            if (selectedFile == null)
+                return;
+
+            PDFDownloader.downloadFile(selectedArticle, selectedFile);
         }
     }
 
@@ -272,15 +279,11 @@ public class ArxivOrgController implements Initializable {
         alert.show();
     }
 
-    private void showFileChooser() {
+    private File showFileChooser() {
         DirectoryChooser dc = new DirectoryChooser();
         dc.setTitle("Télécharger l'article sous...");
         dc.setInitialDirectory(new File(System.getProperty("user.home")));
-        File selectedDir = dc.showDialog(btnDownload.getScene().getWindow());
 
-        if (selectedDir == null)
-            return;
-
-        System.out.println(selectedDir.getAbsolutePath());
+        return dc.showDialog(btnDownload.getScene().getWindow());
     }
 }
