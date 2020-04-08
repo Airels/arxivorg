@@ -13,7 +13,7 @@ public class pdfDownloader {
      * @param file
      * @throws MalformedURLException
      */
-    public void downloadFile(Article article, File file) throws MalformedURLException {
+    public static void downloadFile(Article article, File file) throws MalformedURLException {
         URL url = new URL(article.getLink());
 
         try(BufferedInputStream inputStream = new BufferedInputStream(url.openStream());
