@@ -36,7 +36,7 @@ public class PDFDownloader {
 
     public static void secondDownloader(Article article, File file) {
         try (InputStream in = new URL(article.getLink()).openStream()) {
-            Files.copy(in, Paths.get(article.getTitle() + ".pdf"), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(in, Paths.get(file.getAbsolutePath() + '/'+ article.getTitle() + ".pdf"), StandardCopyOption.REPLACE_EXISTING);
 
 
         } catch (IOException e) {
