@@ -17,25 +17,6 @@ public class PDFDownloader {
      * @throws MalformedURLException
      */
     public static void downloadFile(Article article, File file) {
-
-        File pdfFile = new File(file.getAbsolutePath() + "/" + article.getTitle() + ".pdf");
-
-
-        try (BufferedInputStream inputStream
-                     = new BufferedInputStream(new URL("https" + article.getLink().substring(4)).openStream());
-             FileOutputStream fileOS = new FileOutputStream(pdfFile.getAbsolutePath())) {
-            byte[] data = new byte[1024];
-            int byteContent;
-            while ((byteContent = inputStream.read(data, 0, 1024)) != -1) {
-                fileOS.write(data, 0, byteContent);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void secondDownloader(Article article, File file) {
         try (InputStream in = new URL("https" + article.getLink().substring(4)).openStream()) {
             Files.copy(in,
                     Paths.get(file.getAbsolutePath() + '/'+ article.getTitle() + ".pdf"),
