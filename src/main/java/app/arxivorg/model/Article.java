@@ -1,5 +1,7 @@
 package app.arxivorg.model;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class Article {
@@ -9,13 +11,15 @@ public class Article {
     private Category category;
     private SubCategories subCategories;
     private String link;
+    private LocalDate date;
 
-    public Article(String title, Authors authors, String content, Category category, SubCategories subCategories, String link) throws IllegalArgumentException {
+    public Article(String title, Authors authors, String content, Category category, SubCategories subCategories, String link, LocalDate date) throws IllegalArgumentException {
         if(title.isEmpty()) throw new IllegalArgumentException("title is Empty");
         if(authors.getList().isEmpty()) throw new IllegalArgumentException("there must be at least one author");
         if(content.isEmpty()) throw new IllegalArgumentException("content is empty");
         if(category==null) throw new IllegalArgumentException("category must be defined");
         if(link == null) throw  new IllegalArgumentException("Link can't be null or null");
+        if(date == null) throw new IllegalArgumentException("date can't be null");
         if(subCategories==null)subCategories = new SubCategories();
 
         this.title = title;
@@ -24,6 +28,7 @@ public class Article {
         this.category = category;
         this.subCategories = subCategories;
         this.link = link;
+        this.date = date;
     }
 
 
@@ -52,6 +57,8 @@ public class Article {
         this.subCategories = subCategories;
     }
 
+    public void setDate(LocalDate date) { this.date = date; }
+
     public String getLink() {
         return link;
     }
@@ -75,4 +82,6 @@ public class Article {
     public SubCategories getSubCategories() {
         return subCategories;
     }
+
+    public LocalDate getDate() { return date; }
 }
