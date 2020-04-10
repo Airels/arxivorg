@@ -15,7 +15,7 @@ public class PDFDownloader {
      */
     public static void downloadFile(Article article, File file) {
 
-        File pdfFile = new File(file.getAbsolutePath(), article.getTitle() + ".pdf");
+        File pdfFile = new File(file.getAbsolutePath() + "/" + article.getTitle());
 
         try {
             URL url = new URL(article.getLink());
