@@ -257,7 +257,12 @@ public class ArxivOrgController implements Initializable {
             if (selectedFile == null)
                 return;
 
-            PDFDownloader.downloadFile(selectedArticle, selectedFile);
+            if (PDFDownloader.downloadFile(selectedArticle, selectedFile))
+                showInfoMessage("Téléchargement terminé",
+                        "Le téléchargement de " + selectedArticle.getTitle() + " est terminé !");
+            else
+                showErrorMessage("Téléchargement échoué",
+                        "Le téléchargement de " + selectedArticle.getTitle() + " a échoué !");
         }
     }
 
