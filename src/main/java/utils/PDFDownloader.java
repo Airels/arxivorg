@@ -21,7 +21,7 @@ public class PDFDownloader {
         File pdfFile = new File(file.getAbsolutePath() + "/" + article.getTitle() + ".pdf");
 
 
-        try (BufferedInputStream inputStream = new BufferedInputStream(new URL(article.getLink()).openStream());
+        try (BufferedInputStream inputStream = new BufferedInputStream(new URL(article.getLink() + ".pdf").openStream());
              FileOutputStream fileOS = new FileOutputStream(pdfFile.getAbsolutePath())) {
             byte[] data = new byte[1024];
             int byteContent;
