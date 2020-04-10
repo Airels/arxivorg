@@ -21,7 +21,8 @@ public class PDFDownloader {
         File pdfFile = new File(file.getAbsolutePath() + "/" + article.getTitle() + ".pdf");
 
 
-        try (BufferedInputStream inputStream = new BufferedInputStream(new URL(article.getLink()).openStream());
+        try (BufferedInputStream inputStream
+                     = new BufferedInputStream(new URL("https" + article.getLink().substring(4)).openStream());
              FileOutputStream fileOS = new FileOutputStream(pdfFile.getAbsolutePath())) {
             byte[] data = new byte[1024];
             int byteContent;
@@ -35,8 +36,10 @@ public class PDFDownloader {
     }
 
     public static void secondDownloader(Article article, File file) {
-        try (InputStream in = new URL(article.getLink()).openStream()) {
-            Files.copy(in, Paths.get(article.getTitle() + ".pdf"), StandardCopyOption.REPLACE_EXISTING);
+        try (InputStream in = new URL("https" + article.getLink().substring(4)).openStream()) {
+            Files.copy(in,
+                    Paths.get(file.getAbsolutePath() + '/'+ article.getTitle() + ".pdf"),
+                    StandardCopyOption.REPLACE_EXISTING);
 
 
         } catch (IOException e) {
