@@ -15,7 +15,7 @@ public class PDFDownloader {
      */
     public static void downloadFile(Article article, File file) {
 
-        File pdfFile = new File(file.getAbsolutePath() + "/" + article.getTitle());
+        File pdfFile = new File(file.getAbsolutePath() + "/" + article.getTitle() + ".pdf");
 
         try {
             URL url = new URL(article.getLink());
@@ -35,6 +35,8 @@ public class PDFDownloader {
         }catch(MalformedURLException e){
             System.out.println("Le fichier n'as pas pu être télécharger");
         }
+
+
 
 
     }
