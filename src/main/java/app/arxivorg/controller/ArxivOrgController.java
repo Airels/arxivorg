@@ -102,10 +102,11 @@ public class ArxivOrgController implements Initializable {
 
     /**
      * Main method called to generate interface, articles, sets values and properties of user interface elements,
-     * and sets events triggers.
+     * and sets events triggers. Also creates an object ArticleManager.
      *
      * @param location
      * @param resourceBundle
+     * @see ArticleManager
      * @author VIZCAINO Yohan
      */
     @Override
