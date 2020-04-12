@@ -1,9 +1,6 @@
 package app.arxivorg.controller;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * FileManager used to simplify read and write file
@@ -37,9 +34,25 @@ public class FileManager {
         }
     }
 
-    public String getLines() {
+    public int getLines() {
         if (!file.canRead())
             throw new RuntimeException("Unable to read file");
+
+        int lines = 0;
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+
+            while (reader.readLine() != null) {
+                lines++;
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
+        return lines;
     }
 
     public String getLine(int line) {
