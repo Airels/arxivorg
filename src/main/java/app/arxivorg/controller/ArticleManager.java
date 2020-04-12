@@ -1,10 +1,9 @@
 package app.arxivorg.controller;
 
-import utils.SortArticle;
-import utils.XmlReader;
+import app.arxivorg.utils.SortArticle;
+import app.arxivorg.utils.XmlReader;
 import app.arxivorg.model.Article;
 import app.arxivorg.model.Category;
-import jdk.jfr.Experimental;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;

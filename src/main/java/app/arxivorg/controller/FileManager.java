@@ -15,6 +15,7 @@ public class FileManager {
     /**
      * Initialize FileManager and create a file if don't exist
      * @param nameOfFile Name of the file to open
+     * @author VIZCAINO Yohan (Airels)
      */
     public FileManager(String nameOfFile) {
         file = new File(nameOfFile);
@@ -30,6 +31,7 @@ public class FileManager {
     /**
      * Put a new line in the file
      * @param data String of data you want to write
+     * @author VIZCAINO Yohan (Airels)
      */
     public void putLine(String data) {
         if (!file.canWrite())
@@ -51,6 +53,7 @@ public class FileManager {
      * Put a new line or rewrite data on a specified line
      * @param data String of data you want to write
      * @param line Index of line you want to write data
+     * @author VIZCAINO Yohan (Airels)
      */
     public void putLine(String data, int line) {
         if (!file.canWrite())
@@ -89,6 +92,7 @@ public class FileManager {
     /**
      * Private method used to calculate lines in file
      * @return Number of lines calculated
+     * @author VIZCAINO Yohan (Airels)
      */
     private int calculateLines() {
         if (!file.canRead())
