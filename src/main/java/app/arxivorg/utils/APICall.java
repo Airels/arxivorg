@@ -1,7 +1,6 @@
-package utils;
+package app.arxivorg.utils;
 
 import app.arxivorg.model.Article;
-import app.arxivorg.model.Category;
 
 import java.io.FileWriter;
 import java.net.URI;

@@ -1,9 +1,6 @@
 package app.arxivorg.utils;
 
 
-import app.arxivorg.model.SubCategories;
-import utils.XmlReader;
-import utils.SortArticle;
 import app.arxivorg.model.Article;
 import app.arxivorg.model.Category;
 import org.junit.jupiter.api.Test;
