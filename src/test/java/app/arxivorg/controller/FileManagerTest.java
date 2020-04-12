@@ -84,4 +84,17 @@ public class FileManagerTest {
 
         new File("testFile").delete();
     }
+
+    @Test
+    public void testGetLineContains() {
+        new File("testFile").delete();
+        FileManager fm = new FileManager("testFile");
+        fm.putLine("A: Hello world!");
+        fm.putLine("B: Goodbye world!");
+        fm.putLine("C: If you if, then I'm saying something");
+
+        assert(fm.getLineContains("B") == 2);
+
+        new File("testFile").delete();
+    }
 }
