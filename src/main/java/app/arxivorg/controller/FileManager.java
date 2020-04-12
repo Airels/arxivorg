@@ -158,6 +158,27 @@ public class FileManager {
      * @author VIZCAINO Yohan (Airels)
      */
     public int getLineEqualsTo(String line) {
+        return getLineWithPredicate(line, false);
+    }
+
+    /**
+     * Get index of line if it's contains param
+     * @param line Data to search
+     * @return Index of line if found, -1 otherwise
+     * @author VIZCAINO Yohan (Airels)
+     */
+    public int getLineContains(String line) {
+        return getLineWithPredicate(line, true);
+    }
+
+    /**
+     * Used by getLineEqualsTo and getLineContains. Created to avoid code duplication
+     * @param line Data to search
+     * @param containsTest If data searched need to be in line (TRUE) or equals to line (FALSE)
+     * @return Index of line if found, -1 otherwise
+     * @author VIZCAINO Yohan (Airels)
+     */
+    private int getLineWithPredicate(String line, boolean containsTest) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             int lineIndex = 0;
@@ -166,8 +187,13 @@ public class FileManager {
             while ((lineString = reader.readLine()) != null) {
                 lineIndex++;
 
-                if (lineString.equals(line))
-                    return lineIndex;
+                if (containsTest) {
+                    if (lineString.contains(line))
+                        return lineIndex;
+                } else {
+                    if (lineString.equals(line))
+                        return lineIndex;
+                }
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e.getMessage());
