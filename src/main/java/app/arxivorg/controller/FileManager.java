@@ -85,7 +85,7 @@ public class FileManager {
             while ((lineString = reader.readLine()) != null) {
                 lineIndex++;
 
-                if (lineString.equals(lineIndex))
+                if (lineString.equals(line))
                     return lineIndex;
             }
         } catch (FileNotFoundException e) {
