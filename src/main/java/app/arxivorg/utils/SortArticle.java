@@ -1,4 +1,4 @@
-package utils;
+package app.arxivorg.utils;
 
 import app.arxivorg.model.Article;
 import app.arxivorg.model.Authors;
