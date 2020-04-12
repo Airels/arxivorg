@@ -9,7 +9,8 @@ import java.io.FileReader;
 public class FileManagerTest {
 
     @Test
-    public void testPutLines() {
+    public void testPutLine() {
+        new File("testFile").delete();
         FileManager fm = new FileManager("testFile");
         fm.putLine("Hello world!");
 
@@ -26,7 +27,26 @@ public class FileManagerTest {
     }
 
     @Test
+    public void testPutLineWithIndex() {
+        new File("testFile").delete();
+        FileManager fm = new FileManager("testFile");
+        fm.putLine("Hello");
+        fm.putLine("");
+        fm.putLine("!");
+
+        fm.putLine("World", 2);
+        assert(fm.getLine(2).equals("World"));
+
+        fm.putLine("Goodbye", 10);
+        assert(fm.getLine(9).equals(""));
+        assert(fm.getLine(10).equals("Goodbye"));
+
+        new File("testFile").delete();
+    }
+
+    @Test
     public void testGetLines() {
+        new File("testFile").delete();
         FileManager fm = new FileManager("testFile");
         fm.putLine("A");
         fm.putLine("B");
@@ -40,6 +60,7 @@ public class FileManagerTest {
 
     @Test
     public void testGetLine() {
+        new File("testFile").delete();
         FileManager fm = new FileManager("testFile");
         fm.putLine("Hello");
         fm.putLine("Da Big");
@@ -53,6 +74,7 @@ public class FileManagerTest {
 
     @Test
     public void testGetLineEqualsTo() {
+        new File("testFile").delete();
         FileManager fm = new FileManager("testFile");
         fm.putLine("A");
         fm.putLine("=== SECTION ===");
