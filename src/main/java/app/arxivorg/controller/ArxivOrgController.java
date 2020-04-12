@@ -19,7 +19,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.DirectoryChooser;
-import utils.PDFDownloader;
+import app.arxivorg.utils.PDFDownloader;
 
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
