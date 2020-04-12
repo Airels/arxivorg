@@ -47,5 +47,19 @@ public class FileManagerTest {
 
         assert(fm.getLine(2).equals("Da Big"));
         assert(fm.getLine(1).equals("Hello"));
+
+        new File("testFile").delete();
+    }
+
+    @Test
+    public void testGetLineEqualsTo() {
+        FileManager fm = new FileManager("testFile");
+        fm.putLine("A");
+        fm.putLine("=== SECTION ===");
+        fm.putLine("B");
+
+        assert(fm.getLineEqualsTo("=== SECTION ===") == 2);
+
+        new File("testFile").delete();
     }
 }

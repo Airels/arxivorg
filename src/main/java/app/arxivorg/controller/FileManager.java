@@ -27,7 +27,7 @@ public class FileManager {
         try {
             FileWriter writer = new FileWriter(file, true);
 
-            writer.write(data);
+            writer.write(data + '\n');
             writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
@@ -56,6 +56,44 @@ public class FileManager {
     }
 
     public String getLine(int line) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            int lineIndex = 0;
+            String lineString;
 
+            while ((lineString = reader.readLine()) != null) {
+                lineIndex++;
+
+                if (line == lineIndex)
+                    return lineString;
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
+        return "";
+    }
+
+    public int getLineEqualsTo(String line) {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            int lineIndex = 0;
+            String lineString;
+
+            while ((lineString = reader.readLine()) != null) {
+                lineIndex++;
+
+                if (lineString.equals(lineIndex))
+                    return lineIndex;
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
+        return -1;
     }
 }
