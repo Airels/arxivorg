@@ -19,7 +19,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.DirectoryChooser;
-import utils.PDFDownloader;
+import app.arxivorg.utils.PDFDownloader;
 
 import java.io.File;
 import java.net.URL;
@@ -166,7 +166,6 @@ public class ArxivOrgController implements Initializable {
      * Essentially used by ArticleManager.
      *
      * @param articles List of Article you want to show
-     * @see ArticleManager#updateInterface()
      * @author VIZCAINO Yohan (Airels)
      */
     public void showArticles(List<Article> articles) {
