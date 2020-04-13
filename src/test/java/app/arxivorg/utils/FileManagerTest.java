@@ -98,4 +98,19 @@ public class FileManagerTest {
 
         new File("testFile").delete();
     }
+
+    @Test
+    public void testWipeFile() {
+        new File("testFile").delete();
+        FileManager fm = new FileManager("testFile");
+        fm.putLine("Hello");
+        fm.putLine("The");
+        fm.putLine("World!");
+
+        fm.wipeFile();
+
+        assert(fm.getLines() == 0);
+
+        new File("testFile").delete();
+    }
 }
