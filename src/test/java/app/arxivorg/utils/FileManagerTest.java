@@ -11,17 +11,16 @@ public class FileManagerTest {
 
     @Test
     public void testPutLine() {
-        new File("testFile").delete();
-        FileManager fm = new FileManager("testFile");
+        File file = new File("testFilePutLine");
+        file.delete();
+
+        FileManager fm = new FileManager("testFilePutLine");
         fm.putLine("Hello world!");
 
         try {
-            File file = new File("testFile");
             BufferedReader reader = new BufferedReader(new FileReader(file));
 
             assert(reader.readLine().equals("Hello world!"));
-
-            file.delete();
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
@@ -29,8 +28,10 @@ public class FileManagerTest {
 
     @Test
     public void testPutLineWithIndex() {
-        new File("testFile").delete();
-        FileManager fm = new FileManager("testFile");
+        File file = new File("testFilePutLineWithIndex");
+        file.delete();
+
+        FileManager fm = new FileManager("testFilePutLineWithIndex");
         fm.putLine("Hello");
         fm.putLine("");
         fm.putLine("!");
@@ -41,68 +42,67 @@ public class FileManagerTest {
         fm.putLine("Goodbye", 10);
         assert(fm.getLine(9).equals(""));
         assert(fm.getLine(10).equals("Goodbye"));
-
-        new File("testFile").delete();
     }
 
     @Test
     public void testGetLines() {
-        new File("testFile").delete();
-        FileManager fm = new FileManager("testFile");
+        File file = new File("testFileGetLines");
+        file.delete();
+
+        FileManager fm = new FileManager("testFileGetLines");
         fm.putLine("A");
         fm.putLine("B");
         fm.putLine("C");
 
-        System.out.println(fm.getLines());
         assert(fm.getLines() == 3);
-
-        new File("testFile").delete();
     }
 
     @Test
     public void testGetLine() {
-        new File("testFile").delete();
-        FileManager fm = new FileManager("testFile");
+        File file = new File("testFileGetLine");
+        file.delete();
+
+        FileManager fm = new FileManager("testFileGetLine");
         fm.putLine("Hello");
         fm.putLine("Da Big");
         fm.putLine("World!");
 
         assert(fm.getLine(2).equals("Da Big"));
         assert(fm.getLine(1).equals("Hello"));
-
-        new File("testFile").delete();
     }
 
     @Test
     public void testGetLineEqualsTo() {
-        new File("testFile").delete();
-        FileManager fm = new FileManager("testFile");
+        File file = new File("testFileGetLineEqualsTo");
+        file.delete();
+
+        FileManager fm = new FileManager("testFileGetLineEqualsTo");
         fm.putLine("A");
         fm.putLine("=== SECTION ===");
         fm.putLine("B");
 
         assert(fm.getLineEqualsTo("=== SECTION ===") == 2);
-
-        new File("testFile").delete();
     }
 
     @Test
     public void testGetLineContains() {
-        new File("testFile").delete();
-        FileManager fm = new FileManager("testFile");
+        File file = new File("testFileContains");
+        file.delete();
+
+        FileManager fm = new FileManager("testFileContains");
         fm.putLine("A: Hello world!");
         fm.putLine("B: Goodbye world!");
         fm.putLine("C: If you if, then I'm saying something");
 
         assert(fm.getLineContains("B") == 2);
-
-        new File("testFile").delete();
     }
 
     @Test
     public void testWipeFile() {
-        new File("testFile").delete();
-        FileManager fm = new FileManager("testFile");
+        File file = new File("testFileWipeFile");
+        file.delete();
+
+        FileManager fm = new FileManager("testFileWipeFile");
         fm.putLine("Hello");
         fm.putLine("The");
         fm.putLine("World!");
@@ -110,7 +110,5 @@ public class FileManagerTest {
         fm.wipeFile();
 
         assert(fm.getLines() == 0);
-
-        new File("testFile").delete();
     }
 }
