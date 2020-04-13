@@ -1,4 +1,4 @@
-package app.arxivorg.controller;
+package app.arxivorg.utils;
 
 import java.io.*;
 import java.util.Scanner;
