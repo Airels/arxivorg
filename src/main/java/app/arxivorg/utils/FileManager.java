@@ -203,4 +203,20 @@ public class FileManager {
 
         return -1;
     }
+
+    /**
+     * Wipe all file of it's content
+     */
+    public void wipeFile() {
+        try {
+            FileWriter writer = new FileWriter(file);
+            writer.write("");
+            writer.flush();
+            writer.close();
+
+            lines = 0;
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }
