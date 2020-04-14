@@ -206,6 +206,7 @@ public class FileManager {
 
     /**
      * Wipe all file of it's content
+     * @author VIZCAINO Yohan (Airels)
      */
     public void wipeFile() {
         try {
