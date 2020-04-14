@@ -1,7 +1,9 @@
 package app.arxivorg.controller;
 
 import app.arxivorg.model.Article;
+import app.arxivorg.model.Authors;
 import app.arxivorg.model.Category;
+import app.arxivorg.model.SubCategories;
 import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -140,9 +142,16 @@ public class ArxivOrgController implements Initializable {
 
         // articlesList.addEventFilter(ScrollEvent.ANY, this::onScrollArticleList);
 
+
+
         // ARTICLE MANAGER
-        articleManager = new ArticleManager(this);
-        articleManager.setPredicates(All, null, periodDatePickerStart.getValue(), periodDatePickerEnd.getValue(), null);
+        Thread t = new Thread(() -> {
+            showArticles(new ArrayList<>());
+
+            articleManager = new ArticleManager(this);
+            articleManager.setPredicates(All, null, periodDatePickerStart.getValue(), periodDatePickerEnd.getValue(), null);
+        });
+        t.start();
     }
 
     /**
@@ -170,6 +179,23 @@ public class ArxivOrgController implements Initializable {
      */
     public void showArticles(List<Article> articles) {
         articlesList.getItems().clear();
+
+        if (articles.isEmpty()) {
+            List<String> authorsUS = new ArrayList<>();
+            authorsUS.add("ArxivOrg");
+
+            articles.add(new Article(
+                    "Récupération des articles sur arxiv...",
+                    new Authors(authorsUS),
+                    "Le programme est en train de récupérer la liste des articles, veuillez patienter...\n" +
+                            "Si ce message reste affiché pendant un moment, essayez d'avoir des filtres moins restrictifs. \n" +
+                            "Si vous veneez de lancer le programme, veuillez patienter que les articles s'affichent. Cela peut prendre 1 à 2 minutes.",
+                    All,
+                    new SubCategories(),
+                    "https://google.fr",
+                    LocalDate.now()));
+        }
+
         articlesList.getItems().addAll(articles);
 
         // Génération affichage éléments

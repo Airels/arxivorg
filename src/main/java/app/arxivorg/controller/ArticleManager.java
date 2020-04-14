@@ -53,6 +53,8 @@ public class ArticleManager {
      */
     private LocalDate startPeriod, endPeriod;
 
+    private static int articlesFromToIndex = 10;
+
 
     /**
      * Constructor of ArticleManager.
@@ -72,9 +74,9 @@ public class ArticleManager {
             if (category == Category.All) continue;
             System.out.println("..." + category);
             initialArticles.addAll(SortArticle.byCategory(category));
-        }
 
-        actualArticles = new ArrayList<>(initialArticles);
+            actualArticles = new ArrayList<>(initialArticles);
+        }
     }
 
     /**
@@ -169,13 +171,30 @@ public class ArticleManager {
      * @author VIZCAINO Yohan (Airels)
      */
     public void setPredicates(@NotNull Category category, List<String> authors, @NotNull LocalDate startPeriod, @NotNull LocalDate endPeriod, List<String> keywords) {
-        resetArticlesList();
+        Thread t = new Thread(() -> {
+            resetArticlesList();
 
-        categoryPredicate(category);
-        authorsPredicate(authors);
-        periodPredicate(startPeriod, endPeriod);
-        keywordsPredicate(keywords);
-        updateInterface();
+            categoryPredicate(category);
+            authorsPredicate(authors);
+            periodPredicate(startPeriod, endPeriod);
+            keywordsPredicate(keywords);
+
+            updateInterface();
+
+            if (actualArticles.size() < 5) {
+                articlesFromToIndex += 20;
+
+                List<Article> newArticles = SortArticle.byCategoryFromTo(category, articlesFromToIndex-20, articlesFromToIndex);
+                initialArticles.addAll(newArticles);
+
+                System.out.println(newArticles.size());
+
+                if (newArticles.size() >= 5)
+                    setPredicates(category, authors, startPeriod, endPeriod, keywords);
+            }
+        });
+
+        t.start();
     }
 
     /**

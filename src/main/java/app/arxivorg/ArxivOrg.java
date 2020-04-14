@@ -17,6 +17,8 @@ public class ArxivOrg extends Application {
         primaryStage.setMinWidth(600);
         primaryStage.setMinHeight(570);
         primaryStage.show();
+
+        primaryStage.setOnCloseRequest(we -> System.exit(0)); // To interrupt all threads in ArticleManager
     }
 
     public static void main(String[] args) { launch(args); }
