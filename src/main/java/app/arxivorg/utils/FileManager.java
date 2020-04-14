@@ -87,6 +87,8 @@ public class FileManager {
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
+
+        lines = calculateLines();
     }
 
     /**
