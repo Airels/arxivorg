@@ -60,6 +60,16 @@ public class APICall {
         return requestApiFromTo(typesearch, searchsubjet, 0 , 10);
     }
 
+    /**
+     * Return a List of article from arxiv from a certain searchtype and a subjet
+     * @see XmlReader
+     * @param typesearch type of the research you want to do into Arxiv API
+     * @param searchsubjet what you want to search into arxiv database
+     * @param start index of the first article you want
+     * @param to index of the last
+     * @return List of articles
+     */
+
     protected static ArrayList<Article> requestApiFromTo (String typesearch, String searchsubjet,int start, int to) {
         ArrayList<Article> requestArticles;
         try {
