@@ -379,7 +379,9 @@ public class ArxivOrgController implements Initializable {
         if (event.getDeltaY() < 0) { // if scroll down
             System.out.println("Scroll!");
 
-            System.out.println(articlesList.getSelectionModel().getSelectedItem());
+            System.out.println(articlesList.getLayoutY());
+            System.out.println(articlesList.getTranslateY());
+            System.out.println(articlesList.getScaleY());
         }
     }
 
