@@ -1,7 +1,6 @@
 package app.arxivorg.utils;
 
 
-import utils.XmlReader;
 import app.arxivorg.model.Article;
 import app.arxivorg.model.Authors;
 import app.arxivorg.model.Category;
