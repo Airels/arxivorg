@@ -1,6 +1,7 @@
 package app.arxivorg.utils;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -21,6 +22,15 @@ import static app.arxivorg.model.Category.*;
 
 
 public class XmlReader {
+    /**
+     * Read Atome file and return a list of Articles
+     * @see Article
+     * @see Authors
+     * @see Category
+     * @see SubCategories
+     * @author Sibiak Aymeric , Guillaume Nicolai
+     * @param fileName name of the Atom file to read
+     */
 
     public static ArrayList<Article> read(String fileName) {
 

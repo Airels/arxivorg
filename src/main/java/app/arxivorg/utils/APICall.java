@@ -13,14 +13,27 @@ import java.io.File;
 
 
 public class APICall {
+    /**
+     * Classe to Call the Arxiv Api and get some Article
+     * @author Sibiak Aymeric , Guillaume Nicolai
+     */
 
+    /**
+     * Builder for the Api Call
+     */
     private static HttpClient httpClient = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_2)
             .build();
 
 
-
-
+    /**
+     * Create the call for the Api of a specific research and specific index
+     * @param typesearch the type of search you want to made into arxiv database
+     * @param searchsubjet what you want to get into arxiv database
+     * @param start index of the first article you want
+     * @param to index of the last
+     * @return A request for requestApi
+     */
     private static HttpRequest createGetFromToAsk(String typesearch, String searchsubjet, int start, int to){
 
         String whithourspace = searchsubjet.replace(" ", "+");
@@ -34,10 +47,28 @@ public class APICall {
 
     }
 
+    /**
+     * Return the 10 first Article of the specific request
+     * @see XmlReader
+     * @param typesearch how you want to Look into arxiv database
+     * @param searchsubjet what you want to search
+     * @return List of Article
+     */
+
     protected static ArrayList<Article> requestApi (String typesearch, String searchsubjet) {
 
         return requestApiFromTo(typesearch, searchsubjet, 0 , 10);
     }
+
+    /**
+     * Return a List of article from arxiv from a certain searchtype and a subjet
+     * @see XmlReader
+     * @param typesearch type of the research you want to do into Arxiv API
+     * @param searchsubjet what you want to search into arxiv database
+     * @param start index of the first article you want
+     * @param to index of the last
+     * @return List of articles
+     */
 
     protected static ArrayList<Article> requestApiFromTo (String typesearch, String searchsubjet,int start, int to) {
         ArrayList<Article> requestArticles;

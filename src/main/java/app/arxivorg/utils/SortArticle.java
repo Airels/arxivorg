@@ -10,8 +10,20 @@ import java.util.*;
 import static app.arxivorg.model.Category.*;
 
 public class SortArticle {
+    /**
+     * Methods to Sort a List of Article
+     * @author Sibiak Aymeric , Guillaume Nicolai
+     */
+
+
+    /**
+     * Method to add all of Subcategories to our Category , only use to made some URL call to arxiv
+     * @param category  Category witch you want to add subcategories
+     * @return A List of string mean to be used in APICall
+     */
 
    public static ArrayList<String> getAllSubCategories (Category category) {
+
 
        ArrayList<String> subCategories = new ArrayList<>();
 
@@ -194,6 +206,13 @@ public class SortArticle {
        return subCategories;
     }
 
+    /**
+     * Method to return a List of Articles where the name of the Author appear
+     * @param list The list of Article you want to Sort
+     * @param name The name of the author
+     * @return A list of Articles Sort by author
+     */
+
     public static ArrayList<Article> byAuthors(ArrayList<Article> list , String name) {
 
         if (list.isEmpty()) return list;
@@ -229,6 +248,13 @@ public class SortArticle {
         return result;
     }
 
+    /**
+     * Method to get atom file From arxiv
+     * @see APICall
+     * @param searchsubjet Name of the author
+     * @return List of Articles
+     */
+
     public static ArrayList<Article> byAuthors ( Authors searchsubjet){
         String tempAuthors = searchsubjet.toString();
         ArrayList<Article> articlesByAuthor = APICall.requestApi("au", tempAuthors);
@@ -236,12 +262,26 @@ public class SortArticle {
         return articlesByAuthor;
     }
 
+    /**
+     * Method to get atom file From arxiv
+     * @see APICall
+     * @param searchsubjet Name of the title
+     * @return List of Article
+     */
+
     public static ArrayList<Article> byTitle ( String searchsubjet){
         ArrayList<Article> articlesByTitle = APICall.requestApi("ti", searchsubjet);
 
         return articlesByTitle;
 
     }
+
+    /**
+     * Method to get atom file from arxiv
+     * @see APICall
+     * @param searchcategory Category you want to find
+     * @return List of Article
+     */
 
     public static ArrayList<Article> byCategory (Category searchcategory){
         ArrayList<String> subcat = getAllSubCategories(searchcategory);
@@ -260,6 +300,15 @@ public class SortArticle {
         return articlesByCategory;
     }
 
+    /**
+     * Method to get a certain number of article from arxiv
+     * @see APICall
+     * @param searchsubjet Name of the author
+     * @param start index of the first article you want to take
+     * @param to index of the last article
+     * @return List of Article
+     */
+
     public static ArrayList<Article> byAuthorsFromTo ( Authors searchsubjet, int start, int to){
         String tempAuthors = searchsubjet.toString();
         ArrayList<Article> articlesByAuthor = APICall.requestApiFromTo("au", tempAuthors, start, to);
@@ -267,12 +316,30 @@ public class SortArticle {
         return articlesByAuthor;
     }
 
+    /**
+     * Method to return a certain number of articles from arxiv
+     * @see APICall
+     * @param searchsubjet Title you want to search
+     * @param start index of the first article you want to take
+     * @param to last article you want to take
+     * @return List of articles
+     */
+
     public static ArrayList<Article> byTitleFromTo ( String searchsubjet, int start, int to){
         ArrayList<Article> articlesByTitle = APICall.requestApiFromTo("ti", searchsubjet, start, to);
 
         return articlesByTitle;
 
     }
+
+    /**
+     * Methode to return a list of Article of a certain Category and a certain number
+     * @see APICall
+     * @param searchcategory Category you want to search
+     * @param start index of the first article
+     * @param to index of the last article
+     * @return A list of articles
+     */
 
     public static ArrayList<Article> byCategoryFromTo (Category searchcategory, int start , int to){
         ArrayList<String> subcat = getAllSubCategories(searchcategory);
@@ -291,11 +358,26 @@ public class SortArticle {
         return articlesByCategory;
     }
 
+    /**
+     * Methode to search into arxiv after a specific keywork
+     * @param searchsubjet The keyword
+     * @see APICall
+     * @return A List of articles
+     */
+
     public static ArrayList<Article> byKeyword (String searchsubjet){
         ArrayList<Article> allArticle = APICall.requestApi("all:",  searchsubjet);
 
         return allArticle;
     }
+
+    /**
+     * Method to get a certain number of article whitch a specific keyword
+     * @param searchsubjet keyword
+     * @param start index of the first article
+     * @param to index of the last article
+     * @return List of articles
+     */
 
     public static ArrayList<Article> byKeywordFromTo (String searchsubjet, int start , int to){
         ArrayList<Article> allArticle = APICall.requestApiFromTo("all:",  searchsubjet, start , to);
@@ -303,6 +385,10 @@ public class SortArticle {
         return allArticle;
     }
 
+    /**
+     * Methode to search into arxiv into all search categories
+     * @return List of articles
+     */
     public static ArrayList<Article> All (){
         ArrayList<Article> allArticle = APICall.requestApi("all:","" );
 
@@ -310,8 +396,12 @@ public class SortArticle {
     }
 
 
-
-
+    /**
+     * Return a List of article Sort by a certain category
+     * @param list List you want to Sort
+     * @param type Category
+     * @return List of Article whit a specific Category
+     */
     public static ArrayList<Article> byCategory (ArrayList<Article> list , Category type ) {
 
         if (list.isEmpty()) return list;
@@ -352,6 +442,13 @@ public class SortArticle {
         return result;
     }
 
+    /**
+     * Methode to Sort a list of article by a specific Keyword
+     * @param list List you want to Sort
+     * @param sub Keyword
+     * @return List of article witch contain the Keyword
+     */
+
     public static ArrayList<Article> byKeyword (ArrayList<Article> list , String sub) {
 
         if (list.isEmpty()) return list;
@@ -387,6 +484,14 @@ public class SortArticle {
 
         return result;
     }
+
+    /**
+     * MEthode to Sort a liust of article by date
+     * @param list List you want to Sort
+     * @param dateMin latest Date you want for your Article
+     * @param dateMax newest Date you want for your Article
+     * @return List of Article from dateMin to dateMax
+     */
 
     public static ArrayList<Article> byDate(ArrayList<Article> list , LocalDate dateMin , LocalDate dateMax ) {
 
@@ -429,16 +534,11 @@ public class SortArticle {
         return result;
     }
 
-    private static int Compare ( String title1, String title2, int nb)
-    {
-        if (title1.equals(title2)) return 0 ;
-
-        if (title1.charAt(nb) == title2.charAt(nb)) return Compare(title1,title2,nb+1);
-
-        return title1.charAt(nb) - title2.charAt(nb);
-
-    }
-
+    /**
+     * Methode to Sort a list of Article by Title
+     * @param list List you want to Sort
+     * @return List of Article Sort alphaletical
+     */
     public static ArrayList<Article> byTitle (ArrayList<Article> list) {
 
         if (list.isEmpty()) return list;
