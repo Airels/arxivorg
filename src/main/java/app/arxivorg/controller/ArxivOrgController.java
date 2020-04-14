@@ -25,6 +25,7 @@ import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -45,7 +46,7 @@ public class ArxivOrgController implements Initializable {
 
     /**
      * ListView of articles. Modified by showArticle method
-     * @see ArxivOrgController#showArticles(List<Article>)
+     * @see ArxivOrgController#showArticles(List)
      */
     @FXML private ListView articlesList;
 
@@ -137,7 +138,7 @@ public class ArxivOrgController implements Initializable {
 
         btnDownload.addEventFilter(MouseEvent.MOUSE_CLICKED, this::onBtnDownloadClicked);
 
-        articlesList.addEventFilter(ScrollEvent.ANY, this::onScrollArticleList);
+        // articlesList.addEventFilter(ScrollEvent.ANY, this::onScrollArticleList);
 
         // ARTICLE MANAGER
         articleManager = new ArticleManager(this);
@@ -154,8 +155,7 @@ public class ArxivOrgController implements Initializable {
     private void generateCategoryChoiceBox() {
         List<Category> categories = new ArrayList<>();
 
-        for (Category category : Category.values())
-            categories.add(category);
+        Collections.addAll(categories, values());
 
         categoryChoiceBox.setItems(FXCollections.observableArrayList(categories));
         categoryChoiceBox.setValue(All);
@@ -182,19 +182,19 @@ public class ArxivOrgController implements Initializable {
                     setText(null);
                     setTooltip(null);
                 } else {
-                    String lineContent = "";
-                    lineContent += article.getTitle();
-                    lineContent += "\n\t";
+                    StringBuilder lineContent = new StringBuilder();
+                    lineContent.append(article.getTitle());
+                    lineContent.append("\n\t");
 
                     List<String> authors = article.getAuthors().getList();
 
                     for (int i = 0; i < 3 && i < authors.size(); i++)
-                        lineContent += authors.get(i) + ", ";
+                        lineContent.append(authors.get(i)).append(", ");
 
                     if (authors.size() > 3)
-                        lineContent += "+" + (authors.size()-3) + " autres";
+                        lineContent.append("+").append(authors.size() - 3).append(" autres");
 
-                    setText(lineContent);
+                    setText(lineContent.toString());
 
                     tooltip.setText(article.getAuthors().toString());
                     setTooltip(tooltip);
@@ -310,7 +310,7 @@ public class ArxivOrgController implements Initializable {
      * and will start to sort by authors with setAuthorsPredicate method in ArticleManager class.
      *
      * @param e KeyEvent: Key code entered (A, K, F...)
-     * @see ArticleManager#setAuthorsPredicate(List<String>)
+     * @see ArticleManager#setAuthorsPredicate(List)
      * @author VIZCAINO Yohan (Airels)
      */
     @FXML
@@ -374,14 +374,10 @@ public class ArxivOrgController implements Initializable {
      * @param event ScrollEvent: Scroll down or up
      * @author VIZCAINO Yohan (Airels)
      */
-    @FXML
+    @FXML @Deprecated
     public void onScrollArticleList(ScrollEvent event) {
         if (event.getDeltaY() < 0) { // if scroll down
             System.out.println("Scroll!");
-
-            System.out.println(articlesList.getLayoutY());
-            System.out.println(articlesList.getTranslateY());
-            System.out.println(articlesList.getScaleY());
         }
     }
 
