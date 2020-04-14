@@ -84,6 +84,7 @@ public class Statistics {
      *Give you a String whit the 5 top authors for a certain List of Article
      * @param articles List of Article you want to check
      * @return Return a String whit the 5 top authors name
+     * https://www.youtube.com/watch?v=YPN0qhSyWy8
      */
     
     public static String StatisticAuthors (ArrayList<Article> articles){
