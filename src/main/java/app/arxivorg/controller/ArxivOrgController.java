@@ -102,6 +102,8 @@ public class ArxivOrgController implements Initializable {
      */
     @FXML private Button btnDownload;
 
+    @FXML private MenuBar menuBar;
+
 
     /**
      * Main method called to generate interface, articles, sets values and properties of user interface elements,
@@ -146,10 +148,14 @@ public class ArxivOrgController implements Initializable {
 
         // ARTICLE MANAGER
         Thread t = new Thread(() -> {
+            disableAllInputs();
+
             showArticles(new ArrayList<>());
 
             articleManager = new ArticleManager(this);
             articleManager.setPredicates(All, null, periodDatePickerStart.getValue(), periodDatePickerEnd.getValue(), null);
+
+            enableAllInputs();
         });
         t.start();
     }
@@ -187,12 +193,12 @@ public class ArxivOrgController implements Initializable {
             articles.add(new Article(
                     "Récupération des articles sur arxiv...",
                     new Authors(authorsUS),
-                    "Le programme est en train de récupérer la liste des articles, veuillez patienter...\n" +
-                            "Si ce message reste affiché pendant un moment, essayez d'avoir des filtres moins restrictifs. \n" +
-                            "Si vous veneez de lancer le programme, veuillez patienter que les articles s'affichent. Cela peut prendre 1 à 2 minutes.",
+                    "Le programme est en train de récupérer la liste des articles, veuillez patienter...\n\n" +
+                            "Si ce message reste affiché pendant un moment, essayez d'avoir des filtres moins restrictifs ou de changer de page. \n\n" +
+                            "Si vous venez de lancer le programme ou changer de page, veuillez patienter 1 à 2 minutes...",
                     All,
                     new SubCategories(),
-                    "https://google.fr",
+                    "nolink",
                     LocalDate.now()));
         }
 
@@ -443,12 +449,48 @@ public class ArxivOrgController implements Initializable {
 
     @FXML
     public void onClickMenuArticlesNext() {
+        Thread t = new Thread(() -> {
+            disableAllInputs();
+
+            articleManager.nextPage();
+
+            enableAllInputs();
+        });
+        t.start();
+
         System.out.println("Next!");
     }
 
     @FXML
     public void onClickMenuArticlesPrevious() {
+        Thread t = new Thread(() -> {
+            disableAllInputs();
+
+            articleManager.previousPage();
+
+            enableAllInputs();
+        });
+
         System.out.println("Previous!");
+    }
+
+    // EXTRA USER INTERFACE CONTROL
+    public void disableAllInputs() {
+        menuBar.setDisable(true);
+        categoryChoiceBox.setDisable(true);
+        periodDatePickerStart.setDisable(true);
+        periodDatePickerEnd.setDisable(true);
+        authorsPredicate.setDisable(true);
+        keywordsPredicate.setDisable(true);
+    }
+
+    public void enableAllInputs() {
+        menuBar.setDisable(false);
+        categoryChoiceBox.setDisable(false);
+        periodDatePickerStart.setDisable(false);
+        periodDatePickerEnd.setDisable(false);
+        authorsPredicate.setDisable(false);
+        keywordsPredicate.setDisable(false);
     }
 
 

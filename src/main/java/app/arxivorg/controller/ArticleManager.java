@@ -232,7 +232,7 @@ public class ArticleManager {
         for (Category category : Category.values()) {
             if (category == Category.All) continue;
             System.out.println("..." + category);
-            initialArticles.addAll(SortArticle.byCategory(category));
+            initialArticles.addAll(SortArticle.byCategoryFromTo(category, articlesFromToIndex-10, articlesFromToIndex));
 
             actualArticles = new ArrayList<>(initialArticles);
         }
@@ -240,12 +240,26 @@ public class ArticleManager {
 
     public void nextPage() {
         articlesFromToIndex += 10;
+
+        initialArticles.clear();
+        actualArticles.clear();
+
+        updateInterface();
+
+        generateInitialArticles();
         setPredicates(category, authors, startPeriod, endPeriod, keywords);
     }
 
     public void previousPage() {
         if (articlesFromToIndex > 10) {
             articlesFromToIndex -= 10;
+
+            initialArticles.clear();
+            actualArticles.clear();
+
+            updateInterface();
+
+            generateInitialArticles();
             setPredicates(category, authors, startPeriod, endPeriod, keywords);
         }
     }
