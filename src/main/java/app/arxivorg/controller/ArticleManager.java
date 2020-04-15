@@ -69,14 +69,7 @@ public class ArticleManager {
         initialArticles = new ArrayList<>();
 
 
-        System.out.println("Getting articles...");
-        for (Category category : Category.values()) {
-            if (category == Category.All) continue;
-            System.out.println("..." + category);
-            initialArticles.addAll(SortArticle.byCategory(category));
-
-            actualArticles = new ArrayList<>(initialArticles);
-        }
+        generateInitialArticles();
     }
 
     /**
@@ -159,7 +152,6 @@ public class ArticleManager {
     }
 
     // BRIDGE PREDICATES WITH INTERFACE
-
     /**
      * Bridge predicated called by interface to specify every predicates user wants.
      * @see ArxivOrgController
@@ -184,7 +176,7 @@ public class ArticleManager {
             if (actualArticles.size() < 5) {
                 articlesFromToIndex += 20;
 
-                List<Article> newArticles = SortArticle.byCategoryFromTo(category, articlesFromToIndex-20, articlesFromToIndex);
+                List<Article> newArticles = SortArticle.byCategoryFromTo(category, articlesFromToIndex-10, articlesFromToIndex+10);
                 initialArticles.addAll(newArticles);
 
                 System.out.println(newArticles.size());
@@ -235,8 +227,31 @@ public class ArticleManager {
     }
 
 
-    // /!\ ALL METHODS HERE ARE USED FOR TESTS PURPOSE ONLY /!\
+    public void generateInitialArticles() {
+        System.out.println("Getting articles...");
+        for (Category category : Category.values()) {
+            if (category == Category.All) continue;
+            System.out.println("..." + category);
+            initialArticles.addAll(SortArticle.byCategory(category));
 
+            actualArticles = new ArrayList<>(initialArticles);
+        }
+    }
+
+    public void nextPage() {
+        articlesFromToIndex += 10;
+        setPredicates(category, authors, startPeriod, endPeriod, keywords);
+    }
+
+    public void previousPage() {
+        if (articlesFromToIndex > 10) {
+            articlesFromToIndex -= 10;
+            setPredicates(category, authors, startPeriod, endPeriod, keywords);
+        }
+    }
+
+
+    // /!\ ALL METHODS HERE ARE USED FOR TESTS PURPOSE ONLY /!\
     /**
      * Generates list of articles without user interface.
      * @deprecated <b>This constructor exists only for tests. Not used for other purposes.</b>
