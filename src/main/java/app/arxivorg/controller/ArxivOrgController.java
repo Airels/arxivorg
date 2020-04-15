@@ -435,6 +435,22 @@ public class ArxivOrgController implements Initializable {
         }
     }
 
+    // MENU EVENTS
+    @FXML
+    public void onClickMenuApplicationExit() {
+        System.exit(0);
+    }
+
+    @FXML
+    public void onClickMenuArticlesNext() {
+        System.out.println("Next!");
+    }
+
+    @FXML
+    public void onClickMenuArticlesPrevious() {
+        System.out.println("Previous!");
+    }
+
 
     // ALERTS / POPUPS
 
