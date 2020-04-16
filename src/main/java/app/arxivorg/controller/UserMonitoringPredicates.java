@@ -31,6 +31,17 @@ public class UserMonitoringPredicates {
 
         if (lineCategory == -1 || lineAuthors == -1 || lineKeywords == -1 || lineEND == -1)
             fm.wipeFile();
+
+        // CREATING FILE
+        fm.putLine("=CATEGORY=");
+        for (Category category : Category.values()) {
+            if (category.equals(Category.All)) continue;
+
+            fm.putLine(category.getName());
+        }
+
+        fm.putLine("=AUTHORS=");
+        fm.putLine("=KEYWORDS=");
     }
 
     public static void addCategoryStat(Category category) {
@@ -38,11 +49,11 @@ public class UserMonitoringPredicates {
     }
 
     public static void addAuthor(String author) {
-
+        // TODO : Have to add \n BEFORE string to add in file
     }
 
     public static void addKeyword(String keyword) {
-
+        // TODO : Have to add \n BEFORE string to add in file
     }
 
     public static Dictionary<String, Integer> getAuthors() {
