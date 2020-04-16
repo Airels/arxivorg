@@ -31,6 +31,17 @@ public class UserMonitoringPredicatesTest {
     @Test
     public void testAddAuthor() {
         // TODO : Simply add Author on AUTHOR section
+
+        FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
+
+        UserMonitoringPredicates.addAuthor("machin bidule");
+        assert(fm.getLineContains("machin bidule") != -1);
+        assert(fm.getLine(fm.getLineContains("machin bidule")).contains("1"));
+
+        UserMonitoringPredicates.addAuthor("machin bidule");
+        UserMonitoringPredicates.addAuthor("machin truc");
+        assert(fm.getLine(fm.getLineContains("machin truc")).contains("1"));
+        assert(fm.getLine(fm.getLineContains("machin bidule")).contains("2"));
     }
 
     @Test
