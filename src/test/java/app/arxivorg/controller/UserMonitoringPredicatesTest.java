@@ -5,6 +5,9 @@ import app.arxivorg.utils.FileManager;
 import app.arxivorg.utils.FileManagerTest;
 import org.junit.jupiter.api.Test;
 
+import java.util.Dictionary;
+import java.util.Set;
+
 public class UserMonitoringPredicatesTest {
 
     @Test
@@ -70,10 +73,40 @@ public class UserMonitoringPredicatesTest {
             - Insensitive or not ?
          */
 
+        FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
+        fm.wipeFile();
+
+        UserMonitoringPredicates.addAuthor("Asriel Dreemurr");
+        UserMonitoringPredicates.addAuthor("Asriel Dreemurr");
+        UserMonitoringPredicates.addAuthor("Asriel Dreemurr");
+        UserMonitoringPredicates.addAuthor("Niko");
+        UserMonitoringPredicates.addAuthor("GLaDOS");
+        UserMonitoringPredicates.addAuthor("GLaDOS");
+
+        Dictionary<String, Integer> dico = UserMonitoringPredicates.getAuthors();
+
+        assert(dico.get("Asriel Dreemurr") == 3);
+        assert(dico.get("GLaDOS") == 2);
+        assert(dico.get("Niko") == 1);
     }
 
     @Test
     public void testGetKeywords() {
         // TODO : Same as authors
+
+        FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
+        fm.wipeFile();
+
+        UserMonitoringPredicates.addKeyword("nuclear");
+        UserMonitoringPredicates.addKeyword("nuclear");
+        UserMonitoringPredicates.addKeyword("GDPR");
+        UserMonitoringPredicates.addKeyword("cover");
+        UserMonitoringPredicates.addKeyword("cover");
+
+        Dictionary<String, Integer> dico = UserMonitoringPredicates.getKeywords();
+
+        assert(dico.get("nuclear") == 2);
+        assert(dico.get("cover") == 2);
+        assert(dico.get("GDPR") == 1);
     }
 }
