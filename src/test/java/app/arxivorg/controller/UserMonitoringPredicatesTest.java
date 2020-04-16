@@ -34,19 +34,30 @@ public class UserMonitoringPredicatesTest {
 
         FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
 
-        UserMonitoringPredicates.addAuthor("machin bidule");
-        assert(fm.getLineContains("machin bidule") != -1);
-        assert(fm.getLine(fm.getLineContains("machin bidule")).contains("1"));
+        UserMonitoringPredicates.addAuthor("Asriel Dreemurr");
+        assert(fm.getLineContains("Asriel Dreemurr") != -1);
+        assert(fm.getLine(fm.getLineContains("Asriel Dreemurr")).contains("1"));
 
-        UserMonitoringPredicates.addAuthor("machin bidule");
-        UserMonitoringPredicates.addAuthor("machin truc");
-        assert(fm.getLine(fm.getLineContains("machin truc")).contains("1"));
-        assert(fm.getLine(fm.getLineContains("machin bidule")).contains("2"));
+        UserMonitoringPredicates.addAuthor("Asriel Dreemurr");
+        UserMonitoringPredicates.addAuthor("Niko");
+        assert(fm.getLine(fm.getLineContains("Niko")).contains("1"));
+        assert(fm.getLine(fm.getLineContains("Asriel Dreemurr")).contains("2"));
     }
 
     @Test
     public void testAddKeyword() {
         // TODO : Simply add Keyword on KEYWORD section
+
+        FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
+
+        UserMonitoringPredicates.addKeyword("saucisse");
+        assert(fm.getLineContains("saucisse") != -1);
+        assert(fm.getLine(fm.getLineContains("saucisse")).contains("1"));
+
+        UserMonitoringPredicates.addKeyword("saucisse");
+        UserMonitoringPredicates.addKeyword("it just works");
+        assert(fm.getLine(fm.getLineContains("it just works")).contains("1"));
+        assert(fm.getLine(fm.getLineContains("saucisse")).contains("2"));
     }
 
     @Test
