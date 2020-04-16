@@ -17,6 +17,7 @@ public class UserMonitoringPredicatesTest {
         assert(fm.getLineEqualsTo("=CATEGORY=") == 1);
         assert(fm.getLineEqualsTo("=AUTHORS=") != -1);
         assert(fm.getLineEqualsTo("=KEYWORDS=") != -1);
+        assert(fm.getLineEqualsTo("=END=") != -1);
         assert(fm.getLine(fm.getLineContains(Category.Computer_Science.getName())).contains("0"));
     }
 

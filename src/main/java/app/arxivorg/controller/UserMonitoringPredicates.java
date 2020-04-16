@@ -42,6 +42,7 @@ public class UserMonitoringPredicates {
 
         fm.putLine("=AUTHORS=");
         fm.putLine("=KEYWORDS=");
+        fm.putLine("=END=");
     }
 
     public static void addCategoryStat(Category category) {
