@@ -2,11 +2,9 @@ package app.arxivorg.controller;
 
 import app.arxivorg.model.Category;
 import app.arxivorg.utils.FileManager;
-import app.arxivorg.utils.FileManagerTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.Dictionary;
-import java.util.Set;
 
 public class UserMonitoringPredicatesTest {
 
@@ -19,6 +17,7 @@ public class UserMonitoringPredicatesTest {
         assert(fm.getLineEqualsTo("=CATEGORY=") == 1);
         assert(fm.getLineEqualsTo("=AUTHORS=") != -1);
         assert(fm.getLineEqualsTo("=KEYWORDS=") != -1);
+        assert(fm.getLine(fm.getLineContains(Category.Computer_Science.getName())).contains("0"));
     }
 
     @Test

@@ -37,7 +37,7 @@ public class UserMonitoringPredicates {
         for (Category category : Category.values()) {
             if (category.equals(Category.All)) continue;
 
-            fm.putLine(category.getName());
+            fm.putLine(category.getName() + " 0");
         }
 
         fm.putLine("=AUTHORS=");
@@ -57,10 +57,10 @@ public class UserMonitoringPredicates {
     }
 
     public static Dictionary<String, Integer> getAuthors() {
-
+        return null;
     }
 
     public static Dictionary<String, Integer> getKeywords() {
-
+        return null;
     }
 }
