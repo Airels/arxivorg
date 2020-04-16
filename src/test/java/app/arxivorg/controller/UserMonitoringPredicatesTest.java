@@ -12,7 +12,13 @@ public class UserMonitoringPredicatesTest {
 
     @Test
     public void testCheckUserMonitoringFile() {
+        FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
+        fm.wipeFile();
 
+        UserMonitoringPredicates.checkUserMonitoringFile();
+        assert(fm.getLineEqualsTo("=CATEGORY=") == 1);
+        assert(fm.getLineEqualsTo("=AUTHORS=") != -1);
+        assert(fm.getLineEqualsTo("=KEYWORDS=") != -1);
     }
 
     @Test
