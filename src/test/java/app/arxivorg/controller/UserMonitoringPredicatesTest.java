@@ -33,6 +33,7 @@ public class UserMonitoringPredicatesTest {
         // TODO : Simply add Author on AUTHOR section
 
         FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
+        fm.wipeFile();
 
         UserMonitoringPredicates.addAuthor("Asriel Dreemurr");
         assert(fm.getLineContains("Asriel Dreemurr") != -1);
@@ -49,6 +50,7 @@ public class UserMonitoringPredicatesTest {
         // TODO : Simply add Keyword on KEYWORD section
 
         FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
+        fm.wipeFile();
 
         UserMonitoringPredicates.addKeyword("saucisse");
         assert(fm.getLineContains("saucisse") != -1);
@@ -67,6 +69,7 @@ public class UserMonitoringPredicatesTest {
             - Integer -> How much occurences appears
             - Insensitive or not ?
          */
+
     }
 
     @Test
