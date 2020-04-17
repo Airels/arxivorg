@@ -72,6 +72,23 @@ public class UserMonitoringPredicatesTest {
     }
 
     @Test
+    public void testGetCategories() {
+        FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
+        fm.wipeFile();
+        UserMonitoringPredicates.checkUserMonitoringFile();
+
+        UserMonitoringPredicates.addCategoryStat(Category.Computer_Science);
+        UserMonitoringPredicates.addCategoryStat(Category.Computer_Science);
+        UserMonitoringPredicates.addCategoryStat(Category.Statistics);
+
+        Dictionary<Category, Integer> dico = UserMonitoringPredicates.getCategories();
+
+        assert(dico.get(Category.Computer_Science) == 2);
+        assert(dico.get(Category.Statistics) == 1);
+        assert(dico.get(Category.Astrophysics) == 0);
+    }
+
+    @Test
     public void testGetAuthors() {
         FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
         fm.wipeFile();

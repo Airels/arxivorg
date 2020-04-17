@@ -113,6 +113,10 @@ public class UserMonitoringPredicates {
         fm.putLine(keyword + ' ' + (keywordCount+1), line);
     }
 
+    public static Dictionary<Category, Integer> getCategories() {
+        return null;
+    }
+
     public static Dictionary<String, Integer> getAuthors() {
         Dictionary<String, Integer> dico = new Hashtable<>();
         FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
