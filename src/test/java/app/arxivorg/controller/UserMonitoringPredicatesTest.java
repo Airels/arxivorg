@@ -26,6 +26,8 @@ public class UserMonitoringPredicatesTest {
         // TODO : Check if category selected increments on file
 
         FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
+        fm.wipeFile();
+        UserMonitoringPredicates.checkUserMonitoringFile();
 
         UserMonitoringPredicates.addCategoryStat(Category.Computer_Science);
         String line = fm.getLine(fm.getLineStartsWith(Category.Computer_Science.getName()));
@@ -33,8 +35,7 @@ public class UserMonitoringPredicatesTest {
 
         UserMonitoringPredicates.addCategoryStat(Category.Statistics);
         UserMonitoringPredicates.addCategoryStat(Category.Statistics);
-        String line2 = fm.getLine(fm.getLineStartsWith(Category.Computer_Science.getName()));
-        System.out.println(line);
+        String line2 = fm.getLine(fm.getLineStartsWith(Category.Statistics.getName()));
         assert(line2.contains("2"));
     }
 
