@@ -98,6 +98,19 @@ public class FileManagerTest {
     }
 
     @Test
+    public void testGetLineStartsWith() {
+        File file = new File("testFileStartsWith");
+        file.delete();
+
+        FileManager fm = new FileManager("testFileStartsWith");
+        fm.putLine("A: Hello");
+        fm.putLine("B: How are you ?");
+        fm.putLine("C: It's over nine THOUSAND");
+
+        assert(fm.getLineStartsWith("C") == 3);
+    }
+
+    @Test
     public void testWipeFile() {
         File file = new File("testFileWipeFile");
         file.delete();
