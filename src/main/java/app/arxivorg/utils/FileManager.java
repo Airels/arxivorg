@@ -154,7 +154,7 @@ public class FileManager {
     }
 
     /**
-     * Get index of line if it's equals to param
+     * Get index of line if it's equals to param given
      * @param line Data to search
      * @return Index of line if found, -1 otherwise
      * @author VIZCAINO Yohan (Airels)
@@ -164,7 +164,7 @@ public class FileManager {
     }
 
     /**
-     * Get index of line if it's contains param
+     * Get index of line if it's contains param given
      * @param line Data to search
      * @return Index of line if found, -1 otherwise
      * @author VIZCAINO Yohan (Airels)
@@ -173,14 +173,20 @@ public class FileManager {
         return getLineWithPredicate(line, 2);
     }
 
+    /**
+     * Get index of line if it's starts with param given
+     * @param line Data to search
+     * @return Index of line if found, -1 otherwise
+     * @author VIZCAINO Yohan (Airels)
+     */
     public int getLineStartsWith(String line) {
         return getLineWithPredicate(line, 3);
     }
 
     /**
-     * Used by getLineEqualsTo and getLineContains. Created to avoid code duplication
+     * Used by getLineEqualsTo, getLineContains and getLineStartsWith. Created to avoid code duplication
      * @param line Data to search
-     * @param containsTest If data searched need to be in line (TRUE) or equals to line (FALSE)
+     * @param getLineOption Type of what search to use. 1 for equalsTo, 2 for contains, 3 for startsWith
      * @return Index of line if found, -1 otherwise
      * @author VIZCAINO Yohan (Airels)
      */
