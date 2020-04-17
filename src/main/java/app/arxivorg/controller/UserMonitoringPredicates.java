@@ -76,11 +76,23 @@ public class UserMonitoringPredicates {
 
         int categoryCount = Integer.parseInt(fm.getLine(line).split(" ")[1]); // Line example : cs 3
 
-        fm.putLine(category.getName() + ' ' + (int) (categoryCount+1), line);
+        fm.putLine(category.getName() + ' ' + (categoryCount+1), line);
     }
 
     public static void addAuthor(String author) {
-        // TODO : Have to add \n BEFORE string to add in file
+        FileManager fm = new FileManager(fileName);
+        int lineAuthors = fm.getLineEqualsTo("=AUTHORS=");
+        int line = fm.getLineStartsWith(author);
+
+        if (line == -1) {
+            fm.putLine("=AUTHORS=\n" + author + " 1\n", lineAuthors);
+            return;
+        }
+
+        String[] lineAuthorSplitted = fm.getLine(line).split(" ");
+        int authorCount = Integer.parseInt(lineAuthorSplitted[lineAuthorSplitted.length-1]);
+
+        fm.putLine(author + ' ' + (authorCount+1), line);
     }
 
     public static void addKeyword(String keyword) {
