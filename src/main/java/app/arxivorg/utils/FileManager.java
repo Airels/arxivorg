@@ -160,7 +160,7 @@ public class FileManager {
      * @author VIZCAINO Yohan (Airels)
      */
     public int getLineEqualsTo(String line) {
-        return getLineWithPredicate(line, false);
+        return getLineWithPredicate(line, 1);
     }
 
     /**
@@ -170,7 +170,11 @@ public class FileManager {
      * @author VIZCAINO Yohan (Airels)
      */
     public int getLineContains(String line) {
-        return getLineWithPredicate(line, true);
+        return getLineWithPredicate(line, 2);
+    }
+
+    public int getLineStartsWith(String line) {
+        return getLineWithPredicate(line, 3);
     }
 
     /**
@@ -180,7 +184,7 @@ public class FileManager {
      * @return Index of line if found, -1 otherwise
      * @author VIZCAINO Yohan (Airels)
      */
-    private int getLineWithPredicate(String line, boolean containsTest) {
+    private int getLineWithPredicate(String line, int getLineOption) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
             int lineIndex = 0;
@@ -189,12 +193,17 @@ public class FileManager {
             while ((lineString = reader.readLine()) != null) {
                 lineIndex++;
 
-                if (containsTest) {
-                    if (lineString.contains(line))
-                        return lineIndex;
-                } else {
+                if (getLineOption == 1) {
                     if (lineString.equals(line))
                         return lineIndex;
+                } else if (getLineOption == 2) {
+                    if (lineString.contains(line))
+                        return lineIndex;
+                } else if (getLineOption == 3) {
+                    if (lineString.startsWith(line))
+                        return lineIndex;
+                } else {
+                    throw new RuntimeException("Unknown parameter " + getLineOption);
                 }
             }
         } catch (FileNotFoundException e) {
