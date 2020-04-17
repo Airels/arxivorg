@@ -85,7 +85,7 @@ public class UserMonitoringPredicates {
         int line = fm.getLineStartsWith(author);
 
         if (line == -1) {
-            fm.putLine("=AUTHORS=\n" + author + " 1\n", lineAuthors);
+            fm.putLine("=AUTHORS=\n" + author + " 1", lineAuthors);
             return;
         }
 
