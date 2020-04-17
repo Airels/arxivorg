@@ -132,6 +132,21 @@ public class UserMonitoringPredicates {
     }
 
     public static Dictionary<String, Integer> getKeywords() {
-        return null;
+        Dictionary<String, Integer> dico = new Hashtable<>();
+        FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
+
+        int lineKeywords = fm.getLineEqualsTo("=KEYWORDS=");
+        int lineEnd = fm.getLineEqualsTo("=END=");
+
+        for (int i = lineKeywords+1; i < lineEnd; i++) {
+            String line = fm.getLine(i);
+
+            String keyword = line.substring(0, line.length()-2);
+            int keywordCount = Integer.parseInt(line.substring(line.length()-1));
+
+            dico.put(keyword, keywordCount);
+        }
+
+        return dico;
     }
 }
