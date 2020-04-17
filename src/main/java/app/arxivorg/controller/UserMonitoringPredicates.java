@@ -4,6 +4,7 @@ import app.arxivorg.model.Category;
 import app.arxivorg.utils.FileManager;
 
 import java.util.Dictionary;
+import java.util.Hashtable;
 
 /**
  * Class used to control user predicates statistics.
@@ -96,11 +97,38 @@ public class UserMonitoringPredicates {
     }
 
     public static void addKeyword(String keyword) {
-        // TODO : Have to add \n BEFORE string to add in file
+        FileManager fm = new FileManager(fileName);
+        int lineKeywords = fm.getLineEqualsTo("=KEYWORDS=");
+        int line = fm.getLineStartsWith(keyword);
+
+        if (line == -1) {
+            fm.putLine("=KEYWORDS=\n" + keyword + " 1", lineKeywords);
+            return;
+        }
+
+        String[] lineKeywordSplitted = fm.getLine(line).split(" ");
+        int keywordCount = Integer.parseInt(lineKeywordSplitted[lineKeywordSplitted.length-1]);
+
+        fm.putLine(keyword + ' ' + (keywordCount+1), line);
     }
 
     public static Dictionary<String, Integer> getAuthors() {
-        return null;
+        Dictionary<String, Integer> dico = new Hashtable<>();
+        FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
+
+        int lineAuthors = fm.getLineEqualsTo("=AUTHORS=");
+        int lineKeywords = fm.getLineEqualsTo("=KEYWORDS=");
+
+        for (int i = lineAuthors+1; i < lineKeywords; i++) {
+            String line = fm.getLine(i);
+
+            String author = line.substring(0, line.length()-2);
+            int authorCount = Integer.parseInt(line.substring(line.length()-1));
+
+            dico.put(author, authorCount);
+        }
+
+        return dico;
     }
 
     public static Dictionary<String, Integer> getKeywords() {
