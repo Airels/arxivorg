@@ -41,10 +41,9 @@ public class UserMonitoringPredicatesTest {
 
     @Test
     public void testAddAuthor() {
-        // TODO : Simply add Author on AUTHOR section
-
         FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
         fm.wipeFile();
+        UserMonitoringPredicates.checkUserMonitoringFile();
 
         UserMonitoringPredicates.addAuthor("Asriel Dreemurr");
         assert(fm.getLineStartsWith("Asriel Dreemurr") != -1);
@@ -58,10 +57,9 @@ public class UserMonitoringPredicatesTest {
 
     @Test
     public void testAddKeyword() {
-        // TODO : Simply add Keyword on KEYWORD section
-
         FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
         fm.wipeFile();
+        UserMonitoringPredicates.checkUserMonitoringFile();
 
         UserMonitoringPredicates.addKeyword("saucisse");
         assert(fm.getLineStartsWith("saucisse") != -1);
@@ -75,14 +73,9 @@ public class UserMonitoringPredicatesTest {
 
     @Test
     public void testGetAuthors() {
-        /* TODO : Creates Map (or similar) with Map<String, Integer>
-            - String -> The author
-            - Integer -> How much occurences appears
-            - Insensitive or not ?
-         */
-
         FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
         fm.wipeFile();
+        UserMonitoringPredicates.checkUserMonitoringFile();
 
         UserMonitoringPredicates.addAuthor("Asriel Dreemurr");
         UserMonitoringPredicates.addAuthor("Asriel Dreemurr");
@@ -100,10 +93,9 @@ public class UserMonitoringPredicatesTest {
 
     @Test
     public void testGetKeywords() {
-        // TODO : Same as authors
-
         FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
         fm.wipeFile();
+        UserMonitoringPredicates.checkUserMonitoringFile();
 
         UserMonitoringPredicates.addKeyword("nuclear");
         UserMonitoringPredicates.addKeyword("nuclear");
