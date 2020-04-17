@@ -18,7 +18,7 @@ public class UserMonitoringPredicatesTest {
         assert(fm.getLineEqualsTo("=AUTHORS=") != -1);
         assert(fm.getLineEqualsTo("=KEYWORDS=") != -1);
         assert(fm.getLineEqualsTo("=END=") != -1);
-        assert(fm.getLine(fm.getLineContains(Category.Computer_Science.getName())).contains("0"));
+        assert(fm.getLine(fm.getLineStartsWith(Category.Computer_Science.getName())).contains("0"));
     }
 
     @Test
@@ -28,12 +28,13 @@ public class UserMonitoringPredicatesTest {
         FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
 
         UserMonitoringPredicates.addCategoryStat(Category.Computer_Science);
-        String line = fm.getLine(fm.getLineContains(Category.Computer_Science.getName()));
+        String line = fm.getLine(fm.getLineStartsWith(Category.Computer_Science.getName()));
         assert(line.contains("1"));
 
         UserMonitoringPredicates.addCategoryStat(Category.Statistics);
         UserMonitoringPredicates.addCategoryStat(Category.Statistics);
-        String line2 = fm.getLine(fm.getLineContains(Category.Computer_Science.getName()));
+        String line2 = fm.getLine(fm.getLineStartsWith(Category.Computer_Science.getName()));
+        System.out.println(line);
         assert(line2.contains("2"));
     }
 
@@ -45,13 +46,13 @@ public class UserMonitoringPredicatesTest {
         fm.wipeFile();
 
         UserMonitoringPredicates.addAuthor("Asriel Dreemurr");
-        assert(fm.getLineContains("Asriel Dreemurr") != -1);
-        assert(fm.getLine(fm.getLineContains("Asriel Dreemurr")).contains("1"));
+        assert(fm.getLineStartsWith("Asriel Dreemurr") != -1);
+        assert(fm.getLine(fm.getLineStartsWith("Asriel Dreemurr")).contains("1"));
 
         UserMonitoringPredicates.addAuthor("Asriel Dreemurr");
         UserMonitoringPredicates.addAuthor("Niko");
-        assert(fm.getLine(fm.getLineContains("Niko")).contains("1"));
-        assert(fm.getLine(fm.getLineContains("Asriel Dreemurr")).contains("2"));
+        assert(fm.getLine(fm.getLineStartsWith("Niko")).contains("1"));
+        assert(fm.getLine(fm.getLineStartsWith("Asriel Dreemurr")).contains("2"));
     }
 
     @Test
@@ -62,13 +63,13 @@ public class UserMonitoringPredicatesTest {
         fm.wipeFile();
 
         UserMonitoringPredicates.addKeyword("saucisse");
-        assert(fm.getLineContains("saucisse") != -1);
-        assert(fm.getLine(fm.getLineContains("saucisse")).contains("1"));
+        assert(fm.getLineStartsWith("saucisse") != -1);
+        assert(fm.getLine(fm.getLineStartsWith("saucisse")).contains("1"));
 
         UserMonitoringPredicates.addKeyword("saucisse");
         UserMonitoringPredicates.addKeyword("it just works");
-        assert(fm.getLine(fm.getLineContains("it just works")).contains("1"));
-        assert(fm.getLine(fm.getLineContains("saucisse")).contains("2"));
+        assert(fm.getLine(fm.getLineStartsWith("it just works")).contains("1"));
+        assert(fm.getLine(fm.getLineStartsWith("saucisse")).contains("2"));
     }
 
     @Test
