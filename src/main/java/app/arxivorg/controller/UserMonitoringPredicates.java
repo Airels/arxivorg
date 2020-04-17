@@ -62,6 +62,7 @@ public class UserMonitoringPredicates {
         fm.putLine("=AUTHORS=");
         fm.putLine("=KEYWORDS=");
         fm.putLine("=END=");
+        fm.putLine("Do not modify this file. If this file is not properly modified, software will reset data.");
     }
 
     public static void addCategoryStat(Category category) {
