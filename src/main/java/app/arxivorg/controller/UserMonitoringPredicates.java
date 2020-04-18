@@ -114,7 +114,22 @@ public class UserMonitoringPredicates {
     }
 
     public static Dictionary<Category, Integer> getCategories() {
-        return null;
+        Dictionary<Category, Integer> dico = new Hashtable<>();
+        FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
+
+        int lineCategory = fm.getLineEqualsTo("=CATEGORY=");
+        int lineAuthors = fm.getLineEqualsTo("=AUTHORS=");
+
+        for (int i = lineCategory+1; i < lineAuthors; i++) {
+            String line = fm.getLine(i);
+
+            Category category = Category.getCategory(line.substring(0, line.length()-2));
+            int categoryCount = Integer.parseInt(line.substring(line.length()-1));
+
+            dico.put(category, categoryCount);
+        }
+
+        return dico;
     }
 
     public static Dictionary<String, Integer> getAuthors() {
