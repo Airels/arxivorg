@@ -66,6 +66,8 @@ public class UserMonitoringPredicates {
     }
 
     public static void addCategoryStat(Category category) {
+        checkUserMonitoringFile();
+
         FileManager fm = new FileManager(fileName);
         int line = fm.getLineStartsWith(category.getName());
 
@@ -82,6 +84,8 @@ public class UserMonitoringPredicates {
     }
 
     public static void addAuthor(String author) {
+        checkUserMonitoringFile();
+
         FileManager fm = new FileManager(fileName);
         int lineAuthors = fm.getLineEqualsTo("=AUTHORS=");
         int line = fm.getLineStartsWith(author);
@@ -98,6 +102,8 @@ public class UserMonitoringPredicates {
     }
 
     public static void addKeyword(String keyword) {
+        checkUserMonitoringFile();
+
         FileManager fm = new FileManager(fileName);
         int lineKeywords = fm.getLineEqualsTo("=KEYWORDS=");
         int line = fm.getLineStartsWith(keyword);
@@ -114,6 +120,8 @@ public class UserMonitoringPredicates {
     }
 
     public static Dictionary<Category, Integer> getCategories() {
+        checkUserMonitoringFile();
+
         Dictionary<Category, Integer> dico = new Hashtable<>();
         FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
 
@@ -133,6 +141,8 @@ public class UserMonitoringPredicates {
     }
 
     public static Dictionary<String, Integer> getAuthors() {
+        checkUserMonitoringFile();
+
         Dictionary<String, Integer> dico = new Hashtable<>();
         FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
 
@@ -152,6 +162,8 @@ public class UserMonitoringPredicates {
     }
 
     public static Dictionary<String, Integer> getKeywords() {
+        checkUserMonitoringFile();
+
         Dictionary<String, Integer> dico = new Hashtable<>();
         FileManager fm = new FileManager(UserMonitoringPredicates.fileName);
 
