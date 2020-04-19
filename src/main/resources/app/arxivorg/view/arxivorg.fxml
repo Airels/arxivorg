@@ -24,7 +24,8 @@
             </Menu>
             <Menu text="Statistiques">
                 <items>
-
+                    <MenuItem onAction="#showUserStats" text="Vos préférences" />
+                    <MenuItem onAction="#showArticleStats" text="Statistiques de cette page" />
                 </items>
             </Menu>
         </menus>

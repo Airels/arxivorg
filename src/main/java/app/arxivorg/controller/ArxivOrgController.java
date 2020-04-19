@@ -26,10 +26,7 @@ import app.arxivorg.utils.PDFDownloader;
 import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static app.arxivorg.model.Category.*;
 
@@ -497,6 +494,43 @@ public class ArxivOrgController implements Initializable {
         periodDatePickerEnd.setDisable(false);
         authorsPredicate.setDisable(false);
         keywordsPredicate.setDisable(false);
+    }
+
+    public void showUserStats() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("Catégories :").append('\n');
+        Dictionary<Category, Integer> categoriesStats = UserMonitoringPredicates.getCategories();
+        categoriesStats.keys().asIterator().forEachRemaining(category -> stringBuilder.append("- ")
+                .append(category)
+                .append(" utilisé ")
+                .append(categoriesStats.get(category))
+                .append(" fois")
+                .append('\n'));
+
+        stringBuilder.append("\nAuteurs :").append('\n');
+        Dictionary<String, Integer> authorsStats = UserMonitoringPredicates.getAuthors();
+        authorsStats.keys().asIterator().forEachRemaining(author -> stringBuilder.append("- ")
+                .append(author)
+                .append(" recherché ")
+                .append(authorsStats.get(author))
+                .append(" fois")
+                .append('\n'));
+
+        stringBuilder.append("\nMots clés :").append('\n');
+        Dictionary<String, Integer> keywordsStats = UserMonitoringPredicates.getKeywords();
+        keywordsStats.keys().asIterator().forEachRemaining(keyword -> stringBuilder.append("- ")
+                .append(keyword)
+                .append(" utilisé ")
+                .append(keywordsStats.get(keyword))
+                .append(" fois")
+                .append('\n'));
+
+        showInfoMessage("Statistiques de vos recherches", stringBuilder.toString());
+    }
+
+    public void showArticleStats() {
+
     }
 
 
