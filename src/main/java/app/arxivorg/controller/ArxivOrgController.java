@@ -259,8 +259,10 @@ public class ArxivOrgController implements Initializable {
      * @author VIZCAINO Yohan (Airels)
      */
     @FXML void onCategoryChanged(Observable ov, Category oldCategory, Category newCategory) {
-        if (!oldCategory.equals(newCategory))
+        if (!oldCategory.equals(newCategory)) {
             articleManager.setCategoryPredicate(newCategory);
+            UserMonitoringPredicates.addCategoryStat(newCategory);
+        }
     }
 
     /**
@@ -360,6 +362,8 @@ public class ArxivOrgController implements Initializable {
                 author = author.replace("\n", "");
 
                 authors.add(author);
+
+                UserMonitoringPredicates.addAuthor(author);
             }
 
             articleManager.setAuthorsPredicate(authors);
@@ -392,6 +396,8 @@ public class ArxivOrgController implements Initializable {
                 keyword = keyword.replace("\n", "");
 
                 keywords.add(keyword);
+
+                UserMonitoringPredicates.addKeyword(keyword);
             }
 
             articleManager.setKeywordsPredicate(keywords);
