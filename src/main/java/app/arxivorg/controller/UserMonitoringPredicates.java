@@ -9,7 +9,9 @@ import java.util.Hashtable;
 /**
  * Class used to control user predicates statistics.
  * Called by the controller when user selects a predicate.
+ * Also using FileManager class to manage file.
  *
+ * @see FileManager
  * @author VIZCAINO Yohan (Airels)
  */
 public class UserMonitoringPredicates {
@@ -47,6 +49,10 @@ public class UserMonitoringPredicates {
         }
     }
 
+    /**
+     * Create file and initialize with all required lines
+     * @author VIZCAINO Yohan (Airels)
+     */
     private static void createFile() {
         // CREATING FILE
         FileManager fm = new FileManager(fileName);
@@ -65,6 +71,11 @@ public class UserMonitoringPredicates {
         fm.putLine("Do not modify this file. If this file is not properly modified, software will reset data.");
     }
 
+    /**
+     * Adding +1 to specified category.
+     * @param category Category to increment.
+     * @author VIZCAINO Yohan (Airels)
+     */
     public static void addCategoryStat(Category category) {
         checkUserMonitoringFile();
 
@@ -83,6 +94,12 @@ public class UserMonitoringPredicates {
         fm.putLine(category.getName() + ' ' + (categoryCount+1), line);
     }
 
+    /**
+     * Adding +1 to specified author searched.
+     * If author specified has never been searched, it will adding him.
+     * @param author Author to add.
+     * @author VIZCAINO Yohan (Airels)
+     */
     public static void addAuthor(String author) {
         checkUserMonitoringFile();
 
@@ -101,6 +118,12 @@ public class UserMonitoringPredicates {
         fm.putLine(author + ' ' + (authorCount+1), line);
     }
 
+    /**
+     * Adding +1 to specified keyword searched.
+     * If keyword specified has never been searched, it will adding it.
+     * @param keyword Keyword to add.
+     * @author VIZCAINO Yohan (Airels)
+     */
     public static void addKeyword(String keyword) {
         checkUserMonitoringFile();
 
@@ -119,6 +142,11 @@ public class UserMonitoringPredicates {
         fm.putLine(keyword + ' ' + (keywordCount+1), line);
     }
 
+    /**
+     * Returns a Dictionary of each category and how much user used them.
+     * @return Dictionary of Category and Integer
+     * @author VIZCAINO Yohan (Airels)
+     */
     public static Dictionary<Category, Integer> getCategories() {
         checkUserMonitoringFile();
 
@@ -140,6 +168,11 @@ public class UserMonitoringPredicates {
         return dico;
     }
 
+    /**
+     * Returns a Dictionary of each authors and how much user searched them.
+     * @return Dictionary of String and Integer
+     * @author VIZCAINO Yohan (Airels)
+     */
     public static Dictionary<String, Integer> getAuthors() {
         checkUserMonitoringFile();
 
@@ -161,6 +194,11 @@ public class UserMonitoringPredicates {
         return dico;
     }
 
+    /**
+     * Returns a Dictionary of each keywords and how much user searched them.
+     * @return Dictionary of String and Integer
+     * @author VIZCAINO Yohan (Airels)
+     */
     public static Dictionary<String, Integer> getKeywords() {
         checkUserMonitoringFile();
 

@@ -40,7 +40,6 @@ import static app.arxivorg.model.Category.*;
 public class ArxivOrgController implements Initializable {
 
     private ArticleManager articleManager;
-
     private Article selectedArticle;
 
     /**
@@ -139,15 +138,11 @@ public class ArxivOrgController implements Initializable {
 
         btnDownload.addEventFilter(MouseEvent.MOUSE_CLICKED, this::onBtnDownloadClicked);
 
-        // articlesList.addEventFilter(ScrollEvent.ANY, this::onScrollArticleList);
-
-
-
         // ARTICLE MANAGER
         Thread t = new Thread(() -> {
             disableAllInputs();
 
-            showArticles(new ArrayList<>());
+            showArticles(new ArrayList<>()); // For asking to user to wait a moment
 
             articleManager = new ArticleManager(this);
             articleManager.setPredicates(All, null, periodDatePickerStart.getValue(), periodDatePickerEnd.getValue(), null);
@@ -205,7 +200,8 @@ public class ArxivOrgController implements Initializable {
         articlesList.setCellFactory(cell -> new ListCell<Article>() {
             final Tooltip tooltip = new Tooltip();
 
-            @Override       // Affichage et définition actions pour chaque élément
+            // Affichage et définition actions pour chaque élément
+            @Override
             protected void updateItem(Article article, boolean isEmpty) {
                 if (article == null || isEmpty) {
                     setText(null);
@@ -444,12 +440,23 @@ public class ArxivOrgController implements Initializable {
         }
     }
 
+
     // MENU EVENTS
+
+    /**
+     * Will stop every thread and exit the application
+     * @author VIZCAINO Yohan (Airels)
+     */
     @FXML
     public void onClickMenuApplicationExit() {
         System.exit(0);
     }
 
+    /**
+     * Call refresh method to show new articles
+     * @see ArticleManager#nextPage()
+     * @author VIZCAINO Yohan (Airels)
+     */
     @FXML
     public void onClickMenuArticlesNext() {
         Thread t = new Thread(() -> {
@@ -464,6 +471,11 @@ public class ArxivOrgController implements Initializable {
         System.out.println("Next!");
     }
 
+    /**
+     * Call refresh method to show old articles
+     * @see ArticleManager#previousPage()
+     * @author VIZCAINO Yohan (Airels)
+     */
     @FXML
     public void onClickMenuArticlesPrevious() {
         Thread t = new Thread(() -> {
@@ -477,25 +489,10 @@ public class ArxivOrgController implements Initializable {
         System.out.println("Previous!");
     }
 
-    // EXTRA USER INTERFACE CONTROL
-    public void disableAllInputs() {
-        menuBar.setDisable(true);
-        categoryChoiceBox.setDisable(true);
-        periodDatePickerStart.setDisable(true);
-        periodDatePickerEnd.setDisable(true);
-        authorsPredicate.setDisable(true);
-        keywordsPredicate.setDisable(true);
-    }
-
-    public void enableAllInputs() {
-        menuBar.setDisable(false);
-        categoryChoiceBox.setDisable(false);
-        periodDatePickerStart.setDisable(false);
-        periodDatePickerEnd.setDisable(false);
-        authorsPredicate.setDisable(false);
-        keywordsPredicate.setDisable(false);
-    }
-
+    /**
+     * Show in a popup all predicates used by user
+     * @author VIZCAINO Yohan (Airels)
+     */
     public void showUserStats() {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -529,8 +526,43 @@ public class ArxivOrgController implements Initializable {
         showInfoMessage("Statistiques de vos recherches", stringBuilder.toString());
     }
 
+    /**
+     * Show in a popup statistics of actual articles list
+     * @see
+     * @author VIZCAINO Yohan (Airels)
+     * @deprecated Need to be implemented
+     */
     public void showArticleStats() {
 
+    }
+
+
+    // EXTRA USER INTERFACE CONTROL
+
+    /**
+     * Used to disable main inputs and prevent user interaction
+     * @author VIZCAINO Yohan (Airels)
+     */
+    public void disableAllInputs() {
+        menuBar.setDisable(true);
+        categoryChoiceBox.setDisable(true);
+        periodDatePickerStart.setDisable(true);
+        periodDatePickerEnd.setDisable(true);
+        authorsPredicate.setDisable(true);
+        keywordsPredicate.setDisable(true);
+    }
+
+    /**
+     * Used to enable main inputs and authorise user to interact with interface
+     * @author VIZCAINO Yohan (Airels)
+     */
+    public void enableAllInputs() {
+        menuBar.setDisable(false);
+        categoryChoiceBox.setDisable(false);
+        periodDatePickerStart.setDisable(false);
+        periodDatePickerEnd.setDisable(false);
+        authorsPredicate.setDisable(false);
+        keywordsPredicate.setDisable(false);
     }
 
 

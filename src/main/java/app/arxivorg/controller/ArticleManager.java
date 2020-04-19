@@ -227,6 +227,11 @@ public class ArticleManager {
     }
 
 
+    /**
+     * Initialize articles list with arxivorg without filters.
+     * Used for articles pages system.
+     * @author VIZCAINO Yohan (Airels)
+     */
     public void generateInitialArticles() {
         System.out.println("Getting articles...");
         for (Category category : Category.values()) {
@@ -238,6 +243,11 @@ public class ArticleManager {
         }
     }
 
+    /**
+     * Refresh articles list with new articles
+     * @see ArticleManager#generateInitialArticles()
+     * @author VIZCAINO Yohan (Airels)
+     */
     public void nextPage() {
         articlesFromToIndex += 10;
 
@@ -250,6 +260,11 @@ public class ArticleManager {
         setPredicates(category, authors, startPeriod, endPeriod, keywords);
     }
 
+    /**
+     * Refrech articles list with old articles
+     * @see ArticleManager#generateInitialArticles()
+     * @author VIZCAINO Yohan (Airels)
+     */
     public void previousPage() {
         if (articlesFromToIndex > 10) {
             articlesFromToIndex -= 10;
