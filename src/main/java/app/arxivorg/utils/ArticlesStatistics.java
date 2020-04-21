@@ -14,7 +14,7 @@ import java.util.Locale;
 
 import static app.arxivorg.model.Category.*;
 
-public class Statistics {
+public class ArticlesStatistics {
     /**
      * Classe to send back statistic
      * @author Aymeric Sibiak
@@ -26,7 +26,7 @@ public class Statistics {
      * @return Integer tab of the number of articles by a Category
      */
 
-    public static int[] StatisticCategories (ArrayList<Article> articles) {
+    public static int[] statisticCategories (ArrayList<Article> articles) {
 
         if (articles.size() == 0) {
             int[] empty = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
@@ -56,7 +56,7 @@ public class Statistics {
      * @param articles List of article you want to know the number of article by day 
      * @return number of article by day for the List of article given
      */
-    public static int StatisticDate (ArrayList<Article> articles) {
+    public static int statisticDate (ArrayList<Article> articles) {
         if (articles.size() == 0) return 0;
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -87,7 +87,7 @@ public class Statistics {
      * https://www.youtube.com/watch?v=YPN0qhSyWy8
      */
     
-    public static String StatisticAuthors (ArrayList<Article> articles){
+    public static ArrayList<String> statisticAuthors (ArrayList<Article> articles){
         ArrayList<String> authors = new ArrayList<>();
 
         for (int index = 0 ; index < articles.size(); index++){
@@ -163,15 +163,26 @@ public class Statistics {
 
         }
 
-        return (authors.get(indexOfFirst) + " " + authors.get(indexOfSecond) + " " + authors.get(indexOfThird) + " "+ authors.get(indexOfFourth) + " " + authors.get(indexOFFitth));
+        ArrayList<String> winners = new ArrayList<>();
+        winners.add(authors.get(indexOfFirst));
+        winners.add(authors.get(indexOfSecond));
+        winners.add(authors.get(indexOfThird));
+        winners.add(authors.get(indexOfFourth));
+        winners.add(authors.get(indexOFFitth));
+
+        return winners;
 
 
     }
 
+    public static String statisticRecurentStringIntoTitleAndResume
+
+
+
     public static void main(String[] args) {
         ArrayList<Article> test = XmlReader.read("3.atom");
 
-        String testtab = StatisticAuthors(test);
+        String testtab = statisticAuthors(test);
 
         //for (int index = 0 ; index < 17 ; index++){
             System.out.println(testtab/*[index]*/);
