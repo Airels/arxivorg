@@ -1,15 +1,13 @@
 package app.arxivorg.utils;
 
 import app.arxivorg.model.Article;
-import app.arxivorg.model.Authors;
 import app.arxivorg.model.Category;
-import com.sun.source.tree.WhileLoopTree;
 
-import java.sql.SQLInvalidAuthorizationSpecException;
+
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 
 import static app.arxivorg.model.Category.*;

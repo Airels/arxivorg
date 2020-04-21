@@ -1,7 +1,6 @@
 package app.arxivorg.utils;
 
 import java.io.File;
-import java.net.MalformedURLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
