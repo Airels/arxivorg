@@ -4,7 +4,9 @@ import app.arxivorg.model.Article;
 import app.arxivorg.model.Authors;
 import app.arxivorg.model.Category;
 import app.arxivorg.model.SubCategories;
-import app.arxivorg.utils.ArticlesStatistics;
+import app.arxivorg.view.ArticleManager;
+import app.arxivorg.view.ArticlesStatistics;
+import app.arxivorg.view.UserMonitoringPredicates;
 import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -22,7 +24,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.DirectoryChooser;
-import app.arxivorg.utils.PDFDownloader;
+import app.arxivorg.view.PDFDownloader;
 
 import java.io.File;
 import java.net.URL;
@@ -39,6 +41,8 @@ import static app.arxivorg.model.Category.*;
  * @author VIZCAINO Yohan (Airels)
  */
 public class ArxivOrgController implements Initializable {
+
+    // TODO : Implémenter les favoris utilisateurs
 
     private ArticleManager articleManager;
     private Article selectedArticle;

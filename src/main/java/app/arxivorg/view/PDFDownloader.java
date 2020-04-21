@@ -1,4 +1,4 @@
-package app.arxivorg.utils;
+package app.arxivorg.view;
 
 import app.arxivorg.model.Article;
 

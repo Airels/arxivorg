@@ -1,5 +1,6 @@
-package app.arxivorg.controller;
+package app.arxivorg.view;
 
+import app.arxivorg.controller.ArxivOrgController;
 import app.arxivorg.utils.SortArticle;
 import app.arxivorg.utils.XmlReader;
 import app.arxivorg.model.Article;
@@ -63,7 +64,7 @@ public class ArticleManager {
      * @see ArxivOrgController
      * @author VIZCAINO Yohan (Airels)
      */
-    ArticleManager(ArxivOrgController controller) {
+    public ArticleManager(ArxivOrgController controller) {
         this.controller = controller;
 
         initialArticles = new ArrayList<>();

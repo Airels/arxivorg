@@ -1,9 +1,10 @@
-package app.arxivorg.controller;
+package app.arxivorg.view;
 
 import app.arxivorg.model.Article;
 import app.arxivorg.model.Authors;
 import app.arxivorg.model.Category;
 import app.arxivorg.utils.FileManager;
+import app.arxivorg.view.UserFavourites;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;

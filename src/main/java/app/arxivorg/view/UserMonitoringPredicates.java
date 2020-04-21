@@ -1,4 +1,4 @@
-package app.arxivorg.controller;
+package app.arxivorg.view;
 
 import app.arxivorg.model.Category;
 import app.arxivorg.utils.FileManager;
