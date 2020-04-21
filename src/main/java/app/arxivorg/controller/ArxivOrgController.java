@@ -4,6 +4,7 @@ import app.arxivorg.model.Article;
 import app.arxivorg.model.Authors;
 import app.arxivorg.model.Category;
 import app.arxivorg.model.SubCategories;
+import app.arxivorg.utils.ArticlesStatistics;
 import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -533,7 +534,44 @@ public class ArxivOrgController implements Initializable {
      * @deprecated Need to be implemented
      */
     public void showArticleStats() {
+        StringBuilder stringBuilder = new StringBuilder();
 
+        stringBuilder.append("Catégories :").append('\n');
+        int[] categoriesStat = ArticlesStatistics.statisticCategories((ArrayList<Article>) articleManager.getInitialArticles());
+        int index = 0;
+        for (Category category : Category.values()) {
+            if (category == All) continue;
+
+            stringBuilder.append("- ")
+                    .append(categoriesStat[index])
+                    .append(" articles de ")
+                    .append(category)
+                    .append('\n');
+
+            index++;
+        }
+
+        int nbArticlesByDay = ArticlesStatistics.statisticDate((ArrayList<Article>) articleManager.getInitialArticles());
+        stringBuilder.append("\nArticles moyen par jour : ")
+                .append((nbArticlesByDay == 0) ? "Moins d'un par jour" : nbArticlesByDay)
+                .append('\n');
+
+        stringBuilder.append("\nAuteurs les plus actifs :").append('\n');
+        for (String author : ArticlesStatistics.statisticAuthors((ArrayList<Article>) articleManager.getInitialArticles())) {
+            stringBuilder.append("- ")
+                    .append(author)
+                    .append('\n');
+        }
+
+        if (!keywordsPredicate.getText().isEmpty()) {
+            ArrayList<String> keywordsPredicat = new ArrayList<>();
+            keywordsPredicat.addAll(Arrays.asList(keywordsPredicate.getText().split(",\n")));
+            String statOnTxt = ArticlesStatistics.statisticOnText((ArrayList<Article>) articleManager.getInitialArticles(), keywordsPredicat);
+            stringBuilder.append("\nMot-clé le plus utilisé parmi les mots-clés :").append('\n')
+                    .append(statOnTxt);
+        }
+
+        showInfoMessage("Statistiques de la page", stringBuilder.toString());
     }
 
 
