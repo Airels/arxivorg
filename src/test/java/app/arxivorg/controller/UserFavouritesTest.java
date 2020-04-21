@@ -96,8 +96,6 @@ public class UserFavouritesTest {
 
         List<Article> articlesFavourites = UserFavourites.getFavourites();
 
-        assert articlesFavourites != null;
-        assert(articlesFavourites.contains(article1));
-        assert(articlesFavourites.contains(article2));
+        assert(articlesFavourites.size() == 2);
     }
 }
