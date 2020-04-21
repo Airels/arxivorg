@@ -175,18 +175,41 @@ public class ArticlesStatistics {
 
     }
 
-    public static String statisticRecurentStringIntoTitleAndResume
+    /**
+     * Find the most used String from a given list into a given list of Article
+     * @param articles List of Articles
+     * @param testStrings List of String
+     * @return The most used String into Article List given
+     */
+
+    public static String statisticOnTexte (ArrayList<Article> articles , ArrayList<String> testStrings){
+        int  max = 0;
+        int lastIndex = 0;
+
+        for (int indexofstring = 0 ; indexofstring < testStrings.size() ; indexofstring++){
+            int count = 0;
+            int stringlenght = testStrings.get(indexofstring).length();
+            for (int indexofarticles = 0 ; indexofarticles < articles.size() ; indexofarticles++){
+                String test = articles.get(indexofarticles).getContent() + articles.get(indexofarticles).getTitle();
+                for (int indexofchar = 0 ; indexofchar < test.length() ; indexofchar++){
+                    if(indexofchar+stringlenght > test.length()) break;
+                    if (test.substring(indexofchar, indexofchar+stringlenght).equals(testStrings.get(indexofstring))){
+                        indexofchar += stringlenght-1;
+                        count++;
+                    }
+                }
 
 
 
-    public static void main(String[] args) {
-        ArrayList<Article> test = XmlReader.read("3.atom");
+            }
 
-        String testtab = statisticAuthors(test);
+            if (count > max){
+                max = count;
+                lastIndex = indexofstring;
+            }
+        }
 
-        //for (int index = 0 ; index < 17 ; index++){
-            System.out.println(testtab/*[index]*/);
-        //}
+        return testStrings.get(lastIndex);
 
 
     }
