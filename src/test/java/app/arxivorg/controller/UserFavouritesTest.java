@@ -15,15 +15,13 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 public class UserFavouritesTest {
     private final static Article article1 = new Article("ABC",
-            new Authors(new ArrayList<String>(Arrays.asList("Ben", "Solo"))),
+            new Authors(new ArrayList<String>(Arrays.asList("Kylo", "Metre"))),
             "I love content",
             Category.Computer_Science,
             null,
@@ -32,7 +30,7 @@ public class UserFavouritesTest {
         );
 
     private final static Article article2 = new Article("DEF",
-            new Authors(new ArrayList<>(Arrays.asList("Henri", "Des"))),
+            new Authors(new ArrayList<>(Arrays.asList("Nuque", "Marcheur du ciel"))),
             "It just works",
             Category.Computer_Science,
             null,
@@ -53,23 +51,25 @@ public class UserFavouritesTest {
     public void testSetFavourite() {
         FileManager fm = new FileManager(UserFavourites.fileName);
         fm.wipeFile();
+        testCheckUserFavouritesFile();
 
         UserFavourites.setFavourite(article1);
 
         JSONParser parser = new JSONParser();
         try {
             Object obj = parser.parse(new FileReader(UserFavourites.fileName));
+            JSONArray array = (JSONArray) obj;
 
-            JSONObject jsonObj = (JSONObject) obj;
-            JSONArray articlesList = (JSONArray) jsonObj.get("Articles");
-
-            assert(articlesList.size() == 1);
+            assert(array.size() == 1);
         } catch (ParseException e) {
             e.printStackTrace();
+            assert false;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            assert false;
         } catch (IOException e) {
             e.printStackTrace();
+            assert false;
         }
     }
 
@@ -77,6 +77,7 @@ public class UserFavouritesTest {
     public void testIsFavourite() {
         FileManager fm = new FileManager(UserFavourites.fileName);
         fm.wipeFile();
+        testCheckUserFavouritesFile();
 
         UserFavourites.setFavourite(article1);
 
@@ -88,6 +89,7 @@ public class UserFavouritesTest {
     public void testGetFavourites() {
         FileManager fm = new FileManager(UserFavourites.fileName);
         fm.wipeFile();
+        testCheckUserFavouritesFile();
 
         UserFavourites.setFavourite(article1);
         UserFavourites.setFavourite(article2);
