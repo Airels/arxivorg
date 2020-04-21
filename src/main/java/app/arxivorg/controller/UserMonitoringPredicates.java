@@ -79,6 +79,8 @@ public class UserMonitoringPredicates {
     public static void addCategoryStat(Category category) {
         checkUserMonitoringFile();
 
+        if (category.equals(Category.All)) return;
+
         FileManager fm = new FileManager(fileName);
         int line = fm.getLineStartsWith(category.getName());
 
