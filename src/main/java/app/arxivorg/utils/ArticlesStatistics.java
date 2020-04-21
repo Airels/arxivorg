@@ -180,7 +180,7 @@ public class ArticlesStatistics {
      * @return The most used String into Article List given
      */
 
-    public static String statisticOnTexte (ArrayList<Article> articles , ArrayList<String> testStrings){
+    public static String statisticOnText (ArrayList<Article> articles , ArrayList<String> testStrings){
         int  max = 0;
         int lastIndex = 0;
 
