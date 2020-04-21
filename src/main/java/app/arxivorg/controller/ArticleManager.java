@@ -279,6 +279,10 @@ public class ArticleManager {
         }
     }
 
+    public List<Article> getInitialArticles() {
+        return initialArticles;
+    }
+
 
     // /!\ ALL METHODS HERE ARE USED FOR TESTS PURPOSE ONLY /!\
     /**
