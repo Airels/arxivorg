@@ -44,6 +44,8 @@ dependencies {
     compile 'org.codehaus.griffon:griffon-javafx:2.15.1'
     compile 'org.controlsfx:controlsfx:11.0.0-RC2'
 
+    compile 'com.googlecode.json-simple:json-simple:1.1.1'
+
     testCompile "org.junit.jupiter:junit-jupiter-api:5.4.0"
     testRuntime "org.junit.jupiter:junit-jupiter-engine:5.4.0"
 
