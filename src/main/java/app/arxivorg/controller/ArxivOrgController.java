@@ -531,7 +531,6 @@ public class ArxivOrgController implements Initializable {
      * Show in a popup statistics of actual articles list
      * @see
      * @author VIZCAINO Yohan (Airels)
-     * @deprecated Need to be implemented
      */
     public void showArticleStats() {
         StringBuilder stringBuilder = new StringBuilder();
