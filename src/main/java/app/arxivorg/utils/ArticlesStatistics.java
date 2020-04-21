@@ -188,7 +188,7 @@ public class ArticlesStatistics {
             int count = 0;
             int stringlenght = testStrings.get(indexofstring).length();
             for (int indexofarticles = 0 ; indexofarticles < articles.size() ; indexofarticles++){
-                String test = articles.get(indexofarticles).getContent() + articles.get(indexofarticles).getTitle();
+                String test = articles.get(indexofarticles).getContent() + " "+ articles.get(indexofarticles).getTitle();
                 for (int indexofchar = 0 ; indexofchar < test.length() ; indexofchar++){
                     if(indexofchar+stringlenght > test.length()) break;
                     if (test.substring(indexofchar, indexofchar+stringlenght).equals(testStrings.get(indexofstring))){
