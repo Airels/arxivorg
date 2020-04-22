@@ -4,7 +4,6 @@ import app.arxivorg.model.Article;
 import app.arxivorg.model.Authors;
 import app.arxivorg.model.Category;
 import app.arxivorg.utils.FileManager;
-import app.arxivorg.view.UserFavourites;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.Test;
@@ -49,12 +48,12 @@ public class UserFavouritesTest {
     }
 
     @Test
-    public void testSetFavourite() {
+    public void testAddFavourite() {
         FileManager fm = new FileManager(UserFavourites.fileName);
         fm.wipeFile();
         testCheckUserFavouritesFile();
 
-        UserFavourites.setFavourite(article1);
+        UserFavourites.addFavourite(article1);
 
         JSONParser parser = new JSONParser();
         try {
@@ -80,7 +79,7 @@ public class UserFavouritesTest {
         fm.wipeFile();
         testCheckUserFavouritesFile();
 
-        UserFavourites.setFavourite(article1);
+        UserFavourites.addFavourite(article1);
 
         assert(UserFavourites.isFavourite(article1));
         assert(!UserFavourites.isFavourite(article2));
@@ -92,11 +91,21 @@ public class UserFavouritesTest {
         fm.wipeFile();
         testCheckUserFavouritesFile();
 
-        UserFavourites.setFavourite(article1);
-        UserFavourites.setFavourite(article2);
+        UserFavourites.addFavourite(article1);
+        UserFavourites.addFavourite(article2);
 
         List<Article> articlesFavourites = UserFavourites.getFavourites();
 
         assert(articlesFavourites.size() == 2);
+    }
+
+    @Test
+    public void testRemoveFavourite() {
+        UserFavourites.addFavourite(article1);
+        UserFavourites.addFavourite(article2);
+
+        UserFavourites.removeFavourite(article2);
+
+        assert UserFavourites.getFavourites().size() == 1;
     }
 }
