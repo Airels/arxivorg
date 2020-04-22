@@ -220,8 +220,13 @@ public class ArxivOrgController implements Initializable {
                     for (int i = 0; i < 3 && i < authors.size(); i++)
                         lineContent.append(authors.get(i)).append(", ");
 
-                    if (authors.size() > 3)
-                        lineContent.append("+").append(authors.size() - 3).append(" autres");
+                    if (authors.size() > 3) {
+                        lineContent.append("+").append(authors.size() - 3);
+
+                        if (authors.size() == 4) lineContent.append(" autre");
+                        else lineContent.append(" autres");
+                    }
+
 
                     setText(lineContent.toString());
 
