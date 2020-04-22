@@ -18,9 +18,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Class used for managing easily favourites with a file using JSON.
+ * @author VIZCAINO Yohan (Airels)
+ */
 public class UserFavourites {
     public final static String fileName = "UserFavourites.json";
 
+    /**
+     * Check if user favourites file exist, and initiate the file otherwise.
+     */
     public static void checkUserFavouriteFile() {
         FileManager fm = new FileManager(fileName); // Creates files if doesn't exist
 
@@ -28,6 +35,10 @@ public class UserFavourites {
         fm.putLine(array.toJSONString());
     }
 
+    /**
+     * Adding an article object to the JSON file.
+     * @param article Article to add
+     */
     public static void addFavourite(Article article) {
         JSONObject articleJSON = new JSONObject();
         articleJSON.put("title", article.getTitle());
@@ -46,6 +57,11 @@ public class UserFavourites {
         fm.putLine(jsonArray.toJSONString());
     }
 
+    /**
+     * Check if article is already an user favourite
+     * @param article Article to check
+     * @return Boolean, TRUE if article is already a favourite, FALSE otherwise
+     */
     public static boolean isFavourite(Article article) {
         JSONParser parser = new JSONParser();
         try {
@@ -65,6 +81,10 @@ public class UserFavourites {
         return false;
     }
 
+    /**
+     * Get list of articles added as favourites by the user.
+     * @return List of Article
+     */
     public static List<Article> getFavourites() {
         List<Article> listArticles = new ArrayList<>();
         JSONParser parser = new JSONParser();
@@ -86,6 +106,10 @@ public class UserFavourites {
         return listArticles;
     }
 
+    /**
+     * Remove article favourite from the JSON file.
+     * @param article Article to remove
+     */
     public static void removeFavourite(Article article) {
         if (!isFavourite(article)) return;
 
@@ -104,6 +128,10 @@ public class UserFavourites {
         fm.putLine(favourites.toJSONString());
     }
 
+    /**
+     * Used locally for getting a JSONArray instead as a simple Arrray.
+     * @return JSONArray of favourites
+     */
     private static JSONArray getFavouritesJSONArray() {
         JSONParser parser = new JSONParser();
 
@@ -120,6 +148,11 @@ public class UserFavourites {
         return null;
     }
 
+    /**
+     * Used to convert a JSONObject to an Article.
+     * @param json JSONObject to convert
+     * @return Article converted
+     */
     private static Article jsonToArticle(JSONObject json) {
         return new Article(
                 json.get("title").toString(),
