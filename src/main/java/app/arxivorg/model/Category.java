@@ -21,7 +21,8 @@ public enum Category {
     Nuclear("nucl", "Nucléaire"),
     Cond_Math("cond-mat", "Physique des solides"),
     Quantum_Physics("quant-ph", "Physique quantique"),
-    CMP_LG("cmp-lg","cpm-lg");
+    CMP_LG("cmp-lg","cpm-lg"),
+    Favourites("fav", "Favoris");
 
     private String name, frName;
 
