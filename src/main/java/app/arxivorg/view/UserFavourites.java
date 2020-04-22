@@ -166,10 +166,10 @@ public class UserFavourites {
     private static Article jsonToArticle(JSONObject json) {
         return new Article(
                 json.get("title").toString(),
-                new Authors(new ArrayList<>(Arrays.asList(json.get("authors").toString()))),
+                new Authors(new ArrayList<>(Arrays.asList(json.get("authors").toString().split(",")))),
                 json.get("content").toString(),
                 Category.getCategory(json.get("category").toString()),
-                new SubCategories(new ArrayList<>(Arrays.asList(json.get("subCategories").toString()))),
+                new SubCategories(new ArrayList<>(Arrays.asList(json.get("subCategories").toString().split(",")))),
                 json.get("link").toString(),
                 LocalDate.parse(json.get("date").toString())
         );
