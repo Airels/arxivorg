@@ -106,6 +106,11 @@ public class ArticleManager {
     private void categoryPredicate(Category category) {
         this.category = category;
 
+        if (category.equals(Category.Favourites)) {
+            actualArticles = (ArrayList<Article>) UserFavourites.getFavourites();
+            return;
+        }
+
         actualArticles = SortArticle.byCategory(actualArticles, category);
     }
 
