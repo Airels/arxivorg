@@ -420,6 +420,11 @@ public class ArxivOrgController implements Initializable {
         }
     }
 
+    /**
+     * Event triggered when user click on the checkbox
+     * @param event MouseEvent received
+     * @author VIZCAINO Yohan (Airels)
+     */
     @FXML
     public void onFavChecked(MouseEvent event) {
         if (favCheckBox.isSelected() && !UserFavourites.isFavourite(selectedArticle))
@@ -648,6 +653,24 @@ public class ArxivOrgController implements Initializable {
         alert.setHeaderText(subtitle);
         alert.setContentText(message);
         alert.show();
+    }
+
+    /**
+     * Prompt a confirmation pop-up when method called
+     *
+     * @param subtitle Subtitle of the notification
+     * @param message Notification message
+     * @return User choice
+     * @author VIZCAINO Yohan (Airels)
+     */
+    private boolean showConfirmationMessage(String subtitle, String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation - ArxivOrg");
+        alert.setHeaderText(subtitle);
+        alert.setContentText(message);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        return (result.get() == ButtonType.OK);
     }
 
     /**
