@@ -31,8 +31,10 @@ public class UserFavourites {
     public static void checkUserFavouriteFile() {
         FileManager fm = new FileManager(fileName); // Creates files if doesn't exist
 
-        JSONArray array = new JSONArray();
-        fm.putLine(array.toJSONString());
+        if (fm.getLine(1).isEmpty()) {
+            JSONArray array = new JSONArray();
+            fm.putLine(array.toJSONString());
+        }
     }
 
     /**
@@ -40,6 +42,8 @@ public class UserFavourites {
      * @param article Article to add
      */
     public static void addFavourite(Article article) {
+        checkUserFavouriteFile();
+
         JSONObject articleJSON = new JSONObject();
         articleJSON.put("title", article.getTitle());
         articleJSON.put("authors", article.getAuthors().toString());
@@ -63,6 +67,8 @@ public class UserFavourites {
      * @return Boolean, TRUE if article is already a favourite, FALSE otherwise
      */
     public static boolean isFavourite(Article article) {
+        checkUserFavouriteFile();
+
         JSONParser parser = new JSONParser();
         try {
             JSONArray jsonArray = (JSONArray) parser.parse(new FileReader(fileName));
@@ -86,6 +92,8 @@ public class UserFavourites {
      * @return List of Article
      */
     public static List<Article> getFavourites() {
+        checkUserFavouriteFile();
+
         List<Article> listArticles = new ArrayList<>();
         JSONParser parser = new JSONParser();
 
@@ -111,6 +119,8 @@ public class UserFavourites {
      * @param article Article to remove
      */
     public static void removeFavourite(Article article) {
+        checkUserFavouriteFile();
+
         if (!isFavourite(article)) return;
 
         JSONArray favourites = getFavouritesJSONArray();
