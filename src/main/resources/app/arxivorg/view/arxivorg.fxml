@@ -13,6 +13,8 @@
         <menus>
             <Menu text="Application">
                 <items>
+                    <MenuItem onAction="#OnClickMenuDeleteFavourites" text="Supprimer tout les favoris" />
+                    <SeparatorMenuItem />
                     <MenuItem onAction="#onClickMenuApplicationExit" text="Quitter" />
                 </items>
             </Menu>

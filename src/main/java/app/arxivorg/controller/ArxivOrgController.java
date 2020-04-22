@@ -4,6 +4,7 @@ import app.arxivorg.model.Article;
 import app.arxivorg.model.Authors;
 import app.arxivorg.model.Category;
 import app.arxivorg.model.SubCategories;
+import app.arxivorg.utils.FileManager;
 import app.arxivorg.view.*;
 import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
@@ -463,6 +464,25 @@ public class ArxivOrgController implements Initializable {
 
 
     // MENU EVENTS
+
+    /**
+     * Called when user wants to delete all favourites.
+     * Will ask confirmation first and delete all favourites if user accepts.
+     * @author VIZCAINO Yohan (Airels)
+     */
+    @FXML
+    public void OnClickMenuDeleteFavourites() {
+        boolean confirm = showConfirmationMessage(
+                "Suppression des favoris",
+                "Êtes-vous sûr de vouloiv supprimer TOUS vos favoris ? Cette action est irréversible !");
+
+        if (confirm) {
+            FileManager fm = new FileManager(UserFavourites.fileName);
+            fm.wipeFile();
+            UserFavourites.checkUserFavouriteFile();
+            showInfoMessage("Suppression des favoris terminé", "Tous vos favoris ont été supprimés.");
+        }
+    }
 
     /**
      * Will stop every thread and exit the application
