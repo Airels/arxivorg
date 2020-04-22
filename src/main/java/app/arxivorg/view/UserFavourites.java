@@ -28,7 +28,7 @@ public class UserFavourites {
         fm.putLine(array.toJSONString());
     }
 
-    public static void setFavourite(Article article) {
+    public static void addFavourite(Article article) {
         JSONObject articleJSON = new JSONObject();
         articleJSON.put("title", article.getTitle());
         articleJSON.put("authors", article.getAuthors().toString());
@@ -84,6 +84,24 @@ public class UserFavourites {
         }
 
         return listArticles;
+    }
+
+    public static void removeFavourite(Article article) {
+        if (!isFavourite(article)) return;
+
+        JSONArray favourites = getFavouritesJSONArray();
+
+        for (int i = 0; i < favourites.size(); i++) {
+            JSONObject favArticle = (JSONObject) favourites.get(i);
+            if (article.getTitle().equals(favArticle.get("title"))) {
+                favourites.remove(i);
+                break;
+            }
+        }
+
+        FileManager fm = new FileManager(fileName);
+        fm.wipeFile();
+        fm.putLine(favourites.toJSONString());
     }
 
     private static JSONArray getFavouritesJSONArray() {
