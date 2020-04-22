@@ -4,9 +4,7 @@ import app.arxivorg.model.Article;
 import app.arxivorg.model.Authors;
 import app.arxivorg.model.Category;
 import app.arxivorg.model.SubCategories;
-import app.arxivorg.view.ArticleManager;
-import app.arxivorg.view.ArticlesStatistics;
-import app.arxivorg.view.UserMonitoringPredicates;
+import app.arxivorg.view.*;
 import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -24,7 +22,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.DirectoryChooser;
-import app.arxivorg.view.PDFDownloader;
 
 import java.io.File;
 import java.net.URL;
@@ -141,6 +138,7 @@ public class ArxivOrgController implements Initializable {
         periodDatePickerStart.valueProperty().addListener(this::onDatePickerStartUpdate);
         periodDatePickerEnd.valueProperty().addListener(this::onDatePickerEndUpdate);
 
+        favCheckBox.addEventFilter(MouseEvent.MOUSE_CLICKED, this::onFavChecked);
         btnDownload.addEventFilter(MouseEvent.MOUSE_CLICKED, this::onBtnDownloadClicked);
 
         // ARTICLE MANAGER
@@ -415,6 +413,14 @@ public class ArxivOrgController implements Initializable {
         if (event.getDeltaY() < 0) { // if scroll down
             System.out.println("Scroll!");
         }
+    }
+
+    @FXML
+    public void onFavChecked(MouseEvent event) {
+        if (favCheckBox.isSelected() && !UserFavourites.isFavourite(selectedArticle))
+            UserFavourites.addFavourite(selectedArticle);
+        if (!favCheckBox.isSelected() && UserFavourites.isFavourite(selectedArticle))
+            UserFavourites.removeFavourite(selectedArticle);
     }
 
     /**
