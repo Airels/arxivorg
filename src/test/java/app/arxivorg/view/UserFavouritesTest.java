@@ -101,11 +101,15 @@ public class UserFavouritesTest {
 
     @Test
     public void testRemoveFavourite() {
+        FileManager fm = new FileManager(UserFavourites.fileName);
+        fm.wipeFile();
+        testCheckUserFavouritesFile();
+
         UserFavourites.addFavourite(article1);
         UserFavourites.addFavourite(article2);
 
         UserFavourites.removeFavourite(article2);
 
-        assert UserFavourites.getFavourites().size() == 1;
+        assert(UserFavourites.getFavourites().size() == 1);
     }
 }
