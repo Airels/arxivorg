@@ -290,6 +290,11 @@ public class ArxivOrgController implements Initializable {
 
             favCheckBox.setDisable(false);
             btnDownload.setDisable(false);
+
+            if (UserFavourites.isFavourite(article))
+                favCheckBox.setSelected(true);
+            else
+                favCheckBox.setSelected(false);
         }
     }
 
