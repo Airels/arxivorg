@@ -23,6 +23,9 @@ public class PDFDownloader {
             articleName = articleName.replace("|","");
             articleName = articleName.replace("?","");
             articleName = articleName.replace("\"","");
+            articleName = articleName.replace("\n","");
+            articleName = articleName.replace("\t","");
+
             Files.copy(in,
                     Paths.get(file.getAbsolutePath() + '/'+ articleName + ".pdf"),
                     StandardCopyOption.REPLACE_EXISTING);
