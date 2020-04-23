@@ -480,30 +480,31 @@ public class ArxivOrgController implements Initializable {
             Alert alert = showWaitingMessage("Téléchargement de tout les articles...",
                     "Veuillez patienter, vos articles sont en cours de chargement...");
 
+            disableAllInputs();
+
+            int articlesListSize = articlesList.getItems().size(),
+                    downloadSuccessful = 0, downloadFailed = 0;
+
+            for (int i = 0; i < articlesListSize; i++) {
+                Article article = (Article) articlesList.getItems().get(i);
+
+                if (PDFDownloader.downloadFile(article, selectedFile))
+                    downloadSuccessful++;
+                else
+                    downloadFailed++;
+            }
+
+            StringBuilder msg = new StringBuilder();
+            msg.append(downloadSuccessful).append(" articles ont été enregistré avec succès,").append('\n');
+            msg.append(downloadFailed).append(" articles ont échoué");
+
+            showInfoMessage("Téléchargements de tous les articles terminé", msg.toString());
+
+            enableAllInputs();
+            alert.close();
+
             Thread t = new Thread(() -> {
-                disableAllInputs();
 
-                int articlesListSize = articlesList.getItems().size(),
-                        downloadSuccessful = 0, downloadFailed = 0;
-
-                for (int i = 0; i < articlesListSize; i++) {
-                    Article article = (Article) articlesList.getItems().get(i);
-
-                    if (PDFDownloader.downloadFile(article, selectedFile))
-                        downloadSuccessful++;
-                    else
-                        downloadFailed++;
-                }
-
-                StringBuilder msg = new StringBuilder();
-                msg.append(downloadSuccessful).append(" articles ont été enregistré avec succès,").append('\n');
-                msg.append(downloadFailed).append(" articles ont échoué");
-
-                showInfoMessage(
-                        "Téléchargements de tous les articles terminé", msg.toString());
-
-                enableAllInputs();
-                alert.close();
             });
             t.start();
         }
@@ -736,7 +737,6 @@ public class ArxivOrgController implements Initializable {
         alert.setHeaderText(subtitle);
         alert.setContentText(message);
         alert.getDialogPane().lookupButton(ButtonType.OK).setDisable(true);
-        alert.getDialogPane().lookupButton(ButtonType.CLOSE).setDisable(true);
         alert.show();
 
         return alert;
