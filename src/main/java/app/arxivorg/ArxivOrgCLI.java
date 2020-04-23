@@ -52,7 +52,7 @@ public class ArxivOrgCLI {
 
     /**
      * Print an array of article, as requested by the client
-     * @param articles      array of articles
+     * @param articles      arrayList of articles
      */
 
     public static void printArticles(ArrayList<Article> articles){
@@ -64,7 +64,7 @@ public class ArxivOrgCLI {
 
     /**
      * Download articles in an Array of article to a specified path
-     * @param articles      List of article to download
+     * @param articles      arrayList of article to download
      * @param path          Full path to the download folder
      */
     static void downloadArticles(ArrayList<Article> articles,String path){
@@ -78,7 +78,7 @@ public class ArxivOrgCLI {
     /**
      * Select the articles shown from a call to printArticles
      * Call printArticles on the selected articles to confirm the selection
-     * @param arguments
+     * @param arguments     array of arguments
      */
 
     static void select(String[] arguments){
@@ -99,6 +99,15 @@ public class ArxivOrgCLI {
 
         }
     }
+
+    /**
+     * process the filter contained in the request,
+     * in order to modify the local array of article.
+     * Used when the article's source is an XML file
+     * @param articles          arrayList of articles
+     * @param arguments         arguments from the request
+     * @return (ArrayList of Article)
+     */
 
 
     static ArrayList<Article> processFilters(ArrayList<Article> articles,String[] arguments) {
@@ -172,6 +181,14 @@ public class ArxivOrgCLI {
         return result;
 
     }
+
+    /**
+     * process the filter contained in the request,
+     * in order to modify the local array of article.
+     * Used when the article's source is the API
+     * @param arguments         arguments from the request
+     * @return (ArrayList of Article)
+     */
 
     static ArrayList<Article> processFiltersAPI(String[] arguments) {
         int boundEnd = arguments.length-2;
@@ -255,6 +272,11 @@ public class ArxivOrgCLI {
 
     }
 
+    /**
+     * Start the cli , process the first argument and uses or not other methods
+     * use a loop to always ask for input, can be exited with 'exit'
+     */
+
     static void cli () {
         System.out.print(firstLine);
         Scanner line = new Scanner(System.in);
@@ -331,6 +353,12 @@ public class ArxivOrgCLI {
             //System.out.print("[Arxivor]$ ");
         }
     }
+
+    /**
+     * Remove the last argument in an array of argument
+     * @param arr       array of articles
+     * @return array of String
+     */
 
     public static String[] removeLastElement(String[] arr) {
         String[] anotherArray = new String[arr.length - 1];
