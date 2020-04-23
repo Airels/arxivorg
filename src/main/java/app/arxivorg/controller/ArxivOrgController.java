@@ -6,9 +6,11 @@ import app.arxivorg.model.Category;
 import app.arxivorg.model.SubCategories;
 import app.arxivorg.utils.FileManager;
 import app.arxivorg.view.*;
+import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,7 +20,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -154,14 +155,14 @@ public class ArxivOrgController implements Initializable {
 
         // ARTICLE MANAGER
         Thread t = new Thread(() -> {
-            disableAllInputs();
+            Platform.runLater(this::disableAllInputs);
 
             showArticles(new ArrayList<>()); // For asking to user to wait a moment
 
             articleManager = new ArticleManager(this);
             articleManager.setPredicates(All, null, periodDatePickerStart.getValue(), periodDatePickerEnd.getValue(), null);
 
-            enableAllInputs();
+            Platform.runLater(this::enableAllInputs);
         });
         t.start();
     }
@@ -477,36 +478,46 @@ public class ArxivOrgController implements Initializable {
 
             if (selectedFile == null) return;
 
-            Alert alert = showWaitingMessage("Téléchargement de tout les articles...",
-                    "Veuillez patienter, vos articles sont en cours de chargement...");
-
-            disableAllInputs();
-
-            int articlesListSize = articlesList.getItems().size(),
-                    downloadSuccessful = 0, downloadFailed = 0;
-
-            for (int i = 0; i < articlesListSize; i++) {
-                Article article = (Article) articlesList.getItems().get(i);
-
-                if (PDFDownloader.downloadFile(article, selectedFile))
-                    downloadSuccessful++;
-                else
-                    downloadFailed++;
-            }
-
-            StringBuilder msg = new StringBuilder();
-            msg.append(downloadSuccessful).append(" articles ont été enregistré avec succès,").append('\n');
-            msg.append(downloadFailed).append(" articles ont échoué");
-
-            showInfoMessage("Téléchargements de tous les articles terminé", msg.toString());
-
-            enableAllInputs();
-            alert.close();
+            Alert alert = prepareWaitingMessage("Téléchargement de tous les articles...",
+                    "Initialisation du téléchargement...");
 
             Thread t = new Thread(() -> {
+                Platform.runLater(alert::show);
 
+                int articlesListSize = articlesList.getItems().size(),
+                        downloadSuccessful = 0, downloadFailed = 0;
+
+                for (int i = 0; i < articlesListSize; i++) {
+                    Article article = (Article) articlesList.getItems().get(i);
+
+                    boolean isDownloaded = PDFDownloader.downloadFile(article, selectedFile);
+
+                    if (isDownloaded) downloadSuccessful++;
+                    else downloadFailed++;
+
+                    int percentage = (int) (((float) i / (float) articlesListSize) * 100);
+                    final String msg = percentage + "% (" + i  + " articles sur " + articlesListSize + ")"; // NEED TO BE FINAL
+                    Platform.runLater(() -> alert.setContentText(msg));
+                }
+
+                StringBuilder msg = new StringBuilder();
+                msg.append(downloadSuccessful).append(" articles ont été enregistré avec succès,").append('\n');
+                msg.append(downloadFailed).append(" articles ont échoué");
+
+                Platform.runLater(() -> showInfoMessage("Téléchargements de tous les articles terminé", msg.toString()));
+
+                Platform.runLater(alert::close);
             });
-            t.start();
+
+            alert.getDialogPane().getScene().getWindow().setOnCloseRequest((e) -> {
+                t.interrupt();
+
+                Platform.runLater(() -> showInfoMessage(
+                        "Téléchargement interrompu",
+                        "Le téléchargement des articles à été interrompu"));
+            });
+
+            t.start(); // Start thread
         }
     }
 
@@ -549,11 +560,11 @@ public class ArxivOrgController implements Initializable {
     @FXML
     public void onClickMenuArticlesNext() {
         Thread t = new Thread(() -> {
-            disableAllInputs();
+            Platform.runLater(this::disableAllInputs);
 
             articleManager.nextPage();
 
-            enableAllInputs();
+            Platform.runLater(this::enableAllInputs);
         });
         t.start();
 
@@ -568,12 +579,13 @@ public class ArxivOrgController implements Initializable {
     @FXML
     public void onClickMenuArticlesPrevious() {
         Thread t = new Thread(() -> {
-            disableAllInputs();
+            Platform.runLater(this::disableAllInputs);
 
             articleManager.previousPage();
 
-            enableAllInputs();
+            Platform.runLater(this::enableAllInputs);
         });
+        t.start();
 
         System.out.println("Previous!");
     }
@@ -734,18 +746,18 @@ public class ArxivOrgController implements Initializable {
     }
 
     /**
-     * Prompt an information pop-up when method called but cannot be closed by user
+     * Prompt an information pop-up when method called but cannot be closed by user and need to be open manually
      * @param subtitle Subtitle of the notification
      * @param message Notification message
      * @return Alert dialog to close him when needed
      */
-    private Alert showWaitingMessage(String subtitle, String message) {
+    private Alert prepareWaitingMessage(String subtitle, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information - ArxivOrg");
         alert.setHeaderText(subtitle);
         alert.setContentText(message);
         alert.getDialogPane().lookupButton(ButtonType.OK).setDisable(true);
-        alert.show();
+        alert.getDialogPane().getScene().getWindow().setOnCloseRequest(Event::consume);
 
         return alert;
     }
