@@ -161,7 +161,9 @@ public class UserMonitoringPredicates {
         for (int i = lineCategory+1; i < lineAuthors; i++) {
             String line = fm.getLine(i);
 
-            Category category = Category.getCategory(line.substring(0, line.length()-2));
+
+            // Category category = Category.getCategory(line.substring(0, line.length()-2));
+            Category category = Category.getCategory(line.split(" ")[0]);
             int categoryCount = Integer.parseInt(line.substring(line.length()-1));
 
             dico.put(category, categoryCount);
@@ -185,10 +187,13 @@ public class UserMonitoringPredicates {
         int lineKeywords = fm.getLineEqualsTo("=KEYWORDS=");
 
         for (int i = lineAuthors+1; i < lineKeywords; i++) {
-            String line = fm.getLine(i);
+            String[] line = fm.getLine(i).split(" ");
 
-            String author = line.substring(0, line.length()-2);
-            int authorCount = Integer.parseInt(line.substring(line.length()-1));
+            String author = line[0];
+            for (int k = 1; k < line.length-1; k++)
+                author += " "+line[k];
+
+            int authorCount = Integer.parseInt(line[line.length-1]);
 
             dico.put(author, authorCount);
         }
@@ -211,10 +216,13 @@ public class UserMonitoringPredicates {
         int lineEnd = fm.getLineEqualsTo("=END=");
 
         for (int i = lineKeywords+1; i < lineEnd; i++) {
-            String line = fm.getLine(i);
+            String[] line = fm.getLine(i).split(" ");
 
-            String keyword = line.substring(0, line.length()-2);
-            int keywordCount = Integer.parseInt(line.substring(line.length()-1));
+            String keyword = line[0];
+            for (int k = 1; k < line.length-1; k++)
+                keyword += " "+line[k];
+
+            int keywordCount = Integer.parseInt(line[line.length-1]);
 
             dico.put(keyword, keywordCount);
         }

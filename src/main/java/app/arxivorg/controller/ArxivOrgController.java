@@ -480,30 +480,31 @@ public class ArxivOrgController implements Initializable {
             Alert alert = showWaitingMessage("Téléchargement de tout les articles...",
                     "Veuillez patienter, vos articles sont en cours de chargement...");
 
+            disableAllInputs();
+
+            int articlesListSize = articlesList.getItems().size(),
+                    downloadSuccessful = 0, downloadFailed = 0;
+
+            for (int i = 0; i < articlesListSize; i++) {
+                Article article = (Article) articlesList.getItems().get(i);
+
+                if (PDFDownloader.downloadFile(article, selectedFile))
+                    downloadSuccessful++;
+                else
+                    downloadFailed++;
+            }
+
+            StringBuilder msg = new StringBuilder();
+            msg.append(downloadSuccessful).append(" articles ont été enregistré avec succès,").append('\n');
+            msg.append(downloadFailed).append(" articles ont échoué");
+
+            showInfoMessage("Téléchargements de tous les articles terminé", msg.toString());
+
+            enableAllInputs();
+            alert.close();
+
             Thread t = new Thread(() -> {
-                disableAllInputs();
 
-                int articlesListSize = articlesList.getItems().size(),
-                        downloadSuccessful = 0, downloadFailed = 0;
-
-                for (int i = 0; i < articlesListSize; i++) {
-                    Article article = (Article) articlesList.getItems().get(i);
-
-                    if (PDFDownloader.downloadFile(article, selectedFile))
-                        downloadSuccessful++;
-                    else
-                        downloadFailed++;
-                }
-
-                StringBuilder msg = new StringBuilder();
-                msg.append(downloadSuccessful).append(" articles ont été enregistré avec succès,").append('\n');
-                msg.append(downloadFailed).append(" articles ont échoué");
-
-                showInfoMessage(
-                        "Téléchargements de tous les articles terminé", msg.toString());
-
-                enableAllInputs();
-                alert.close();
             });
             t.start();
         }
@@ -583,6 +584,7 @@ public class ArxivOrgController implements Initializable {
      */
     public void showUserStats() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Statistiques de vos recherches :").append("\n\n");
 
         stringBuilder.append("Catégories :").append('\n');
         Dictionary<Category, Integer> categoriesStats = UserMonitoringPredicates.getCategories();
@@ -611,7 +613,10 @@ public class ArxivOrgController implements Initializable {
                 .append(" fois")
                 .append('\n'));
 
-        showInfoMessage("Statistiques de vos recherches", stringBuilder.toString());
+        articleView.getChildren().clear();
+        articleView.getChildren().add(new Text(stringBuilder.toString()));
+        favCheckBox.setDisable(true);
+        btnDownload.setDisable(true);
     }
 
     /**
@@ -621,12 +626,13 @@ public class ArxivOrgController implements Initializable {
      */
     public void showArticleStats() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Statistiques de la page :").append("\n\n");
 
         stringBuilder.append("Catégories :").append('\n');
         int[] categoriesStat = ArticlesStatistics.statisticCategories((ArrayList<Article>) articleManager.getInitialArticles());
         int index = 0;
         for (Category category : Category.values()) {
-            if (category == All) continue;
+            if (category == All || category == Favourites) continue;
 
             stringBuilder.append("- ")
                     .append(categoriesStat[index])
@@ -657,7 +663,10 @@ public class ArxivOrgController implements Initializable {
                     .append(statOnTxt);
         }
 
-        showInfoMessage("Statistiques de la page", stringBuilder.toString());
+        articleView.getChildren().clear();
+        articleView.getChildren().add(new Text(stringBuilder.toString()));
+        favCheckBox.setDisable(true);
+        btnDownload.setDisable(true);
     }
 
 
@@ -736,7 +745,6 @@ public class ArxivOrgController implements Initializable {
         alert.setHeaderText(subtitle);
         alert.setContentText(message);
         alert.getDialogPane().lookupButton(ButtonType.OK).setDisable(true);
-        alert.getDialogPane().lookupButton(ButtonType.CLOSE).setDisable(true);
         alert.show();
 
         return alert;
