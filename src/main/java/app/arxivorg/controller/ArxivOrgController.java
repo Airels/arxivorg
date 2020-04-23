@@ -101,6 +101,15 @@ public class ArxivOrgController implements Initializable {
      */
     @FXML private Button btnDownload;
 
+    /**
+     * A simple button to download all articles in the list
+     *
+     */
+    @FXML private Button btnDownloadAll;
+
+    /**
+     * Menubar with all of menus buttons and submenus
+     */
     @FXML private MenuBar menuBar;
 
 
@@ -141,6 +150,7 @@ public class ArxivOrgController implements Initializable {
 
         favCheckBox.addEventFilter(MouseEvent.MOUSE_CLICKED, this::onFavChecked);
         btnDownload.addEventFilter(MouseEvent.MOUSE_CLICKED, this::onBtnDownloadClicked);
+        btnDownloadAll.addEventFilter(MouseEvent.MOUSE_CLICKED, this::onBtnDownloadAllClicked);
 
         // ARTICLE MANAGER
         Thread t = new Thread(() -> {
@@ -414,19 +424,6 @@ public class ArxivOrgController implements Initializable {
     }
 
     /**
-     * Event when user scrolls list of articles.
-     *
-     * @param event ScrollEvent: Scroll down or up
-     * @author VIZCAINO Yohan (Airels)
-     */
-    @FXML @Deprecated
-    public void onScrollArticleList(ScrollEvent event) {
-        if (event.getDeltaY() < 0) { // if scroll down
-            System.out.println("Scroll!");
-        }
-    }
-
-    /**
      * Event triggered when user click on the checkbox
      * @param event MouseEvent received
      * @author VIZCAINO Yohan (Airels)
@@ -443,7 +440,7 @@ public class ArxivOrgController implements Initializable {
      * When user click on download button after selected an article.
      * Will prompt a Directory Chooser and will send Article and Path to PDFDownloader.
      *
-     * @param event
+     * @param event Mouse click event
      * @see ArxivOrgController#showDirectoryChooser()
      * @see PDFDownloader#downloadFile(Article, File)
      * @author VIZCAINO Yohan (Airels)
@@ -451,12 +448,9 @@ public class ArxivOrgController implements Initializable {
     @FXML
     public void onBtnDownloadClicked(MouseEvent event) {
         if (event.getButton() == MouseButton.PRIMARY) {
-            System.out.println(selectedArticle.getLink());
-
             File selectedFile = showDirectoryChooser();
 
-            if (selectedFile == null)
-                return;
+            if (selectedFile == null) return;
 
             if (PDFDownloader.downloadFile(selectedArticle, selectedFile))
                 showInfoMessage("Téléchargement terminé",
@@ -464,6 +458,43 @@ public class ArxivOrgController implements Initializable {
             else
                 showErrorMessage("Téléchargement échoué",
                         "Le téléchargement de " + selectedArticle.getTitle() + " a échoué !");
+        }
+    }
+
+    /**
+     * When user click on download all button.
+     * Will prompt a Directory Chooser and will send Article and Path to PDFDownloader.
+     *
+     * @param event Mouse click event
+     * @see ArxivOrgController#showDirectoryChooser()
+     * @see PDFDownloader#downloadFile(Article, File)
+     * @author VIZCAINO Yohan (Airels)
+     */
+    @FXML
+    public void onBtnDownloadAllClicked(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY) {
+            File selectedFile = showDirectoryChooser();
+
+            if (selectedFile == null) return;
+
+            int articlesListSize = articlesList.getItems().size(),
+                    downloadSuccessful = 0, downloadFailed = 0;
+
+            for (int i = 0; i < articlesListSize; i++) {
+                Article article = (Article) articlesList.getItems().get(i);
+
+                if (PDFDownloader.downloadFile(article, selectedFile))
+                    downloadSuccessful++;
+                else
+                    downloadFailed++;
+            }
+
+            StringBuilder msg = new StringBuilder();
+            msg.append(downloadSuccessful).append(" articles ont été enregistré avec succès,").append('\n');
+            msg.append(downloadFailed).append(" articles ont échoué");
+
+            showInfoMessage(
+                    "Téléchargements de tous les articles terminé", msg.toString());
         }
     }
 
@@ -632,6 +663,7 @@ public class ArxivOrgController implements Initializable {
         periodDatePickerEnd.setDisable(true);
         authorsPredicate.setDisable(true);
         keywordsPredicate.setDisable(true);
+        btnDownloadAll.setDisable(true);
     }
 
     /**
@@ -645,6 +677,7 @@ public class ArxivOrgController implements Initializable {
         periodDatePickerEnd.setDisable(false);
         authorsPredicate.setDisable(false);
         keywordsPredicate.setDisable(false);
+        btnDownloadAll.setDisable(false);
     }
 
 

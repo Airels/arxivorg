@@ -84,7 +84,7 @@
       <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Mots-clefs :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="TOP" />
       <TextArea fx:id="keywordsPredicate" maxWidth="140.0" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
 
-     <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Tout télécharger" GridPane.halignment="CENTER" GridPane.rowIndex="11" GridPane.valignment="BOTTOM" />
+     <Button fx:id="btnDownloadAll" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Tout télécharger" GridPane.halignment="CENTER" GridPane.rowIndex="11" GridPane.valignment="BOTTOM" />
       <opaqueInsets>
          <Insets />
       </opaqueInsets>
