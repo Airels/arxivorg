@@ -13,7 +13,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class ArxivOrgCLI {
-    public static String firstLine = "faite une recherce ou tapez help pour de l'aide , tapez exit pour quitter\n";
+    public static String firstLine = "ArxivOrgCli : faite une recherce ou tapez help pour de l'aide , tapez exit pour quitter\n";
     public static String manual = "CLI arxivorg\n" +
             "\n" +
             "list [OPTIONS]... FILE                  list the articles in a FILE of from Arxiv org with keyword arxiv\n" +
