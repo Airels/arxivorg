@@ -13,7 +13,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class ArxivOrgCLI {
-    public static String fisrtLine = "faite une recherce ou tapez help pour de l'aide , tapez exit pour quitter\n";
+    public static String firstLine = "faite une recherce ou tapez help pour de l'aide , tapez exit pour quitter\n";
     public static String manual = "CLI arxivorg\n" +
             "\n" +
             "list [OPTIONS]... FILE                  list the articles in a FILE of from Arxiv org with keyword arxiv\n" +
@@ -39,9 +39,21 @@ public class ArxivOrgCLI {
 
     static ArrayList<Article> articles = new ArrayList<>();
 
+    /**
+     * Build a String containing the requested content for one article
+     * @param index         index of this article
+     * @param article       article to be utilized
+     * @return (String)
+     */
+
     public static String articleToString(int index,Article article){
         return index+1+" : "+article.getTitle()+"\n"+article.getAuthors().toString()+"\n";
     }
+
+    /**
+     * Print an array of article, as requested by the client
+     * @param articles      array of articles
+     */
 
     public static void printArticles(ArrayList<Article> articles){
         for(int i=0;i<articles.size();i++){
@@ -50,6 +62,11 @@ public class ArxivOrgCLI {
         }
     }
 
+    /**
+     * Download articles in an Array of article to a specified path
+     * @param articles      List of article to download
+     * @param path          Full path to the download folder
+     */
     static void downloadArticles(ArrayList<Article> articles,String path){
         File file = new File(path);
         for (Article a:articles){
@@ -57,6 +74,12 @@ public class ArxivOrgCLI {
         }
 
     }
+
+    /**
+     * Select the articles shown from a call to printArticles
+     * Call printArticles on the selected articles to confirm the selection
+     * @param arguments
+     */
 
     static void select(String[] arguments){
         int boundEnd = arguments.length-1;
@@ -233,7 +256,7 @@ public class ArxivOrgCLI {
     }
 
     static void cli () {
-        System.out.print(fisrtLine);
+        System.out.print(firstLine);
         Scanner line = new Scanner(System.in);
         String input = line.nextLine();
         while (true) {
