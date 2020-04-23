@@ -100,14 +100,14 @@
             </ScrollPane>
 
             <GridPane nodeOrientation="RIGHT_TO_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                <CheckBox fx:id="favCheckBox" nodeOrientation="RIGHT_TO_LEFT" style="-fx-background-color: white; -fx-border-color: lightgray;" text="Favoris :" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+                <CheckBox fx:id="favCheckBox" maxWidth="100.0" minWidth="100.0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="100.0" style="-fx-background-color: white; -fx-border-color: lightgray;" text="Favoris :" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0">
                     <padding>
                         <Insets bottom="3.0" left="7.0" right="7.0" top="3.0" />
                     </padding></CheckBox>
 
-                <Button fx:id="btnDownload" maxWidth="80.0" minWidth="80.0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="80.0" text="Télécharger" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Button fx:id="btnDownload" maxWidth="100.0" minWidth="100.0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="100.0" text="Télécharger" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                 <columnConstraints>
-                    <ColumnConstraints maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
+                    <ColumnConstraints maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
                 </columnConstraints>
                 <rowConstraints>
                     <RowConstraints maxHeight="20.0" minHeight="25.0" prefHeight="25.0" />
@@ -117,7 +117,7 @@
             </GridPane>
          <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" />
-            <ColumnConstraints maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
+            <ColumnConstraints maxWidth="100.0" minWidth="100.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints percentHeight="100.0" />
