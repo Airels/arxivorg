@@ -13,14 +13,24 @@ public class PDFDownloader {
     public static boolean downloadFile(Article article, File file) {
         boolean isDownloaded = false;
         try (InputStream in = new URL("https" + article.getLink().substring(4)).openStream()) {
+            String articleName = article.getTitle();
+            articleName = articleName.replace("<","");
+            articleName = articleName.replace(">","");
+            articleName = articleName.replace(":","");
+            articleName = articleName.replace("/","");
+            articleName = articleName.replace("\\","");
+            articleName = articleName.replace("*","");
+            articleName = articleName.replace("|","");
+            articleName = articleName.replace("?","");
+            articleName = articleName.replace("\"","");
             Files.copy(in,
-                    Paths.get(file.getAbsolutePath() + '/'+ article.getTitle() + ".pdf"),
+                    Paths.get(file.getAbsolutePath() + '/'+ articleName + ".pdf"),
                     StandardCopyOption.REPLACE_EXISTING);
             isDownloaded = true;
 
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
 
         return isDownloaded;
