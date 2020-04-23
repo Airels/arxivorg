@@ -477,24 +477,35 @@ public class ArxivOrgController implements Initializable {
 
             if (selectedFile == null) return;
 
-            int articlesListSize = articlesList.getItems().size(),
-                    downloadSuccessful = 0, downloadFailed = 0;
+            Alert alert = showWaitingMessage("Téléchargement de tout les articles...",
+                    "Veuillez patienter, vos articles sont en cours de chargement...");
 
-            for (int i = 0; i < articlesListSize; i++) {
-                Article article = (Article) articlesList.getItems().get(i);
+            Thread t = new Thread(() -> {
+                disableAllInputs();
 
-                if (PDFDownloader.downloadFile(article, selectedFile))
-                    downloadSuccessful++;
-                else
-                    downloadFailed++;
-            }
+                int articlesListSize = articlesList.getItems().size(),
+                        downloadSuccessful = 0, downloadFailed = 0;
 
-            StringBuilder msg = new StringBuilder();
-            msg.append(downloadSuccessful).append(" articles ont été enregistré avec succès,").append('\n');
-            msg.append(downloadFailed).append(" articles ont échoué");
+                for (int i = 0; i < articlesListSize; i++) {
+                    Article article = (Article) articlesList.getItems().get(i);
 
-            showInfoMessage(
-                    "Téléchargements de tous les articles terminé", msg.toString());
+                    if (PDFDownloader.downloadFile(article, selectedFile))
+                        downloadSuccessful++;
+                    else
+                        downloadFailed++;
+                }
+
+                StringBuilder msg = new StringBuilder();
+                msg.append(downloadSuccessful).append(" articles ont été enregistré avec succès,").append('\n');
+                msg.append(downloadFailed).append(" articles ont échoué");
+
+                showInfoMessage(
+                        "Téléchargements de tous les articles terminé", msg.toString());
+
+                enableAllInputs();
+                alert.close();
+            });
+            t.start();
         }
     }
 
@@ -711,6 +722,24 @@ public class ArxivOrgController implements Initializable {
         alert.setHeaderText(subtitle);
         alert.setContentText(message);
         alert.show();
+    }
+
+    /**
+     * Prompt an information pop-up when method called but cannot be closed by user
+     * @param subtitle Subtitle of the notification
+     * @param message Notification message
+     * @return Alert dialog to close him when needed
+     */
+    private Alert showWaitingMessage(String subtitle, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information - ArxivOrg");
+        alert.setHeaderText(subtitle);
+        alert.setContentText(message);
+        alert.getDialogPane().lookupButton(ButtonType.OK).setDisable(true);
+        alert.getDialogPane().lookupButton(ButtonType.CLOSE).setDisable(true);
+        alert.show();
+
+        return alert;
     }
 
     /**
