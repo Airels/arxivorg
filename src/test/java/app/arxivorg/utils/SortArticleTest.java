@@ -125,7 +125,7 @@ public class SortArticleTest {
 
         ArrayList<Article> thirdExpected = new ArrayList<>();
         String thirdKeyWord = "stat.ML";
-        thirdExpected.add(articles.get(0));
+        thirdExpected.add(articles.get(1));
 
         ArrayList<Article> thirdTestedSortSubCategory = SortArticle.byKeyword(articles,thirdKeyWord);
 
