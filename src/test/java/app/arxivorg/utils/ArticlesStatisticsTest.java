@@ -1,6 +1,7 @@
 package app.arxivorg.utils;
 
 import app.arxivorg.model.Article;
+import app.arxivorg.view.ArticlesStatistics;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

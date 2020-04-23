@@ -31,7 +31,7 @@ public class XmlReaderTest {
 
         List<String> secondAuth = new ArrayList<>();
         secondAuth.add("Guillome Nicolai");
-        secondAuth.add("Iohan Vizcaino");
+        secondAuth.add("Yohan Vizcaino");
         secondAuth.add("Tam David-Broglio");
         secondAuth.add("Aymerikk Sybiak");
         Authors secondAuthors = new Authors(secondAuth);
