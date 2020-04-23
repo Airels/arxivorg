@@ -1,7 +1,5 @@
 package app.arxivorg.model;
 
-import javafx.scene.chart.CategoryAxis;
-
 public enum Category {
 
     All("All", "Toutes"),
