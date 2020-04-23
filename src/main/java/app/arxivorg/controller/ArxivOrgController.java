@@ -584,6 +584,7 @@ public class ArxivOrgController implements Initializable {
      */
     public void showUserStats() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Statistiques de vos recherches :").append("\n\n");
 
         stringBuilder.append("Catégories :").append('\n');
         Dictionary<Category, Integer> categoriesStats = UserMonitoringPredicates.getCategories();
@@ -612,7 +613,10 @@ public class ArxivOrgController implements Initializable {
                 .append(" fois")
                 .append('\n'));
 
-        showInfoMessage("Statistiques de vos recherches", stringBuilder.toString());
+        articleView.getChildren().clear();
+        articleView.getChildren().add(new Text(stringBuilder.toString()));
+        favCheckBox.setDisable(true);
+        btnDownload.setDisable(true);
     }
 
     /**
@@ -622,12 +626,13 @@ public class ArxivOrgController implements Initializable {
      */
     public void showArticleStats() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Statistiques de la page :").append("\n\n");
 
         stringBuilder.append("Catégories :").append('\n');
         int[] categoriesStat = ArticlesStatistics.statisticCategories((ArrayList<Article>) articleManager.getInitialArticles());
         int index = 0;
         for (Category category : Category.values()) {
-            if (category == All) continue;
+            if (category == All || category == Favourites) continue;
 
             stringBuilder.append("- ")
                     .append(categoriesStat[index])
@@ -658,7 +663,10 @@ public class ArxivOrgController implements Initializable {
                     .append(statOnTxt);
         }
 
-        showInfoMessage("Statistiques de la page", stringBuilder.toString());
+        articleView.getChildren().clear();
+        articleView.getChildren().add(new Text(stringBuilder.toString()));
+        favCheckBox.setDisable(true);
+        btnDownload.setDisable(true);
     }
 
 
