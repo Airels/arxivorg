@@ -60,7 +60,7 @@
      </Label>
       <Line endX="145.0" strokeWidth="2.0" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
 
-      <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Catégories :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+      <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Catégorie :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
       <ChoiceBox fx:id="categoryChoiceBox" prefHeight="25.0" prefWidth="130.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
 
       <Label alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="18.0" prefWidth="155.0" text="Période :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="TOP" />
