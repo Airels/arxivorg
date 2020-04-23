@@ -1,6 +1,7 @@
-package app.arxivorg.controller;
+package app.arxivorg.view;
 
 import app.arxivorg.model.Category;
+import app.arxivorg.view.ArticleManager;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

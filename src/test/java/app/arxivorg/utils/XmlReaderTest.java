@@ -31,7 +31,7 @@ public class XmlReaderTest {
 
         List<String> secondAuth = new ArrayList<>();
         secondAuth.add("Guillome Nicolai");
-        secondAuth.add("Iohan Vizcaino");
+        secondAuth.add("Yohan Vizcaino");
         secondAuth.add("Tam David-Broglio");
         secondAuth.add("Aymerikk Sybiak");
         Authors secondAuthors = new Authors(secondAuth);
@@ -71,7 +71,7 @@ public class XmlReaderTest {
 
     @Test
     public void CategoryTest(){
-        Category articleCategory = Category.Computer_Science;
+        Category articleCategory = Category.Statistics;
         Category testedArticleCategory = testedArticle.getCategory();
 
         assertEquals(articleCategory, testedArticleCategory);
@@ -80,12 +80,16 @@ public class XmlReaderTest {
     @Test
     public void SubCategoryTest(){
         SubCategories subCategories = new SubCategories();
-        subCategories.add("I test category");
+        subCategories.add("I test subCategory");
+        subCategories.add("cs.CL");
+        subCategories.add("stat.GL");
         SubCategories testedSubCategories = testedArticle.getSubCategories();
         SubCategories secondTestSubCategory = secondTestedArticle.getSubCategories();
 
         SubCategories secondEntryCategories = new SubCategories();
         secondEntryCategories.add("I also test it");
+        secondEntryCategories.add("cs.CL");
+        secondEntryCategories.add("stat.ML");
         assertEquals(secondEntryCategories.getList().size(),secondTestSubCategory.getList().size());
         assertEquals(subCategories.getList().size(), testedSubCategories.getList().size());
 
