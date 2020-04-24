@@ -25,7 +25,7 @@ public class Article {
      * @param subCategories     Subcategories of an article
      * @param link              String link to download the article
      * @param date              Date of publication off the article
-     * @throws IllegalArgumentException     throws Exeption when wrong parameter are passed to the construcor
+     * @throws IllegalArgumentException     throws Exception when wrong parameter are passed to the constructor
      */
 
     public Article(String title, Authors authors, String content, Category category, SubCategories subCategories, String link, LocalDate date) throws IllegalArgumentException {
