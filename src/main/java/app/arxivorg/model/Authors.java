@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Athors class containing a list of author, constructor and methods
- * @author Tom
+ * @author Tom David--Broglio
  */
 
 public class Authors {

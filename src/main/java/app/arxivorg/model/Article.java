@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 /**
  * Article class containing all properties,method and constructor needed for an article
- * @author Tom
+ * @author Tom David--Broglio
  */
 
 public class Article {
