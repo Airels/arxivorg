@@ -122,10 +122,23 @@ public class ArxivOrgCLI {
 
          */
         if(boundEnd%2 !=0){
-            System.out.println("le nombre d'argument doit etre pair : "+boundEnd + 2);
+            System.out.println("le nombre d'argument doit etre pair : "+(boundEnd + 2));
             return false;
         }
         else return true;
+    }
+
+    /**
+     * load all articles from all categories within a bound limit
+     * @return ArrayList of article
+     */
+    static ArrayList<Article> loadAll(){
+        int bound = 10;
+        ArrayList<Article> articles = new ArrayList<>();
+        for (Category c: Category.values()) {
+            articles.addAll(SortArticle.byCategoryFromTo(c,0,bound));
+        }
+        return articles;
     }
 
     /**
@@ -153,7 +166,7 @@ public class ArxivOrgCLI {
             String secondArgument = arguments[i+1];
             switch (firstArgument){
                 case "-p":
-                    result = isApiRequest ? SortArticle.All() : result;
+                    result = isApiRequest ? loadAll() : result;
                     switch (secondArgument){
 
                         case "today":
@@ -196,11 +209,12 @@ public class ArxivOrgCLI {
 
                     break;
                 case "-k":
+                    result = isApiRequest ? loadAll():result;
 
                     String[] keywords = secondArgument.split(",");
                     for (String s : keywords) {
                         String keyword = s.replace("_", " ");
-                        result = isApiRequest ? SortArticle.byKeyword(keyword) : SortArticle.byKeyword(result, keyword);
+                        result = SortArticle.byKeyword(result,keyword);
                     }
                     break;
                 case "-c":
@@ -209,8 +223,12 @@ public class ArxivOrgCLI {
                         c = Category.getCategory(secondArgument);
                     }
                     catch (IllegalArgumentException e){
-                        System.out.println("categories indefini : "+secondArgument);
-                        result = new ArrayList<>();
+                        try {
+                            c = Category.valueOf(secondArgument);
+                        }
+                        catch (IllegalArgumentException e2){
+                            System.out.println("categories indefini : "+secondArgument);
+                        }
                     }
 
                     //Category.valueOf(secondArgument)
@@ -235,8 +253,6 @@ public class ArxivOrgCLI {
         String input = line.nextLine();
         while (true) {
             String[] arguments = input.split(" ");
-
-            //Pattern start = Pattern.compile(arguments[0]);
             String argument = arguments[0];
             if(argument.equals("exit") ){
                 line.close();
