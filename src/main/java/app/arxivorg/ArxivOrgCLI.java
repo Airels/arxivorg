@@ -109,13 +109,13 @@ public class ArxivOrgCLI {
 
     /**
      * Tell if the number or arguments in the input is correct
-     * @param arguments
+     * @param arguments         input arguments
      * @return (boolean)
      */
     static boolean numberOfArgument_isCorrect(String[] arguments){
         int boundEnd = arguments.length-2;
-        int boundStart = 1;
         /*
+        int boundStart = 1;
         if(boundEnd<boundStart){
             System.out.println("no arguments, all articles :");
         }
@@ -249,13 +249,12 @@ public class ArxivOrgCLI {
                     if(numberOfArgument_isCorrect(arguments)){
                         if(source.equals("arxiv")) {
                             articles = processFilters(articles,arguments,true);
-                            printArticles(articles);
                         }
                         else {
                             articles = XmlReader.read(source);
                             articles = processFilters(articles,arguments,false);
-                            printArticles(articles);
                         }
+                        printArticles(articles);
                     }
 
                     break;
@@ -267,14 +266,13 @@ public class ArxivOrgCLI {
                         if(numberOfArgument_isCorrect(arguments)) {
                             if (source.equals("arxiv")) {
                                 articles = processFilters(articles,arguments,true);
-                                downloadArticles(articles, filePath);
                             } else {
                                 articles = XmlReader.read(source);
                                 System.out.println("fichier introuvable : "+source);
                                 articles = processFilters(articles, arguments,false);
 
-                                downloadArticles(articles, filePath);
                             }
+                            downloadArticles(articles, filePath);
                         }
                     }
                     else {
@@ -287,13 +285,12 @@ public class ArxivOrgCLI {
                 case "select":
                     if(articles.isEmpty()){
                         System.out.println("make a search first with list");
-                        break;
                     }
                     else {
                         select(arguments);
                         printArticles(articles);
-                        break;
                     }
+                    break;
 
 
                 case "man":
@@ -319,9 +316,7 @@ public class ArxivOrgCLI {
 
     public static String[] removeLastElement(String[] arr) {
         String[] anotherArray = new String[arr.length - 1];
-        for (int i = 0; i < anotherArray.length; i++) {
-            anotherArray[i] = arr[i];
-        }
+        System.arraycopy(arr, 0, anotherArray, 0, anotherArray.length);
         return anotherArray;
     }
 
