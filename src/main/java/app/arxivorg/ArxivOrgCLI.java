@@ -12,8 +12,15 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
+/**
+ * ArxivorgCli is a simple cli to search , select and download some articles
+ * with a command line interface
+ * @author Tom
+ */
+
 public class ArxivOrgCLI {
     public static String firstLine = "ArxivOrgCli : faite une recherce ou tapez help pour de l'aide , tapez exit pour quitter\n";
+
     public static String manual = "CLI arxivorg\n" +
             "\n" +
             "list [OPTIONS]... FILE                  list the articles in a FILE of from Arxiv org with keyword arxiv\n" +
@@ -193,7 +200,7 @@ public class ArxivOrgCLI {
     static ArrayList<Article> processFiltersAPI(String[] arguments) {
         int boundEnd = arguments.length-2;
         int boundStart = 1;
-        ArrayList<Article> result = new ArrayList<>(articles);
+        ArrayList<Article> result = articles;
         result = SortArticle.All();
         if(boundEnd<boundStart){
             return result;
@@ -207,9 +214,7 @@ public class ArxivOrgCLI {
             String secondArgument = arguments[i+1];
             switch (firstArgument){
                 case "-p":
-                    System.out.println("-p not yet implemented");
-                    //not yet implemented in API
-                    /*
+                    result = SortArticle.All();
                     switch (secondArgument){
                         case "today":
                             LocalDate today = LocalDate.now();
@@ -225,10 +230,7 @@ public class ArxivOrgCLI {
                             LocalDate firstdate = LocalDate.parse(period[0]);
                             LocalDate lastdate = LocalDate.parse(period[1]);
                             result = SortArticle.byDate(result,firstdate,lastdate);
-
-
                     }
-                    */
 
                     break;
                 case "-a":
@@ -248,7 +250,7 @@ public class ArxivOrgCLI {
                     String[] keywords = secondArgument.split(",");
                     for (String s : keywords) {
                         String keyword = s.replace("_", " ");
-                        result = SortArticle.byKeyword(keyword);
+                        result = (SortArticle.byKeyword(keyword));
                     }
                     break;
                 case "-c":
@@ -258,7 +260,7 @@ public class ArxivOrgCLI {
                     }
                     catch (IllegalArgumentException e){
                         System.out.println("categories indefini : "+secondArgument);
-                        result = null;
+                        result = new ArrayList<>();
                     }
 
                     //Category.valueOf(secondArgument)
