@@ -3,7 +3,7 @@ package app.arxivorg.model;
 import java.time.LocalDate;
 
 /**
- * Article class containing all properties and method needed for an article
+ * Article class containing all properties,method and constructor needed for an article
  * @author Tom
  */
 
