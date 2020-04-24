@@ -1,5 +1,10 @@
 package app.arxivorg.model;
 
+/**
+ * enumeration of all categories used for all sort of articles
+ * @author Tom David--Broglio , VIZCAINO Yohan , Sibiak Aymeric
+ */
+
 public enum Category {
 
     All("All", "Toutes"),
@@ -24,18 +29,41 @@ public enum Category {
 
     private String name, frName;
 
+    /**
+     * Constructor for a category
+     * @param name          String name(english)
+     * @param frName        String name(French)
+     */
+
     Category(String name, String frName){
         this.name = name;
         this.frName = frName;
     }
 
+    /**
+     * Get the name(english)
+     * @return (String)
+     */
+
     public String getName(){
         return name;
     }
 
+    /**
+     * Get the name(French)
+     * @return (String)
+     */
+
     public String toString() {
         return frName;
     }
+
+    /**
+     * Get a category from it's name
+     * @param name                          String name
+     * @return                              (Category)
+     * @throws IllegalArgumentException     throws Exception if the name does not exist
+     */
 
     public static Category getCategory(String name) throws IllegalArgumentException {
         for (Category category : Category.values()) {
