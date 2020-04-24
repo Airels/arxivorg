@@ -4,8 +4,8 @@ import app.arxivorg.model.Article;
 import app.arxivorg.model.Authors;
 import app.arxivorg.model.Category;
 import app.arxivorg.utils.SortArticle;
-import app.arxivorg.view.PDFDownloader;
 import app.arxivorg.utils.XmlReader;
+import app.arxivorg.view.PDFDownloader;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -14,7 +14,7 @@ import java.util.*;
 
 /**
  * ArxivorgCli is a simple cli to search , select and download some articles
- * with a command line interface
+ * from an atom file or from arxivOrg directly
  * @author Tom
  */
 
@@ -23,7 +23,7 @@ public class ArxivOrgCLI {
 
     public static String manual = "CLI arxivorg\n" +
             "\n" +
-            "list [OPTIONS]... FILE                  list the articles in a FILE of from Arxiv org with keyword arxiv\n" +
+            "list [OPTIONS]... FILE                  list the articles in a FILE of from Arxiv org with keyword 'arxiv'\n" +
 
             "-p, --period==PERIOD                    filter by period , specify the period : today yesterday YYYY-MM-DD,YYYY-MM-DD\n" +
 
@@ -108,114 +108,54 @@ public class ArxivOrgCLI {
     }
 
     /**
-     * process the filter contained in the request,
-     * in order to modify the local array of article.
-     * Used when the article's source is an XML file
-     * @param articles          arrayList of articles
-     * @param arguments         arguments from the request
-     * @return (ArrayList of Article)
+     * Tell if the number or arguments in the input is correct
+     * @param arguments
+     * @return (boolean)
      */
-
-
-    static ArrayList<Article> processFilters(ArrayList<Article> articles,String[] arguments) {
+    static boolean numberOfArgument_isCorrect(String[] arguments){
         int boundEnd = arguments.length-2;
         int boundStart = 1;
-        ArrayList<Article> result = new ArrayList<>(articles);
+        /*
         if(boundEnd<boundStart){
-            return articles;
+            System.out.println("no arguments, all articles :");
         }
-        if(boundEnd%2 !=0 /*|| boundEnd==1*/){
-            System.out.println("incorrect number of argument : "+boundEnd);
-            return result;
+
+         */
+        if(boundEnd%2 !=0){
+            System.out.println("le nombre d'argument doit etre pair : "+boundEnd + 2);
+            return false;
         }
-        for(int i=boundStart;i<boundEnd;i=i+2){
-            String firstArgument = arguments[i];
-            String secondArgument = arguments[i+1];
-            switch (firstArgument){
-                case "-p":
-                    switch (secondArgument){
-                        case "today":
-                            LocalDate today = LocalDate.now();
-                            result = SortArticle.byDate(result,today,today);
-                            break;
-                        case "yesterday":
-                            LocalDate yesterday = LocalDate.now().minus(1,ChronoUnit.DAYS);
-                            result = SortArticle.byDate(result,yesterday,yesterday);
-                            break;
-                        default:
-                            String[] period = secondArgument.split(",");
-                            if(period.length!=2) throw new IllegalArgumentException("wrong period format : "+secondArgument+" must be YYYY-MM-DD,YYYY-MM-DD");
-                            LocalDate firstdate = LocalDate.parse(period[0]);
-                            LocalDate lastdate = LocalDate.parse(period[1]);
-                            result = SortArticle.byDate(result,firstdate,lastdate);
-                    }
-                    break;
-                case "-a":
-                    String[] authors = secondArgument.split(",");
-
-                    for (String s : authors) {
-                        String author = s.replace("_", " ");
-                        result = SortArticle.byAuthors(result,author);
-                    }
-
-
-                    break;
-                case "-k":
-
-                    String[] keywords = secondArgument.split(",");
-                    for (String s : keywords) {
-                        String keyword = s.replace("_", " ");
-                        result = SortArticle.byKeyword(result, keyword);
-                    }
-                    break;
-                case "-c":
-                    Category c = Category.All;
-                    try {
-                        c = Category.getCategory(secondArgument);
-                    }
-                    catch (IllegalArgumentException e){
-                        System.out.println("categories indefini : "+secondArgument);
-                        result = null;
-                    }
-
-                    //Category.valueOf(secondArgument)
-                    result = SortArticle.byCategory(result,c);
-                    break;
-                default:
-                    System.out.println("Invalid argument : "+firstArgument);
-            }
-        }
-        return result;
-
+        else return true;
     }
 
     /**
      * process the filter contained in the request,
-     * in order to modify the local array of article.
-     * Used when the article's source is the API
+     * in order to modify the local array of article
+     * @param articles          arrayList of articles
      * @param arguments         arguments from the request
+     * @param isApiRequest      boolean to tell if it's an Api request or not
      * @return (ArrayList of Article)
      */
 
-    static ArrayList<Article> processFiltersAPI(String[] arguments) {
+
+
+    static ArrayList<Article> processFilters(ArrayList<Article> articles,String[] arguments,boolean isApiRequest) {
         int boundEnd = arguments.length-2;
         int boundStart = 1;
-        ArrayList<Article> result = articles;
-        result = SortArticle.All();
+        ArrayList<Article> result;
+        result = new ArrayList<>(articles);
         if(boundEnd<boundStart){
-            return result;
+            return articles;
         }
-        if(boundEnd%2 !=0 /*|| boundEnd==1*/){
-            System.out.println("incorrect number of argument : "+boundEnd);
-            return result;
-        }
+
         for(int i=boundStart;i<boundEnd;i=i+2){
             String firstArgument = arguments[i];
             String secondArgument = arguments[i+1];
             switch (firstArgument){
                 case "-p":
-                    result = SortArticle.All();
+                    result = isApiRequest ? SortArticle.All() : result;
                     switch (secondArgument){
+
                         case "today":
                             LocalDate today = LocalDate.now();
                             result = SortArticle.byDate(result,today,today);
@@ -231,17 +171,27 @@ public class ArxivOrgCLI {
                             LocalDate lastdate = LocalDate.parse(period[1]);
                             result = SortArticle.byDate(result,firstdate,lastdate);
                     }
-
                     break;
                 case "-a":
                     String[] authors = secondArgument.split(",");
-                    List<String> authors1 = new ArrayList<>();
 
-                    for (String s : authors) {
-                        String author = s.replace("_", " ");
-                        authors1.add(author);
+                    if(isApiRequest){
+                        List<String> authors1 = new ArrayList<>();
+
+                        for (String s : authors) {
+                            String author = s.replace("_", " ");
+                            authors1.add(author);
+                        }
+                        result = SortArticle.byAuthors(new Authors(authors1));
                     }
-                    result = SortArticle.byAuthors(new Authors(authors1));
+                    else {
+                        for (String s : authors) {
+                            String author = s.replace("_", " ");
+                            result = SortArticle.byAuthors(result,author);
+                        }
+                    }
+
+
 
 
                     break;
@@ -250,7 +200,7 @@ public class ArxivOrgCLI {
                     String[] keywords = secondArgument.split(",");
                     for (String s : keywords) {
                         String keyword = s.replace("_", " ");
-                        result = (SortArticle.byKeyword(keyword));
+                        result = isApiRequest ? SortArticle.byKeyword(keyword) : SortArticle.byKeyword(result, keyword);
                     }
                     break;
                 case "-c":
@@ -264,7 +214,7 @@ public class ArxivOrgCLI {
                     }
 
                     //Category.valueOf(secondArgument)
-                    result = SortArticle.byCategory(c);
+                    result = isApiRequest ? SortArticle.byCategory(c) : SortArticle.byCategory(result,c);
                     break;
                 default:
                     System.out.println("Invalid argument : "+firstArgument);
@@ -296,29 +246,35 @@ public class ArxivOrgCLI {
             switch (argument) {
                 case "list":
                     String source = arguments[arguments.length - 1];
-                    if(source.equals("arxiv")) {
-                        articles = processFiltersAPI(arguments);
-                        printArticles(articles);
+                    if(numberOfArgument_isCorrect(arguments)){
+                        if(source.equals("arxiv")) {
+                            articles = processFilters(articles,arguments,true);
+                            printArticles(articles);
+                        }
+                        else {
+                            articles = XmlReader.read(source);
+                            articles = processFilters(articles,arguments,false);
+                            printArticles(articles);
+                        }
                     }
-                    else {
-                        articles = XmlReader.read(source);
-                        articles = processFilters(articles,arguments);
-                        printArticles(articles);
-                    }
+
                     break;
                 case "download":
                     String filePath = arguments[arguments.length - 1];
                     if(articles.isEmpty()){
                         source = arguments[arguments.length - 2];
                         arguments = removeLastElement(arguments);
-                        if(source.equals("fromApi")) {
-                            articles = processFiltersAPI(arguments);
-                            downloadArticles(articles,filePath);
-                        }
-                        else {
-                            articles = XmlReader.read(source);
-                            articles = processFilters(articles,arguments);
-                            downloadArticles(articles,filePath);
+                        if(numberOfArgument_isCorrect(arguments)) {
+                            if (source.equals("arxiv")) {
+                                articles = processFilters(articles,arguments,true);
+                                downloadArticles(articles, filePath);
+                            } else {
+                                articles = XmlReader.read(source);
+                                System.out.println("fichier introuvable : "+source);
+                                articles = processFilters(articles, arguments,false);
+
+                                downloadArticles(articles, filePath);
+                            }
                         }
                     }
                     else {
@@ -352,7 +308,6 @@ public class ArxivOrgCLI {
 
 
             input = line.nextLine();
-            //System.out.print("[Arxivor]$ ");
         }
     }
 
